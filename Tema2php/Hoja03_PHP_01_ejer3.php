@@ -7,26 +7,19 @@
 </head>
 <body>
     <?php
-    // a ver si no me lio xd
-    $numero='22322';
-    //con strlen podemos ver la longitud de un string,hice el numero String porque es mas facil trabajar con el así
-    $longitud=strlen($numero);
-    //creamos una variable para almacenar si es capicua o no
-    $capicua=true;
-    // haacemos un for que llegue hasta la mitad
-    for($i=0;$i<=$longitud/2;$i++){
-        // hacemos dos variables, una que tome el valor de la posicion que va aumentando
-        //y la otra la contraria
-        $numero1=$numero[$i];
-        //para ello sacamos la longitud del numnreo,le restamos 1 y le restamos la posicion del primer valor
-        $numero2=$numero[strlen($numero)-1-$i];
-        //con el if comprobamos si son iguales los dos numeros y si no lo son capicua toma un valor falso
-    if($numero1!=$numero2){
-    $capicua=false;
+    //Capicua generico de forma matematica
+    $numero=4774;
+    $inverso=0;
+    $aux=$numero;
+    while($aux!=0){
+        $resto=$aux%10;
+        $inverso=$inverso*10+$resto;
+        $aux=(int)($aux/10);
     }
-    }
-    //un ternario,usalos cabron
-    echo $capicua ? 'Sí, es capicúa' : 'No, no es capicúa';
+    if($numero==$inverso)
+       echo "El numero $numero es capicúa<br />";
+    else
+       echo "El numero $numero NO es capicúa<br />";
     ?>
-</body>
+</body> 
 </html>
