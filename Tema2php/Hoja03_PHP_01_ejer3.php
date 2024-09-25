@@ -13,7 +13,7 @@
     $longitud=strlen($numero);
     //creamos una variable para almacenar si es capicua o no
     $capicua=true;
-    // hacemos un for que llegue hasta la mitad
+    // haacemos un for que llegue hasta la mitad
     for($i=0;$i<=$longitud/2;$i++){
         // hacemos dos variables, una que tome el valor de la posicion que va aumentando
         //y la otra la contraria
