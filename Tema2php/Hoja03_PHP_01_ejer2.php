@@ -7,8 +7,11 @@
 </head>
 <body>
     <?php
+    //declaramos la suma
     $suma=0;
+    //un for que recorre del 10 al 100
     for($num=10;$num<=100;$num++){
+        //suma los numeros
     if($num%2==0){
         $suma+=$num;
     }
