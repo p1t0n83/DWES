@@ -14,6 +14,7 @@
     }
     echo"<br>";
     }
+
     /*
     no hagas esto en tu vida
       $numero =10;
@@ -23,8 +24,9 @@
         $i = $numero--;
      } else {
         echo $i . " ";
-     }
-    }
+     } 
+    }*/
+    
     ?>
 </body>
 </html>
