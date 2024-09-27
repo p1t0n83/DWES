@@ -10,10 +10,14 @@
     $numero=8;
     $final=$numero;
     //cuenta hasta 1 a partir del numero que tenemos y se va multiplicando por este
-    for($i=$numero-1;$i>1;$i--){
-    $final*=$i;
-    }
-    echo "El factorial del numero $numero es $final";
-    ?>
+    if($numero>0){
+       for($i=$numero-1;$i>1;$i--){
+         $final*=$i;
+       }
+       echo "El factorial del numero $numero es $final";
+    }else{
+       echo "Un numero menor de 0 no puede tener factorial";
+}
+?>
 </body>
 </html>

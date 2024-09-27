@@ -7,10 +7,22 @@
 </head>
 <body>
     <?php
-     for($i=3;$i<=999;$i++){
-     if($i%2!=0 || $i==1)
-         echo(" $i Es primo <br>");    
+     $numero;
+     $primo=true;
+     for($f=3;$f<=999;$f++){
+        $primo=true;
+        $numero=$f;
+     if($numero<=1){
+       $primo=false;
+     }else{
+     for($i=2;$i<=sqrt($numero) && $primo;$i++){
+         if($numero % $i ==0){
+        $primo=false;
+         }
      }
+ }
+     echo $primo== false ? "":"$numero Es primo <br/>";
+}
     ?>
 </body>
 </html>

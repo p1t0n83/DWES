@@ -7,12 +7,19 @@
 </head>
 <body>
     <?php
-    $numero=2;
-    if($numero%2!=0 || $numero==1){
-        echo("Es primo");
+    $numero=1;
+    $primo=true;
+
+    if($numero<=1){
+      $primo=false;
     }else{
-        echo("No es primo");
+    for($i=2;$i<=sqrt($numero) && $primo;$i++){
+        if($numero % $i ==0){
+       $primo=false;
+        }
     }
+}
+    echo $primo== false ? "$numero No es primo":"$numero Es primo"; 
     ?>
 </body>
 </html>

@@ -14,6 +14,17 @@
     }
     echo"<br>";
     }
+    /*
+    no hagas esto en tu vida
+      $numero =10;
+    for($i=$numero;$i>=1;$i--){
+     if($i === 1){
+        echo "$i <br>";
+        $i = $numero--;
+     } else {
+        echo $i . " ";
+     }
+    }
     ?>
 </body>
 </html>
