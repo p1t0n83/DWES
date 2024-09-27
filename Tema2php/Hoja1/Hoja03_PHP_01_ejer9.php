@@ -19,7 +19,7 @@
     }else{
          $precioFinal=floatval($distanciakm*$preciokm);
     }
-    echo "El precio final del billete es de: $precioFinal";
+    echo "El precio final del billete es de:" . number_format($precioFinal,2);
     ?>
 </body>
 </html>
