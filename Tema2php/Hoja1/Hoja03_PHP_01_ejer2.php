@@ -10,11 +10,10 @@
     //declaramos la suma
     $suma=0;
     //un for que recorre del 10 al 100
-    for($num=10;$num<=100;$num++){
-        //suma los numeros
-    if($num%2==0){
-        $suma+=$num;
-    }
+    for($i=10;$i<=100;$i+=2){
+        //suma los numeros pares, que entre 2 son 0
+        $suma+=$i;
+    
     }
     echo "la suma de todos los numeros naturales del 10 al 100: $suma"
     ?>
