@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php
+    
     // pongo la zona horaria de españa no vaya a ser....
    date_default_timezone_set('Europe/Madrid');
     $dia=date("D");
@@ -14,51 +15,52 @@
     $anio= date("Y");
     $diaTexto;
     // dependiendo del valor de mes le asignara el mes correspondiente.
-    if($mes==1) {
-        $mes="Enero";
-    }else if($mes==2){
-        $mes="Febrero";
-    }else if($mes==3){
-        $mes="Marzo";
-    }else if($mes==4){
-        $mes="Abril";
-    }else if($mes==5){
-        $mes="Mayo";
-    }else if($mes==6){
-        $mes="Junio";
-    }else if($mes==7){
-        $mes="Julio";
-    }else if($mes==8){
-        $mes="Agosto";
-    }else if($mes==9){
-        $mes="Septiembre";
-    }else if($mex==10){
-        $mes="Octubre";
-    }else if($mex==11){
-        $mes="Noviembre";
-    }else{
-        $mes="Diciembre";
-    }
+   $mes = [
+    1 => "Enero",
+    2 => "Febrero",
+    3 => "Marzo",
+    4 => "Abril",
+    5 => "Mayo",
+    6 => "Junio",
+    7 => "Julio",
+    8 => "Agosto",
+    9 => "Septiembre",
+    10 => "Octubre",
+    11 => "Noviembre",
+    12 => "Diciembre"
+];
+
+// Asigna el nombre del mes según el valor de $mes
+$mes = $meses[$mes] ?? "Mes desconocido"; // Si $mes no existe,
+
     // ya que la variable dia recoje el dia en ingles lo paso al español.
-    if($dia=="Mon") {
-        $diaTexto="Lunes";
-    }else if($dia=="Tue"){
-        $diaTexto="Martes";
-    }else if($dia=="Wed"){
-        $diaTexto="Miercoles";
-    }else if($dia=="Thu"){
-        $diaTexto="Jueves";
-    }else if($dia=="Fri"){
-        $diaTexto="Viernes";
-    }else if($dia=="Sat"){
-        $diaTexto="Sabado";
-    }else{
-        $diaTexto="Domingo";
-    }
+    $dias = [
+    "Mon" => "Lunes",
+    "Tue" => "Martes",
+    "Wed" => "Miércoles",
+    "Thu" => "Jueves",
+    "Fri" => "Viernes",
+    "Sat" => "Sábado",
+    "Sun" => "Domingo"
+];
+
+// Asigna el nombre del día según el valor de $dia
+$diaTexto = $dias[$dia] ?? "Día desconocido"; // Si $dia no existe, muestra "Día desconocido"
+
     // ahora cambio el valor de dia al numero poniendo la d en minuscula.
     $dia=date("d");
     
     echo "$diaTexto ,$dia de $mes de $anio";
+
+   /*
+    setlocale(LC_TIME,'es_ES.UTF-8','spanish');
+    //$fecha=strftime("%A, %d de %B de %Y");
+    $fecha = new DateTime();
+    $fecha->setTimezone(new DateTimeZone('UTF+1'));
+    echo $fecha->format("l, d  M Y");
+    */
+    
+
     ?>
 </body>
 </html>

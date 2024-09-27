@@ -9,7 +9,7 @@
     <?php
     // - Visualizar aquellos que cumplen que la suma de sus dígitos es igual al producto de los
     // mismos. Por ejemplo 123, donde 1*2*3 = 1+2+3
- $numero=1233;
+ $numero=123;
  $aux=$numero;
 
  $suma=0;

@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    //Capicua generico de forma matematica
+    //Capicua de forma matematica
     $numero=4774;
     $inverso=0;
     $aux=$numero;
