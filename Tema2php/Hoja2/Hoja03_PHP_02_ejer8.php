@@ -14,7 +14,7 @@
 
 
     //str_replace nos permite sustituir una parte de una cadena por otra
-    $cadena=str_replace("realmente", "muy", $cadena);
+    $cadena=str_replace("realmente", "muy",$cadena);
     echo $cadena.'<br/>';
 
 
