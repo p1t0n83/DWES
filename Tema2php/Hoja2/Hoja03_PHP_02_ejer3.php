@@ -7,6 +7,10 @@
 </head>
 <body>
     <?php
+    function mensaje($mensaje){
+      echo $mensaje;
+    }
+    mensaje("pito pito gorgorito, lo que tu das te lo quito");
     ?>
 </body>
 </html>
