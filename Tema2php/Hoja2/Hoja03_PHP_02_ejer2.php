@@ -7,6 +7,11 @@
 </head>
 <body>
     <?php
+    function suma($a,$b){
+        $suma=$a+$b;
+     echo "La suma de $a y $b es: $suma";
+    }
+    suma(5,7);
     ?>
 </body>
 </html>
