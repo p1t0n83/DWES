@@ -14,13 +14,14 @@
             <th>Valor</th>
         </tr>
         <?php
+        //los $ que ya estan implementados son arrays especiales
         // Recorrer el array $_SERVER con foreach
         // para sacar tambien la clave lo ponemos con la flecha =>
-        foreach ($_SERVER as $variable => $valor) {
-            echo "<tr>";
-            echo "<td>" . $variable . "</td>";
-            echo "<td>" . $valor . "</td>";
-            echo "</tr>";
+        foreach ($_SERVER as $key => $valor) {
+            echo "<tr>".
+             "<td>" . $key . "</td>".
+             "<td>" . $valor . "</td>".
+             "</tr>";
         }
         ?>
     </table>

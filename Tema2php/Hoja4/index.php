@@ -10,9 +10,9 @@
 <body>
     <?php
 
-    /*
+    
     //con esto podemos usar las clases que tengamos en esta hoja
-    require_once("Hoja03_PHP_04_ejer1.php");
+    include("Hoja03_PHP_04_ejer1.php");
 
     //creamos un objeto de la clase circulo
     //ponemos 5 para inicializar el radio
@@ -24,11 +24,11 @@
      // Cambiamos el valor del radio usando el método mágico __set
      $miCirculo->__set('radio',10);
      echo "El nuevo radio del círculo es: " . $miCirculo->__get('radio') . "<br/>";
-     */
-
-
-     /*
-    require_once("Hoja03_PHP_04_ejer2.php");
+     
+?>
+<?php
+     
+    include("Hoja03_PHP_04_ejer2.php");
 
     // Crear un objeto de la clase Coche
     $coche1 = new Coche("1234ABC", 50);
@@ -47,9 +47,10 @@
     $coche1->desacelerar(60);
     
     $coche1->mostrar();
-    */
-
-    require_once("Hoja03_PHP_04_ejer3.php");
+    
+    ?>
+<?php
+    include("Hoja03_PHP_04_ejer3.php");
     
       // Crear instancias de la clase Monedero
       $monedero1 = new Monedero(100); // Crear un monedero con 100 unidades
