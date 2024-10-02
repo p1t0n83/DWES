@@ -24,6 +24,8 @@
         {
             return "Sueldo de $this->nombre = ".$this->sueldo."<br/>";
         }
+
+       
     }
 
     class Encargado extends Empleado
