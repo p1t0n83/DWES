@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    require_once("Hoja04_PHP_05_ejer2.php");
+    include("Hoja03_PHP_05_ejer2.php");
     // Crear objetos de CuentaCorriente y CuentaAhorro
     $cuentaCorriente = new CuentaCorriente(10, "001", "Juan Pérez", 1000);
     $cuentaAhorro = new CuentaAhorro(50, 5, "002", "María López", 1500);
@@ -27,5 +27,20 @@
     echo "<h3>La mostramos de nuevo tras los cambios</h3>";
     $cuentaAhorro->mostrar();
     ?>
+
+    <?php
+    include("Hoja03_PHP_05_ejer3.php");
+    $medicos=array();
+    $medico1=new Familia(60,"Iker Garcia Iturri",19,turno::MANIANA);
+    $medico2=new Familia(40,"Alberto Gonzalez Fernandez",20,turno::TARDE);
+    $medico3=new Familia(20,"Elsa Ferreiro Calvo",20,turno::MANIANA);
+    $medico4=new Urgencia("noise","Angel Fernandez Labrador",80,turno::MANIANA);
+    $medico5=new Urgencia("noise","Manu",40,turno::MANIANA);
+    $medico6=new Urgencia("noise","Alejandro",65,turno::TARDE);
+    array_push($medicos,$medico1,$medico2,$medico3,$medico4,$medico5,$medico6);
+
+    
+    ?>
+    
 </body>
 </html>

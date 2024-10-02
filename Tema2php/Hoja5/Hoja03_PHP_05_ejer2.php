@@ -12,9 +12,9 @@
     //clase cuenta
     class Cuenta
     {
-        protected $numero;
-        protected $titular;
-        protected $saldo;
+        protected int $numero;
+        protected string $titular;
+        protected float $saldo;
 
         public function __construct($numero, $titular, $saldo)
         {
