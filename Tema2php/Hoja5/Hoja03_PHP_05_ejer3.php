@@ -64,6 +64,9 @@
             $this->unidad = $unidad;
         }
         
+        public function getUnidad():string{
+            return $this->unidad;
+        }
     }
 
 
