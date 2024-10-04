@@ -19,11 +19,11 @@
         protected string $nombre;
         protected int $numAlas;
         protected int $numMotores;
-        protected int $altitud;
+        protected float $altitud;
 
         protected int $velocidad;
 
-        public function __construct(string $nombre, int $numAlas, int $numMotores, int $altitud, int $velocidad)
+        public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, int $velocidad)
         {
             $this->nombre = $nombre;
             $this->numAlas = $numAlas;
@@ -50,7 +50,7 @@
         {
             $this->velocidad = $velocidad;
         }
-        public abstract function volar(int $altitud);
+        public abstract function volar(float $altitud);
         public abstract function mostrarInformacion();
 
 
@@ -71,7 +71,7 @@
         }
 
 
-        public function volar(int $altitudDeseada): void
+        public function volar(float $altitudDeseada): void
         {
             if ($altitudDeseada > 0 && $this->altitudMaxima>=$altitudDeseada) {
                 if ($this->getVelocidad() > 150) {
@@ -128,7 +128,7 @@
 
         }
 
-        public function volar(int $altitudEsperada)
+        public function volar(float $altitudEsperada)
         {
             if ( (100 * $this->nRotor)>=$altitudEsperada) {
                 while ($this->altitud < $altitudEsperada) {

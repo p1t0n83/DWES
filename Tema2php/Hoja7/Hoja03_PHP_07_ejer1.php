@@ -9,7 +9,7 @@
 
 <body>
     <?php
-    //creo mi trait
+    
      
     interface Volador
     {
@@ -19,14 +19,14 @@
     abstract class ElementoVolador implements Volador
     {
        
-        protected string $nombre;
-        protected int $numAlas;
-        protected int $numMotores;
-        protected int $altitud;
+        private string $nombre;
+        private int $numAlas;
+        private int $numMotores;
+        private float $altitud;
 
         protected int $velocidad;
 
-        public function __construct(string $nombre, int $numAlas, int $numMotores, int $altitud, int $velocidad)
+        public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, int $velocidad)
         {
             $this->nombre = $nombre;
             $this->numAlas = $numAlas;
@@ -53,7 +53,7 @@
         {
             $this->velocidad = $velocidad;
         }
-        public abstract function volar(int $altitud);
+        public abstract function volar(float $altitud);
         public abstract function mostrarInformacion();
 
         
@@ -63,9 +63,9 @@
     {
         private string $companiaAerea;
         private DateTime $fechaAlta;
-        private int $altitudMaxima;
+        private float $altitudMaxima;
 
-        public function __construct(string $nombre, int $numAlas, int $numMotores, int $altitud, string $companiaAerea, int $velocidad, DateTime $fechaAlta, int $altitudMaxima)
+        public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, string $companiaAerea, int $velocidad, DateTime $fechaAlta, float $altitudMaxima)
         {
             parent::__construct($nombre, $numAlas, $numMotores, $altitud, $velocidad);
             $this->fechaAlta = $fechaAlta;
@@ -74,7 +74,7 @@
         }
 
 
-        public function volar(int $altitudDeseada): void
+        public function volar(float $altitudDeseada): void
         {
             if ($altitudDeseada > 0 && $this->altitudMaxima>=$altitudDeseada) {
                 if ($this->getVelocidad() > 150) {
@@ -123,7 +123,7 @@
         private string $propietario;
         private int $nRotor;
 
-        public function __construct(string $nombre, int $numAlas, int $numMotores, int $altitud, int $velocidad, string $propietario, int $nRotor)
+        public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, int $velocidad, string $propietario, int $nRotor)
         {
             parent::__construct($nombre, $numAlas, $numMotores, $altitud, $velocidad, );
             $this->propietario = $propietario;
@@ -131,7 +131,7 @@
 
         }
 
-        public function volar(int $altitudEsperada){
+        public function volar(float $altitudEsperada){
             if ((100 * $this->nRotor)>=$altitudEsperada) {
                 while ($this->altitud < $altitudEsperada) {
                     $this->altitud += 20;
