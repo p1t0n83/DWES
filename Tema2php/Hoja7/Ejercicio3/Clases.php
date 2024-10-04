@@ -1,7 +1,6 @@
 <?php
 namespace MiProyecto\Clases;
-use MiProyecto\Interfaces\Volador;
-use MiProyecto\Traits;
+
 use DateTime;
  abstract class ElementoVolador implements Volador
  {

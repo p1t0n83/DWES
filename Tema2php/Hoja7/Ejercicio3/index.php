@@ -1,7 +1,7 @@
 <?php
 // los namespace tienen que ir en primera linea
 namespace MiProyecto\Index;
-use MiProyecto\Clases;
+
 
 use DateTime; // Clase DateTime
 
