@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <?
+    <?php
     include_once('Clases\Aeropuerto.php');
     include_once('Clases\Avion.php');
     include_once('Clases\Helicoptero.php'); 
@@ -18,15 +18,15 @@
     use MiProyecto\Clases\Aeropuerto;
     use MiProyecto\Clases\Avion;
     use MiProyecto\Clases\Helicoptero;
-
+    use DateTime;
     //crea aeropuerto
     include("Hoja03_PHP_07_ejer1.php");
     $aeropuerto = new Aeropuerto();
 
     // Crear tres aviones
-    $avion1 = new Avion("Boeing 777", 2, 4, 0, "Iberia", 300, new DateTime("2020-05-20"), 13000);
-    $avion2 = new Avion("Airbus A320", 2, 2, 0, "Vueling", 280, new DateTime("2018-11-10"), 12000);
-    $avion3 = new Avion("Cessna 007", 1, 1, 0, "AirEuropa", 180, new DateTime("2019-03-15"), 4000);
+    $avion1 = new Avion("Boeing 777", 2, 4, 0, "Iberia", 300, new DateTime(2020-05-20), 13000);
+    $avion2 = new Avion("Airbus A320", 2, 2, 0, "Vueling", 280, new DateTime(2018-11-10), 12000);
+    $avion3 = new Avion("Cessna 007", 1, 1, 0, "AirEuropa", 180, new DateTime(2019-03-15), 4000);
 
     // Crear tres helicópteros
     $helicoptero1 = new Helicoptero("Helicóptero Apache", 0, 1, 0, 150, "Militar", 4);

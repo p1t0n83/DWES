@@ -71,6 +71,7 @@ class Aeropuerto
                 echo "Acelerando " . $elemento->getNombre() . " a " . $velocidad . " km/h.<br>";
                 // Hacer que el objeto vuele a la altitud deseada
                 $elemento->volar($altitudEsperada);
+
                 // Devolver el objeto después de haber despegado
                 return $elemento;
             }
