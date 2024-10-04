@@ -28,8 +28,8 @@ use DateTime; // Clase DateTime
 
     // 2.Crear tres helicópteros
     $helicoptero1 = new Helicoptero("Helicóptero Apache", 0, 1, 0, 150, "Militar", 4);
-    $helicoptero2 = new Helicoptero("Helicóptero Bell", 0, 1, 0, 120, "Privado", 2);
-    $helicoptero3 = new Helicoptero("Helicóptero Robinson", 0, 1, 0, 100, "Rescate", 3);
+    $helicoptero2 = new Helicoptero("Helicóptero 2", 0, 1, 0, 120, "Privado", 2);
+    $helicoptero3 = new Helicoptero("Helicóptero 3", 0, 1, 0, 100, "Rescate", 3);
 
     // 3.Introducir los objetos creados en el aeropuerto
     $aeropuerto->insertar($avion1);

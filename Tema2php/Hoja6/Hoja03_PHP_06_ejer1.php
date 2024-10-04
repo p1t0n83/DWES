@@ -73,7 +73,7 @@
 
         public function volar(int $altitudDeseada): void
         {
-            if ($altitudDeseada > 0 && $altitudDeseada <= $this->altitudMaxima) {
+            if ($altitudDeseada > 0 && $this->altitudMaxima>=$altitudDeseada) {
                 if ($this->getVelocidad() > 150) {
                     while ($this->altitud < $altitudDeseada) {
                         $this->altitud += 100;
@@ -130,7 +130,7 @@
 
         public function volar(int $altitudEsperada)
         {
-            if ($altitudEsperada <= (100 * $this->nRotor)) {
+            if ( (100 * $this->nRotor)>=$altitudEsperada) {
                 while ($this->altitud < $altitudEsperada) {
                     $this->altitud += 20;
                     if ($this->altitud > $altitudEsperada) {
