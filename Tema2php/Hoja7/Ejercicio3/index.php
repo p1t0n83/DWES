@@ -1,16 +1,24 @@
+<?php
+// los namespace tienen que ir en primera linea
+namespace MiProyecto\Index;
+use MiProyecto\Clases;
+
+use DateTime; // Clase DateTime
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejemplo de Aeropuerto</title>
 </head>
 
 <body>
     <?php
+      
     //1.crea aeropuerto
-    include("Hoja03_PHP_06_ejer1.php");
     $aeropuerto = new Aeropuerto();
 
     // 2.Crear tres aviones

@@ -9,6 +9,8 @@
 
 <body>
     <?php
+    //creo mi trait
+     
     interface Volador
     {
         public function acelerar(int $velocidad): void;
@@ -16,6 +18,7 @@
 
     abstract class ElementoVolador implements Volador
     {
+       
         protected string $nombre;
         protected int $numAlas;
         protected int $numMotores;
@@ -53,7 +56,7 @@
         public abstract function volar(int $altitud);
         public abstract function mostrarInformacion();
 
-
+        
     }
 
     class Avion extends ElementoVolador
@@ -163,8 +166,15 @@
         }
 
     }
+    trait Mensaje{
+        function mostrarMensaje($mensaje):void{
+         echo $mensaje;
+        }
+     }
     class Aeropuerto
     {
+         //meto dentro un use Mensaje;
+         use Mensaje;
         private $elementosVolador = array();
         public function __construct()
         {
@@ -242,7 +252,7 @@
             return null;
         }
     }
-
+  
     ?>
 </body>
 
