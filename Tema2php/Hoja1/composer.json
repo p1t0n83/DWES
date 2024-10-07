@@ -9,5 +9,10 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "hackzilla/password-generator": "^1.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.4"
+    }
 }
