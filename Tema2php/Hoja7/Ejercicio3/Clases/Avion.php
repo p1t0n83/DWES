@@ -4,10 +4,10 @@ use MiProyecto\Interfaces\Volador;
  class Avion extends ElementoVolador
  {
      private string $companiaAerea;
-     private DateTime $fechaAlta;
+     private \DateTime $fechaAlta;
      private float $altitudMaxima;
 
-     public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, string $companiaAerea, int $velocidad, DateTime $fechaAlta, float $altitudMaxima)
+     public function __construct(string $nombre, int $numAlas, int $numMotores, float $altitud, string $companiaAerea, int $velocidad, \DateTime $fechaAlta, float $altitudMaxima)
      {
          parent::__construct($nombre, $numAlas, $numMotores, $altitud, $velocidad);
          $this->fechaAlta = $fechaAlta;
@@ -19,7 +19,7 @@ use MiProyecto\Interfaces\Volador;
      public function volar(float $altitudDeseada): void
      {
          if ($altitudDeseada > 0 && $this->altitudMaxima>=$altitudDeseada) {
-             if ($this->getVelocidad() >= 150) {
+             if ($this->__get('velocidad') >= 150) {
                  while ($this->altitud < $altitudDeseada) {
                      $this->altitud += 100;
                      if ($this->altitud > $altitudDeseada) {
@@ -41,6 +41,8 @@ use MiProyecto\Interfaces\Volador;
      {
          return $this->altitud > 0 ? true : false;
      }
+     
+   
 
      public function getCompania(): string
      {

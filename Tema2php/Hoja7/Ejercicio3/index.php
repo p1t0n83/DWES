@@ -9,20 +9,22 @@
 
 <body>
     <?php
-    include_once('Traits\Mensaje.php');  
-    include_once('Clases\Aeropuerto.php');
-    include_once('Clases\ElementoVolador.php');
-    include_once('Clases\Avion.php');
-    include_once('Clases\Helicoptero.php'); 
+    require_once('Traits/Mensaje.php');        // Primero, el trait
+    require_once('Interfaces/Volador.php');     // Luego, la interfaz
+    require_once('Clases/ElementoVolador.php'); // Luego, la clase base
+    require_once('Clases/Avion.php');           // Luego, las clases que la extienden
+    require_once('Clases/Helicoptero.php');     // Luego, otras clases
+    require_once('Clases/Aeropuerto.php');      // Finalmente, la clase que las usa
     
-    include_once('Interfaces\Volador.php');
     
+
+     
     use MiProyecto\Clases\Aeropuerto;
     use MiProyecto\Clases\Avion;
     use MiProyecto\Clases\Helicoptero;
     use MiProyecto\Traits\Mensaje;
+    
     //crea aeropuerto
-    include("Hoja03_PHP_07_ejer1.php");
     $aeropuerto = new Aeropuerto();
 
     // Crear tres aviones
@@ -45,14 +47,31 @@
     // trait ahora en el programa principal
     $aeropuerto->mostrarMensaje("Arriba España Cojones<br/>");
 
+
+      // Probar métodos de Aeropuerto
+      echo "<h2>Búsqueda de vehículo:</h2>";
+      $aeropuerto->buscar("Boeing 777");
+      echo "<br/>";
+  
+      echo "<h2>Listar aviones de la compañía 'Iberia':</h2>";
+      $aeropuerto->listarCompania("Iberia");
+      echo "<br/>";
+  
+      echo "<h2>Listar helicópteros con 4 rotores:</h2>";
+
+      $aeropuerto->rotores(4);
+    echo "<br/>";
+
+    echo "<h2>Despegar el avión 'Cessna 007':</h2>";
+    $despegue = $aeropuerto->despegar("Cessna 007", 1000, 180);
+    if ($despegue !== null) {
+        echo "Despegue exitoso para: " . $despegue->__get('nombre') . "<br/>";
+    } else {
+        echo "Error al despegar el vehículo.<br/>";
+    }
     ?>
 
-    <?php
-    include("Hoja03_PHP_07_ejer2.php");
-    $empleado = new Empleado("Iker Garcia Iturri", 19, "Zurita Barrio San Marin N8 Bajo 1 Puerta D", "001", 1900);
-    $empleado->mostrarInformacionPersonal($empleado->__get('nombre'), $empleado->__get('edad'), $empleado->__get('direccion'));
-    $empleado->mostrarInformacionLaboral($empleado->__get('codigoEmpleado'), $empleado->__get('salario'));
-    ?>
+    
 </body>
 
 </html>

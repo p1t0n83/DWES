@@ -20,7 +20,7 @@ class Aeropuerto
     {
         $cont = 0;
         foreach ($this->elementosVolador as $elemento) {
-            if ($elemento->getNombre() === $nombre) {
+            if ($elemento->__get('nombre') === $nombre) {
                 echo $elemento->mostrarInformacion();
                 $cont++;
             }
@@ -65,10 +65,10 @@ class Aeropuerto
     public function despegar($nombre, $altitudEsperada, $velocidad): ?ElementoVolador
     {
         foreach ($this->elementosVolador as $elemento) {
-            if ($elemento->getNombre() === $nombre) {
+            if ($elemento->__get('nombre') === $nombre) {
                 // Acelerar a la velocidad indicada
                 $elemento->acelerar($velocidad);
-                echo "Acelerando " . $elemento->getNombre() . " a " . $velocidad . " km/h.<br>";
+                echo "Acelerando " . $elemento->__get('nombre') . " a " . $velocidad . " km/h.<br>";
                 // Hacer que el objeto vuele a la altitud deseada
                 $elemento->volar($altitudEsperada);
 
