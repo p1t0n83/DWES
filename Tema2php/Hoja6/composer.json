@@ -1,0 +1,13 @@
+{
+    "name": "igi/hoja6_tema2",
+    "description": "Esta es la hoja 6 del tema 2",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
