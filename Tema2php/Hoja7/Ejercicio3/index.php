@@ -9,12 +9,12 @@
 
 <body>
     <?php
-    require_once('Traits/Mensaje.php');        // Primero, el trait
-    require_once('Interfaces/Volador.php');     // Luego, la interfaz
-    require_once('Clases/ElementoVolador.php'); // Luego, la clase base
-    require_once('Clases/Avion.php');           // Luego, las clases que la extienden
-    require_once('Clases/Helicoptero.php');     // Luego, otras clases
-    require_once('Clases/Aeropuerto.php');      // Finalmente, la clase que las usa
+    include_once('Traits/Mensaje.php');        // Primero, el trait
+    include_once('Interfaces/Volador.php');     // Luego, la interfaz
+    include_once('Clases/ElementoVolador.php'); // Luego, la clase base
+    include_once('Clases/Avion.php');           // Luego, las clases que la extienden
+    include_once('Clases/Helicoptero.php');     // Luego, otras clases
+    include_once('Clases/Aeropuerto.php');      // Finalmente, la clase que las usa
     
     
 
