@@ -11,5 +11,10 @@
     "minimum-stability": "stable",
     "require": {
         "brick/math": "^0.12.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/src/"
+        }
     }
 }

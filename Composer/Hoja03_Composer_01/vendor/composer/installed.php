@@ -3,7 +3,7 @@
         'name' => 'igi/hoja03composer01',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '128043ffc383914a7a8fd77eb776517111f95ede',
+        'reference' => 'f9fb4781c1192076b4ec77fed3f5576d722b89c9',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'igi/hoja03composer01' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '128043ffc383914a7a8fd77eb776517111f95ede',
+            'reference' => 'f9fb4781c1192076b4ec77fed3f5576d722b89c9',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
