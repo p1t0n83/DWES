@@ -1,0 +1,20 @@
+{
+    "name": "igi/hoja2composer",
+    "description": "Esta es la hoja 2 de los ejercicios de composer",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+        "autoload": {
+            "psr-4": {
+                "App\\": "app/src/"
+            }
+        },
+        "require": {
+            "phpmailer/phpmailer": "^6.0"
+        }
+    }
