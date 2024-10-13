@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="input" action="procesa.php" method="post"> 
+        <h1>LISTA DE NUMEROS PAR</h1>
+        <label for="primero">Elige el primer numero:</label>
+        <input type="number" name="primero" id="primero" />
+        <br />
+        <label for="segundo">Elige el segundo numero:</label>
+        <input type="number" name="segundo" id="segundo" />
+        <br />
+        <input type="submit" value="Enviar datos">
+        <fieldset>
+        <input type="radio" name="operacion" id="suma" value="1">Suma
+        <input type="radio" name="operacion" id="resta" value="2">Resta
+        <input type="radio" name="operacion" id="multiplicacion" value="3">Multiplicacion
+        <input type="radio" name="operacion" id="division" value="4">Division
+            <legend>Seleccione la operacion</legend>
+        </fieldset>
+         <br />       
+    </form>
+</body>
+</html>

@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Clases;
+namespace App\Correo;
 
-use App\Interfaces\InterfazProveedorCorreo;
-
-class ServicioCorreo
-{
+class ServicioCorreo {
     private InterfazProveedorCorreo $proveedorCorreo;
 
-    public function __construct(InterfazProveedorCorreo $proveedorCorreo)
-    {
+    public function __construct(InterfazProveedorCorreo $proveedorCorreo) {
         $this->proveedorCorreo = $proveedorCorreo;
     }
 
-    public function enviarCorreo(string $paraQuien, string $asunto, string $cuerpoMensaje): bool
-    {
+    public function enviarCorreo(string $paraQuien, string $asunto, string $cuerpoMensaje): bool {
         return $this->proveedorCorreo->enviarCorreo($paraQuien, $asunto, $cuerpoMensaje);
     }
 }
