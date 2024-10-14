@@ -3,10 +3,8 @@
 namespace App\Correo;
 
 class ServicioCorreo {
-    private InterfazProveedorCorreo $proveedorCorreo;
 
-    public function __construct(InterfazProveedorCorreo $proveedorCorreo) {
-        $this->proveedorCorreo = $proveedorCorreo;
+    public function __construct(private InterfazProveedorCorreo $proveedorCorreo) {  
     }
 
     public function enviarCorreo(string $paraQuien, string $asunto, string $cuerpoMensaje): bool {
