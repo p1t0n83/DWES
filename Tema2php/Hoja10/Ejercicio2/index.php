@@ -24,38 +24,9 @@ $equipos = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipos de Fútbol</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-        img {
-            width: 100px;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .equipo {
-            width: 45%;
-        }
-    </style>
+    <link rel="stylesheet" href="estilo.css">
+    
+ 
 </head>
 <body>
     <h1>Elige un equipo</h1>
