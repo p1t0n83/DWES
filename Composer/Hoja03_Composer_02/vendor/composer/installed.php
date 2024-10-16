@@ -3,7 +3,7 @@
         'name' => 'igi/hoja2composer',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fa602c8152c553707820eb99a8a3bdc4108cf742',
+        'reference' => '5d6c2f966f84da3af78bacfa63a5bc63713c4d9d',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'igi/hoja2composer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fa602c8152c553707820eb99a8a3bdc4108cf742',
+            'reference' => '5d6c2f966f84da3af78bacfa63a5bc63713c4d9d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

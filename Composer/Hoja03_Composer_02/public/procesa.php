@@ -5,34 +5,27 @@ use App\Clases\ServicioCorreo;
 use App\Clases\ProveedorMailtrap;
 
 
-$nombre = $_GET['nombre'] ?? '';
-$email = $_GET['email'] ?? '';
-$mensaje = $_GET['mensaje'] ?? '';
-$asunto=$_GET['asunto']??'';
 
 // Validar los campos
-if (empty($nombre) || empty($email) || empty($mensaje)) {
+if (empty($_POST['nombre']) || empty($_POST['email']) || empty($_POST['mensaje'])) {
     header('Location: formulario.php?error=1');
     exit;
 }
-
-// Validar el email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header('Location: formulario.php?error=2');
-    exit;
-}
-
 // Crear la instancia del servicio de correo
 $proveedorMailtrap = new ProveedorMailtrap();
 $servicioCorreo = new ServicioCorreo($proveedorMailtrap);
 
-// Enviar el correo
+$nombre = $_POST['nombre'];
+$email = $_POST['email'];
+$mensaje = $_POST['mensaje'];
 
+// Enviar el correo
+$asunto='nuevo mensaje de '.$nombre;
 if ($servicioCorreo->enviarCorreo($email, $asunto, $mensaje)) {
-    header('Location: formulario.php?success=1');
+    header('Location: formulario?success=1');
     exit;
 } else {
-    header('Location: formulario.php?error=3');
+    header('Location: formulario?error=3');
     exit;
 }
 ?>
