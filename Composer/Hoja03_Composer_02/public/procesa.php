@@ -22,10 +22,10 @@ $mensaje = $_POST['mensaje'];
 // Enviar el correo
 $asunto='nuevo mensaje de '.$nombre;
 if ($servicioCorreo->enviarCorreo($email, $asunto, $mensaje)) {
-    header('Location: formulario?success=1');
+    header('Location:formulario.php?success=1');
     exit;
 } else {
-    header('Location: formulario?error=3');
+    header('Location: formulario.php?error=3');
     exit;
 }
 ?>

@@ -25,7 +25,7 @@ class ProveedorMailtrap implements InterfazProveedorCorreo
         $this->mail->Username = 'c6fe4aff36959a';                   // Nombre de usuario SMTP
         $this->mail->Password = 'bb43b49a4b41e8';                   // Contraseña SMTP
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Habilita el cifrado TLS; `ssl` también aceptado
-        $this->mail->Port = 2525;                                    // Puerto TCP para conectarse
+        $this->mail->Port = 25;                                    // Puerto TCP para conectarse
     }
     function enviarCorreo(string $paraQuien, string $asunto, string $cuerpoMensaje): bool
     {
