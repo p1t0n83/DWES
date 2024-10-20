@@ -1,8 +1,8 @@
 <?php
 
-namespace MiProyecto\Clases;
+namespace App\Clases;
 
-use MiProyecto\Interfaces\Volador;
+use App\Interfaces\Volador;
  abstract class ElementoVolador implements Volador
  {
     

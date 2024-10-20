@@ -1,7 +1,6 @@
 <?php
-
-namespace MiProyecto\Clases;
-use MiProyecto\Traits\Mensaje;
+namespace App\Clases;
+use App\Traits\Mensaje;
 class Aeropuerto
 {
      //meto dentro un use Mensaje;
@@ -56,10 +55,11 @@ class Aeropuerto
                     $cont++;
                 }
             }
-            if ($cont === 0) {
+            
+        }
+        if ($cont === 0) {
                 echo "No se encontraron helicopteros";
             }
-        }
     }
     // con el ? decimos que puede ser elemento volador o no lo que nos retornara
     public function despegar($nombre, $altitudEsperada, $velocidad): ?ElementoVolador

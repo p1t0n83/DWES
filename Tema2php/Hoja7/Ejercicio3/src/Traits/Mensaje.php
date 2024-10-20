@@ -1,5 +1,5 @@
 <?php
-namespace MiProyecto\Traits;
+namespace App\Traits;
 trait Mensaje{
         function mostrarMensaje(string $mensaje):void{
          echo $mensaje;

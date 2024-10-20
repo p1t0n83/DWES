@@ -1,8 +1,7 @@
 <?php
-namespace MiProyecto\Interfaces;
+namespace App\Interfaces;
 interface Volador
     {
         public function acelerar(int $velocidad): void;
     }
-
     ?>

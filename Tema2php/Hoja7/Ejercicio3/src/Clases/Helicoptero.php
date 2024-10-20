@@ -1,5 +1,6 @@
 <?php
-namespace MiProyecto\Clases;
+namespace App\Clases;
+use App\Clases\ElementoVolador;
 class Helicoptero extends ElementoVolador
 {
     private string $propietario;

@@ -6,24 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-    <?php
-    include_once('Traits/Mensaje.php');        // Primero, el trait
-    include_once('Interfaces/Volador.php');     // Luego, la interfaz
-    include_once('Clases/ElementoVolador.php'); // Luego, la clase base
-    include_once('Clases/Avion.php');           // Luego, las clases que la extienden
-    include_once('Clases/Helicoptero.php');     // Luego, otras clases
-    include_once('Clases/Aeropuerto.php');      // Finalmente, la clase que las usa
-    
-    
+<?php
+   require_once __DIR__ . '/../vendor/autoload.php';
+    use App\Clases\Aeropuerto; 
+    use App\Clases\Avion;
+    use App\Clases\Helicoptero;
 
-     
-    use MiProyecto\Clases\Aeropuerto;
-    use MiProyecto\Clases\Avion;
-    use MiProyecto\Clases\Helicoptero;
-    use MiProyecto\Traits\Mensaje;
-    
     //crea aeropuerto
     $aeropuerto = new Aeropuerto();
 

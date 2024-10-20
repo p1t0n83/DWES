@@ -1,6 +1,5 @@
 <?php
-namespace MiProyecto\Clases;
-use MiProyecto\Interfaces\Volador;
+namespace App\Clases;
  class Avion extends ElementoVolador
  {
      private string $companiaAerea;
