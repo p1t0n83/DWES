@@ -49,7 +49,7 @@ class SMTP
      *
      * @var int
      */
-    const DEFAULT_PORT = 25;
+    const DEFAULT_PORT = 2525;
 
     /**
      * The SMTPs port to use if one is not specified.

@@ -1,6 +1,7 @@
 {
     "name": "igi/hoja2composer",
     "description": "Esta es la puta hoja 2 de composer que he borrado como 5 veces",
+    "type":"project",
     "authors": [
         {
             "name": "p1t0n83",
@@ -13,9 +14,15 @@
     },
         "autoload": {
             "psr-4": {
-                "App\\": "app/src/"
+                "App\\": "src/"
             }
         }
+    ,"scripts": {
+     "start":
+        "php -S localhost:8001 -t public"     
+    }
+    
+    
     }
     
 

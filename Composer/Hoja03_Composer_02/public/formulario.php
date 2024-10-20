@@ -11,13 +11,15 @@
     <?php
     // Mostrar mensajes según los parámetros GET
     if (isset($_GET['error'])) {
-        if ($_GET['error'] == 1) {
+        switch(intval($_GET['error'])){
+        case 1: {
             echo "<p>Por favor, rellena todos los campos.</p>";
-        } elseif ($_GET['error'] == 2) {
+        }case 2: {   
             echo "<p>Por favor, introduce un email válido.</p>";
-        } elseif ($_GET['error'] == 3) {
+        } case 3: {
             echo "<p>Ha ocurrido un error al enviar el email.</p>";
         }
+    }
     }
 
     if (isset($_GET['success'])) {
@@ -25,18 +27,15 @@
     }
     ?>
    
-    <form action="procesa.php" method="GET">
+    <form action="procesa.php" method="post">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+        <input type="text" id="nombre" name="nombre">
         <br>
         <label for="email">Correo electrónico:</label>
-        <input type="text" id="email" name="email" required>
-        <br>
-        <label for="asunto">Asunto:</label>
-        <input type="text" id="asunto" name="asunto" required>
+        <input type="email" id="email" name="email" >
         <br>
         <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" required></textarea>
+        <textarea id="mensaje" name="mensaje"></textarea>
 
         <button type="submit">Enviar</button>
     </form>
