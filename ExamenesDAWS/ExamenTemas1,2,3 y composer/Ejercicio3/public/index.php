@@ -23,7 +23,7 @@
 <?php
    
     require_once '../vendor/autoload.php';
-    $faker = Faker\Generate::create();
+    $faker = libreria\Faker\Generate::create();
     echo"<h2>Resultados</h2>";
     $numeroNombres=$_GET['nombres'];
     $numeroemails=$_GET['emails'];
