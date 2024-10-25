@@ -1,0 +1,20 @@
+{
+    "name": "igi/ejercicio2examen",
+    "description": "este es el composer para gestionar los namespace del ejercicio 2",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iker"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "Ejercicio2\\": "src/"
+        }
+    },
+    "scripts":{
+        "start": "php -S localhost:8001 -t public"
+    }
+}

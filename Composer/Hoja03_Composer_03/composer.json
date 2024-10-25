@@ -1,0 +1,22 @@
+{
+    "name": "igi/hoja3",
+    "description": "Hoja 3 de composer, estoy hasta la polla de ph",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MiAplicacion\\": "app/",
+            "MiLibreria\\": "libreria/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8001 -t public"
+    }
+}

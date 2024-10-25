@@ -1,0 +1,20 @@
+{
+    "name": "igi/ejercicio3",
+    "description": "Ejercicio 3 del examen que nos pide crear campos con faker",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iker Garcia iturri"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "scripts":{
+        "start": "php -S localhost:8001 -t public"
+    },"repository":[
+        {
+            "type":"path",
+            "url":"libreria/Faker"
+        }
+    ]
+}
