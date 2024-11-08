@@ -64,7 +64,7 @@
         <label for="alturaRemplazo">Altura:<input type="number" id="alturaRemplazo" name="alturaRemplazo"></label><br>
         <label for="pesoRemplazo">Peso:<input type="number" id="pesoRemplazo" name="pesoRemplazo"></label><br>
         <label for="posicionRemplazo">Posicion:<select name="posicionRemplazo" id="posicionRemplazo">
-         <option value="f-g">F-G</option>
+         <option value="f-c">F-C</option>
          <option value="g-f">G-F</option>
          <option value="c">C</option>
          <option value="f">F</option>
