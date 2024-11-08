@@ -3,7 +3,7 @@
         'name' => 'ikergarciaiturri/basedatoshoja1ejer1',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '552cefb92c27798c821608c4a434de23f1b0c6de',
+        'reference' => 'ddc37b1023a97676cdd46bf0d89d0854f51a1839',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'ikergarciaiturri/basedatoshoja1ejer1' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '552cefb92c27798c821608c4a434de23f1b0c6de',
+            'reference' => 'ddc37b1023a97676cdd46bf0d89d0854f51a1839',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
