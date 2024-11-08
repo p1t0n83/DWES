@@ -59,12 +59,16 @@
     </form>
     <form>
         <h3>Datos del nuevo Jugador:</h3>
-        <label for="nombreRemplazo">Nombre:<input type="text" name="nombreRemplazo" id="nombreRemplazo"></label>
-        <label for="procedenciaRemplazo">Procedencia:<input type="text" name="procedenciaRemplazo" id="procedenciaRemplazo"></label>
-        <label for="alturaRemplazo">Altura:<input type="number" id="alturaRemplazo" name="alturaRemplazo"></label>
-        <label for="pesoRemplazo">Peso:<input type="number" id="pesoRemplazo" name="pesoRemplazo"></label>
-        <label for="posicionRemplazo"><select name="posicionRemplazo" id="posicionRemplazo">
-         <option> </option>
+        <label for="nombreRemplazo">Nombre:<input type="text" name="nombreRemplazo" id="nombreRemplazo"></label><br>
+        <label for="procedenciaRemplazo">Procedencia:<input type="text" name="procedenciaRemplazo" id="procedenciaRemplazo"></label><br>
+        <label for="alturaRemplazo">Altura:<input type="number" id="alturaRemplazo" name="alturaRemplazo"></label><br>
+        <label for="pesoRemplazo">Peso:<input type="number" id="pesoRemplazo" name="pesoRemplazo"></label><br>
+        <label for="posicionRemplazo">Posicion:<select name="posicionRemplazo" id="posicionRemplazo">
+         <option value="f-g">F-G</option>
+         <option value="g-f">G-F</option>
+         <option value="c">C</option>
+         <option value="f">F</option>
+         <option value="g">G</option>
         </select></label>
     </form>
 </body>
