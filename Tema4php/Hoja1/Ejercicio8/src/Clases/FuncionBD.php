@@ -24,7 +24,7 @@ class FuncionBD
     public static function getJugadoresEquipo($equipo){
         try {
             $dwes = ConexionBD::getConnection();
-            $resultado = $dwes->query('SELECT nombre,peso FROM jugadores where nombre_equipo='.'"'.$equipo.'"');
+            $resultado = $dwes->query('SELECT nombre FROM jugadores where nombre_equipo='.'"'.$equipo.'"');
             return $resultado->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (PDOException $e) {
