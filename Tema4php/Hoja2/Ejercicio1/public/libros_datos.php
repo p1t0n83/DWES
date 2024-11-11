@@ -27,6 +27,7 @@
     }
     echo ('</table>');
     ?>
+    <a href="libros.php">volver</a>
 </body>
 
 </html>
