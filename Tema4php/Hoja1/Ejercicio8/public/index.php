@@ -32,10 +32,10 @@
                 foreach ($equipos as $equipo) {
                     echo '<option>' . $equipo['nombre'] . '</option>';
                 }
-                echo '<input type="submit" name="enviar" id="enviar"';
                 ?>
             </select>
         </label>
+        <input type="submit" name="enviar" id="enviar" value="Mostrar">
     </form>
     <?php
     if (isset($_POST['equipo'])) {
@@ -56,13 +56,11 @@
                 ?>
             </select>
         </label>
-    </form>
-    <form>
         <h3>Datos del nuevo Jugador:</h3>
         <label for="nombreRemplazo">Nombre:<input type="text" name="nombreRemplazo" id="nombreRemplazo"></label><br>
         <label for="procedenciaRemplazo">Procedencia:<input type="text" name="procedenciaRemplazo" id="procedenciaRemplazo"></label><br>
-        <label for="alturaRemplazo">Altura:<input type="number" id="alturaRemplazo" name="alturaRemplazo"></label><br>
-        <label for="pesoRemplazo">Peso:<input type="number" id="pesoRemplazo" name="pesoRemplazo"></label><br>
+        <label for="alturaRemplazo">Altura:<input type="number" id="alturaRemplazo" name="alturaRemplazo" step="0.01"></label><br>
+        <label for="pesoRemplazo">Peso:<input type="number" id="pesoRemplazo" name="pesoRemplazo" step="0.01"></label><br>
         <label for="posicionRemplazo">Posicion:<select name="posicionRemplazo" id="posicionRemplazo">
          <option value="f-c">F-C</option>
          <option value="g-f">G-F</option>
@@ -70,7 +68,22 @@
          <option value="f">F</option>
          <option value="g">G</option>
         </select></label>
+        <br>
+        <input type="submit" name="traspaso" id="traspaso" value="Realizar traspaso">
     </form>
+    <?php
+    if (isset($_POST['traspaso'])) {
+        // Capturamos los datos del formulario
+        $nombreViejo=$_POST['jugador'];
+        $nombre = $_POST['nombreRemplazo'];
+        $procedencia = $_POST['procedenciaRemplazo'];
+        $altura = $_POST['alturaRemplazo'];
+        $peso = $_POST['pesoRemplazo'];
+        $posicion = $_POST['posicionRemplazo'];
+        // Llamamos a la función para modificar el jugador
+        $funciones->modificarJugador($nombreViejo,$nombre, $procedencia, $altura, $peso, $posicion);     
+    }
+    ?>
 </body>
 
 </html>
