@@ -53,6 +53,8 @@
                 foreach ($jugadores as $jugador) {
                     echo '<option>' . $jugador['nombre'] . '</option>';
                 }
+                $jugador=$_POST['jugador'];
+                echo(var_dump($jugador));
                 ?>
             </select>
         </label>
@@ -74,14 +76,13 @@
     <?php
     if (isset($_POST['traspaso'])) {
         // Capturamos los datos del formulario
-        $nombreViejo=$_POST['jugador'];
         $nombre = $_POST['nombreRemplazo'];
         $procedencia = $_POST['procedenciaRemplazo'];
         $altura = $_POST['alturaRemplazo'];
         $peso = $_POST['pesoRemplazo'];
         $posicion = $_POST['posicionRemplazo'];
         // Llamamos a la función para modificar el jugador
-        $funciones->modificarJugador($nombreViejo,$nombre, $procedencia, $altura, $peso, $posicion);     
+        $funciones->crearJugador(nombre: $nombre, procedencia: $procedencia, altura: $altura, peso: $peso, posicion: $posicion,nombre_equipo: $equipo,nombreBorrar: $jugador);     
     }
     ?>
 </body>

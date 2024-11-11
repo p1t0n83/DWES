@@ -9,20 +9,16 @@
 </head>
 
 <body>
-    <!--Ejercicio 4-->
-    <h1>Ejercicio 4</h1>
     <?php
     require_once '../vendor/autoload.php';
-    use App\Clases\ConexionBD;
     use App\Clases\FuncionBD;
-    $connection = ConexionBD::getConnection();
-    $funciones = new FuncionBD();
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $titulo=$_POST['titulo'];
         $edicion=$_POST['edicion'];
         $precio=$_POST['precio'];
         $adquisicion=$_POST['adquisicion'];
-        $funciones->agregarLibro($titulo,$edicion,$precio,$adquisicion);
+        //si es estatico llamalo directamente de la clase
+        FuncionBD::agregarLibro($titulo,$edicion,$precio,$adquisicion);
     }
     ?>
     <a href="libros.php">volver</a>

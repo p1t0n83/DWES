@@ -8,16 +8,11 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
-    <!--Ejercicio 4-->
-    
+<body> 
     <?php
     require_once '../vendor/autoload.php';
-    use App\Clases\ConexionBD;
     use App\Clases\FuncionBD;
-    $connection = ConexionBD::getConnection();
-    $funciones = new FuncionBD();
-    $libros = $funciones->getLibros();
+    $libros = FuncionBD::getLibros();
     echo ('<table>');
     echo('<tr><th>NUMERO DE EJEMPLAR</th><th>TITULO</th><th>AÑO DE EDICION</th><th>PRECIO</th><th>FECHA DE ADQUISICION</th></tr>');
     foreach ($libros as $libro) {
@@ -27,7 +22,7 @@
     }
     echo ('</table>');
     ?>
-    <a href="libros.php">volver</a>
+    <a href="libros.html">volver</a>
 </body>
 
 </html>

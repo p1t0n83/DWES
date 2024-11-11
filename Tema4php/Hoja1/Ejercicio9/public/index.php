@@ -20,13 +20,13 @@
         echo 'Conexión establecida correctamente';
     }
 
-    // Obtener equipos
+  
     $equipos = $funciones->getEquipos();
     ?>
 
     <h1>Actualización de Pesos de Jugadores</h1>
 
-    <!-- Formulario para seleccionar el equipo -->
+ 
     <form method="POST">
         <label for="equipo">Seleccionar equipo:</label>
         <select id="equipo" name="equipo">
@@ -40,14 +40,11 @@
     </form>
 
     <?php
-    // Si se ha seleccionado un equipo, mostrar los jugadores
+    
     if (isset($_POST['equipo'])) {
         $equipo = $_POST['equipo'];
-        $jugadores = $funciones->getJugadoresEquipo($equipo);
-        
-        if (count($jugadores) > 0) {
-            // Mostrar la tabla de jugadores con sus pesos
-            echo '<form method="POST">';
+        $jugadores = $funciones->getJugadoresEquipo($equipo);         
+            echo '<form method="post">';
             echo '<h2>Actualizar Pesos de los Jugadores</h2>';
             echo '<table>';
             echo '<tr><th>Jugador</th><th>Peso</th></tr>';
@@ -63,26 +60,17 @@
             echo '<br>';
             echo '<input type="submit" name="actualizarPesos" value="Actualizar">';
             echo '</form>';
-        } else {
-            echo "No hay jugadores en este equipo.";
-        }
-    }
-
-    // Procesar la actualización de pesos
+    }  
     if (isset($_POST['actualizarPesos'])) {
         $jugadoresPesos = $_POST['peso'];
-        $jugadoresData = [];
-        
-        // Reorganizar los datos para pasarlos a la función
+        $jugadoresDatos = [];
         foreach ($jugadoresPesos as $nombre => $peso) {
-            $jugadoresData[] = [
+            $jugadoresDatos[] = [
                 'nombre' => $nombre,
                 'peso' => $peso
             ];
         }
-        
-        // Actualizar los pesos de los jugadores
-        $funciones->actualizarPesos($jugadoresData);
+        $funciones->actualizarPesos($jugadoresDatos);
     }
     ?>
 </body>

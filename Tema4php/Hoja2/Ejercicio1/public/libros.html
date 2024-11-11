@@ -7,17 +7,7 @@
     <title>Libros</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
-
-<body>
-    <!--Ejercicio 4-->
-    <h1>Ejercicio 4</h1>
-    <?php
-    require_once '../vendor/autoload.php';
-    use App\Clases\ConexionBD;
-    use App\Clases\FuncionBD;
-    $connection = ConexionBD::getConnection();
-    $funciones = new FuncionBD();
-    ?>
+<body>  
     <form method="post" action="libros_guardar.php">
     <h3>Inserte los datos del libro:</h3>
         <label for="titulo">Titulo:<input type="text" name="titulo" id="titulo"></label><br>
@@ -27,8 +17,6 @@
         <input type="submit" name="traspaso" id="traspaso" value="Guardar datos del libro">
         <hr>
         <a href="libros_datos.php">Mostrar los libros guardados</a>
-
     </form>
-        </body>  
-
+</body>  
 </html>

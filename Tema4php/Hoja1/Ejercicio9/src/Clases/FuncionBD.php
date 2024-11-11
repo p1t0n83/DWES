@@ -38,8 +38,6 @@ class FuncionBD
         try {
             $dwes = ConexionBD::getConnection();
             $dwes->beginTransaction();
-
-            // Actualizar los pesos de todos los jugadores
             $consulta = $dwes->prepare('UPDATE jugadores SET peso = :peso WHERE nombre = :nombre');
             
             foreach ($jugadores as $jugador) {
