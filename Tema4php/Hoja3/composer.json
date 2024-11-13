@@ -1,0 +1,26 @@
+{
+    "name": "igi/hoja3",
+    "description": "Hoja 3 de base de datos",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv":"^5.6"
+    }
+    ,"scripts": {
+        "start":
+           "php -S localhost:8001 -t public"     
+       }
+       ,
+        "autoload": {
+            "psr-4": {
+                "App\\": "src/",
+                "Paginas\\":"Paginas"
+            }
+        }
+}
