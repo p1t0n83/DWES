@@ -3,7 +3,7 @@
         'name' => 'igi/hoja3',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '572fb02c4d5e8a5c43e41dda5ee153f60946baf1',
+        'reference' => '7a1bb44d23cd5c6cc85a9f635506506f952159be',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'igi/hoja3' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '572fb02c4d5e8a5c43e41dda5ee153f60946baf1',
+            'reference' => '7a1bb44d23cd5c6cc85a9f635506506f952159be',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

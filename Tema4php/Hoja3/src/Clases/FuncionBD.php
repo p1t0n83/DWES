@@ -45,15 +45,19 @@ class FuncionBD
                 $stmt->bindParam(':sexo', $sexo, PDO::PARAM_STR); // Asegúrate de que `sexo` sea un valor adecuado
                 $stmt->bindParam(':asiento', $asiento, PDO::PARAM_INT);
                 $stmt->execute();
-
+                $salida1 = $stmt->rowCount();
                 // Actualizar la plaza como reservada
                 $stmt = $dwes->prepare('UPDATE plazas SET reservada = 1 WHERE numero = :asiento');
                 $stmt->bindParam(':asiento', $asiento, PDO::PARAM_INT);
                 $stmt->execute();
-
+                $salida2 = $stmt->rowCount();
                 // Confirmar la transacción
-                $dwes->commit();
-                echo "La plaza ha sido reservada con éxito.";
+                if ($salida1 === 1 && $salida2 === 1) {
+                    $dwes->commit();
+                    echo "La plaza ha sido reservada con éxito.";
+                } else {
+                    throw new PDOException("No se han insertado/actualizado correctamente las sentencias");
+                }
             }
         } catch (PDOException $e) {
             $dwes->rollBack();
@@ -68,12 +72,18 @@ class FuncionBD
         try {
             $dwes = ConexionBD::getConnection();
             $dwes->beginTransaction();
-            $consulta = $dwes->prepare('update plazas set reservada=0');
+            $consulta = $dwes->prepare('update plazas set reservada=0 where reservada=1');
             $consulta->execute();
+            $salida1 = $consulta->rowCount();
             $consulta = $dwes->prepare("delete from pasajeros");
             $consulta->execute();
-            echo "Se han podido realizar los cambios";
-            $dwes->commit();
+            $salida2 = $consulta->rowCount();
+            if ($salida1 === $salida2) {
+                echo "Se han podido realizar los cambios";
+                $dwes->commit();
+            } else {
+                throw new PDOException('No se han podido eliminar/actualizar las tablas');
+            }
         } catch (PDOException $e) {
             $dwes->rollBack();
             echo "No se han podido hacer los cambios: " . $e->getMessage();
@@ -88,7 +98,7 @@ class FuncionBD
             $resultado = $dwes->query('SELECT numero,precio FROM plazas ');
             return $resultado->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "No se han podido conseguir las plazas libres: " . $e->getMessage();
+            echo "No se han podido conseguir las plazas libres del tren: " . $e->getMessage();
             return [];
         }
     }
@@ -101,16 +111,21 @@ class FuncionBD
 
             // Actualizar el precio de cada plaza
             $stmt = $dwes->prepare('UPDATE plazas SET precio = :precio WHERE numero = :numero');
-            
+
             foreach ($plazas as $numero => $precio) {
                 $stmt->bindParam(':precio', $precio);
                 $stmt->bindParam(':numero', $numero);
                 $stmt->execute();
             }
-
+            $filasActualizadas = $stmt->rowCount();
             // Confirmar la transacción
-            $dwes->commit();
-            echo "Los precios de las plazas han sido actualizados con éxito.";
+            if ($filasActualizadas === count($plazas)) {
+                $dwes->commit();
+                echo "Los precios de las plazas han sido actualizados con éxito.";
+            }else{
+                throw new PDOException("No se han actualizado las plazas");
+            }
+
         } catch (PDOException $e) {
             $dwes->rollBack();
             echo "No se han podido actualizar los precios de las plazas: " . $e->getMessage();

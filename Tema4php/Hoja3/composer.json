@@ -20,7 +20,7 @@
             "App\\": "src/"
         },
         "files": [
-            "src/Funciones/Funciones.php"
+            "src/Ficheros/Funciones.php"
         ]
     }
 }

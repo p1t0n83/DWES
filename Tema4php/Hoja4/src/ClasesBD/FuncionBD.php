@@ -44,7 +44,7 @@ class FuncionBD
 
             $resultado = $dwes->query($sql);
 
-            while ($columna = $resultado->fetch(PDO::FETCH_ASSOC)) {
+            while ($columna = $resultado->fetch(PDO::FETCH_OBJ)) {
                 $categoria = new Categoria($columna['categoria_id'], $columna['categoria_nombre']);
 
                 // Crear el objeto dependiendo del tipo
@@ -57,7 +57,7 @@ class FuncionBD
                         $columna['nombre'],
                         $categoria
                     );
-                } elseif ($tipo === "electronica" || ($tipo === null && !is_null($columna['plazo_garantia']))) {
+                } elseif ($tipo === "electronica" || ($tipo === null && $columna['plazo_garantia']!==null)) {
                     $producto = new Electronica(
                         $columna['plazo_garantia'],
                         $columna['id'],

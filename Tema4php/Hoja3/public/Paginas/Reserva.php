@@ -4,7 +4,7 @@ use App\Clases\FuncionBD;
 $dniError = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dni = $_POST['DNI'];
-    if (!Funciones::validarDNI($dni)) {
+    if (!validarDNI($dni)) {
         $dniError = "El DNI no es válido. El formato debe ser 12345678A.";
     }
 }
@@ -38,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </label>
         <hr>
 
-
         <label for="sexo">Sexo:
             <select id="sexo" name="sexo">
                 <option value="H">Hombre</option>
@@ -46,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
         </label>
         <hr>
-
 
         <label for="asiento">Asiento:
             <select id="plaza" name="plaza">
@@ -59,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
         </label>
         <hr>
-
         <input type="submit" value="Reservar" id="reservar">
     </form>
 
