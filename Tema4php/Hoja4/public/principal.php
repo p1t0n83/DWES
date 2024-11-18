@@ -11,7 +11,7 @@ use App\ClasesBD\FuncionBD;
 </head>
 <body>
    <?php
-   $productos=FuncionBD::getProductos(null);
+   $productos=FuncionBD::getProductos("todos");
    foreach($productos as $producto){
        echo $producto->toString();
    }

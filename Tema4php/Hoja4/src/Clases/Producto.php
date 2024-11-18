@@ -2,10 +2,10 @@
 namespace App\Clases;
 class Producto
 {
-    protected $codigo;
-    protected $precio;
-    protected $nombre;
-    protected $categoria;
+    protected int $codigo;
+    protected float $precio;
+    protected string $nombre;
+    protected Categoria $categoria;
 
 
     public function __construct($codigo, $precio, $nombre, Categoria $categoria)

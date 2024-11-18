@@ -3,6 +3,7 @@ namespace App\ClasesBD;
 // como conexion esta en la misma carpeta se puede quitar
 use PDOException;
 use PDO;
+use App\Clases\Producto;
 use App\Clases\Categoria;
 use App\Clases\Alimentacion;
 use App\Clases\Electronica;
@@ -11,7 +12,7 @@ class FuncionBD
 
 
 
-    public static function getProductos($tipo): array
+    public static function getProductos($tipo)
     {
         try {
             $productos = []; // Array para almacenar los objetos de productos
@@ -31,7 +32,7 @@ class FuncionBD
                         FROM productos
                         INNER JOIN electronica ON productos.id = electronica.id
                         INNER JOIN categorias ON productos.categoria_id = categorias.id';
-            } else {
+            } elseif ($tipo === "todos") {
                 $sql = 'SELECT productos.id, productos.nombre, productos.precio, productos.categoria_id,
                             alimentacion.mes_caducidad, alimentacion.anio_caducidad,
                             electronica.plazo_garantia,
@@ -43,33 +44,55 @@ class FuncionBD
             }
 
             $resultado = $dwes->query($sql);
-
+            $producto = null;
             while ($columna = $resultado->fetch(PDO::FETCH_OBJ)) {
-                $categoria = new Categoria($columna['categoria_id'], $columna['categoria_nombre']);
+                $categoria = new Categoria($columna->categoria_id, $columna->categoria_nombre);
 
                 // Crear el objeto dependiendo del tipo
-                if ($tipo === "alimentacion" || ($tipo === null && !is_null($columna['mes_caducidad']))) {
+                if ($tipo === "alimentacion" && $columna->mes_caducidad !== null) {
                     $producto = new Alimentacion(
-                        $columna['mes_caducidad'],
-                        $columna['anio_caducidad'],
-                        $columna['id'],
-                        $columna['precio'],
-                        $columna['nombre'],
+                        $columna->mes_caducidad,
+                        $columna->anio_caducidad,
+                        $columna->id,
+                        $columna->precio,
+                        $columna->nombre,
                         $categoria
                     );
-                } elseif ($tipo === "electronica" || ($tipo === null && $columna['plazo_garantia']!==null)) {
+                } elseif ($tipo === "electronica" && $columna->plazo_garantia !== null) {
                     $producto = new Electronica(
-                        $columna['plazo_garantia'],
-                        $columna['id'],
-                        $columna['precio'],
-                        $columna['nombre'],
+                        $columna->plazo_garantia,
+                        $columna->id,
+                        $columna->precio,
+                        $columna->nombre,
                         $categoria
                     );
                 } else {
-                    continue; // Si no se puede clasificar, ignorar el producto
+                    if ($columna->mes_caducidad !== null) {
+                        $producto = new Alimentacion(
+                            $columna->mes_caducidad,
+                            $columna->anio_caducidad,
+                            $columna->id,
+                            $columna->precio,
+                            $columna->nombre,
+                            $categoria
+                        );
+                        $productos[] = $producto; // Añadir al array de productos
+                    }
+
+                    if ($columna->plazo_garantia !== null) {
+                        $producto = new Electronica(
+                            $columna->plazo_garantia,
+                            $columna->id,
+                            $columna->precio,
+                            $columna->nombre,
+                            $categoria
+                        );
+                        $productos[] = $producto; // Añadir al array de productos
+                    }
+                    continue; // Continuar con la siguiente iteración si ya añadimos un producto
                 }
 
-                // Evitar duplicados
+                // Evitar duplicados (no es necesario si ya estamos añadiendo cada tipo por separado)
                 if (!in_array($producto, $productos)) {
                     $productos[] = $producto;
                 }
@@ -82,6 +105,5 @@ class FuncionBD
             return [];
         }
     }
-
 }
 ?>
