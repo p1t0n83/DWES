@@ -14,69 +14,64 @@ class FuncionBD
     public static function getProductos($tipo): array
     {
         try {
-            $productos = [];  // Array para almacenar los objetos de productos
-
+            $productos = []; // Array para almacenar los objetos de productos
             $dwes = ConexionBD::getConnection();
 
             if ($tipo === "alimentacion") {
-                $resultado = $dwes->query('SELECT DISTINCT productos.id, productos.nombre, productos.precio, productos.categoria_id, alimentacion.mes_caducidad, alimentacion.anio_caducidad, categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
-                    FROM productos
-                    INNER JOIN alimentacion ON productos.id = alimentacion.id
-                    INNER JOIN categorias ON productos.categoria_id = categorias.id');
-
-                while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                    $categoria = new Categoria($row['categoria_id'], $row['categoria_nombre']);
-                    $producto = new Alimentacion($row['mes_caducidad'], $row['anio_caducidad'], $row['id'], $row['precio'], $row['nombre'], $categoria);
-                    // Al agregar productos, asegúrate de que no se repitan
-                    if (!in_array($producto, $productos)) {
-                        $productos[] = $producto;
-                    }
-
-                }
-
-            } else if ($tipo === "electronica") {
-                $resultado = $dwes->query('SELECT DISTINCT productos.id, productos.nombre, productos.precio, productos.categoria_id, electronica.plazo_garantia, categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
-                    FROM productos
-                    INNER JOIN electronica ON productos.id = electronica.id
-                    INNER JOIN categorias ON productos.categoria_id = categorias.id');
-
-                while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                    $categoria = new Categoria($row['categoria_id'], $row['categoria_nombre']);
-                    $producto = new Electronica($row['plazo_garantia'], $row['id'], $row['precio'], $row['nombre'], $categoria);
-                    // Al agregar productos, asegúrate de que no se repitan
-                    if (!in_array($producto, $productos)) {
-                        $productos[] = $producto;
-                    }
-
-                }
-
+                $sql = 'SELECT productos.id, productos.nombre, productos.precio, productos.categoria_id,
+                            alimentacion.mes_caducidad, alimentacion.anio_caducidad,
+                            categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
+                        FROM productos
+                        INNER JOIN alimentacion ON productos.id = alimentacion.id
+                        INNER JOIN categorias ON productos.categoria_id = categorias.id';
+            } elseif ($tipo === "electronica") {
+                $sql = 'SELECT productos.id, productos.nombre, productos.precio, productos.categoria_id,
+                            electronica.plazo_garantia,
+                            categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
+                        FROM productos
+                        INNER JOIN electronica ON productos.id = electronica.id
+                        INNER JOIN categorias ON productos.categoria_id = categorias.id';
             } else {
-                $resultado = $dwes->query('SELECT DISTINCT productos.id, productos.nombre, productos.precio, productos.categoria_id,
-                    COALESCE(alimentacion.mes_caducidad, NULL) AS mes_caducidad,
-                    COALESCE(alimentacion.anio_caducidad, NULL) AS anio_caducidad,
-                    COALESCE(electronica.plazo_garantia, NULL) AS plazo_garantia,
-                    categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
-                    FROM productos
-                    LEFT JOIN alimentacion ON productos.id = alimentacion.id
-                    LEFT JOIN electronica ON productos.id = electronica.id
-                    INNER JOIN categorias ON productos.categoria_id = categorias.id');
+                $sql = 'SELECT productos.id, productos.nombre, productos.precio, productos.categoria_id,
+                            alimentacion.mes_caducidad, alimentacion.anio_caducidad,
+                            electronica.plazo_garantia,
+                            categorias.id AS categoria_id, categorias.nombre AS categoria_nombre
+                        FROM productos
+                        LEFT JOIN alimentacion ON productos.id = alimentacion.id
+                        LEFT JOIN electronica ON productos.id = electronica.id
+                        INNER JOIN categorias ON productos.categoria_id = categorias.id';
+            }
 
-                while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                    $categoria = new Categoria($row['categoria_id'], $row['categoria_nombre']);
+            $resultado = $dwes->query($sql);
 
-                    // Verificamos si es un producto de alimentación
-                    if ($row['mes_caducidad'] !== null) {
-                        $producto = new Alimentacion($row['mes_caducidad'], $row['anio_caducidad'], $row['id'], $row['precio'], $row['nombre'], $categoria);
-                    }
-                    // Verificamos si es un producto de electrónica
-                    elseif ($row['plazo_garantia'] !== null) {
-                        $producto = new Electronica($row['plazo_garantia'], $row['id'], $row['precio'], $row['nombre'], categoria: $categoria);
-                    }
-                    // Al agregar productos, asegúrate de que no se repitan
-                    if (!in_array($producto, $productos)) {
-                        $productos[] = $producto;
-                    }
+            while ($columna = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                $categoria = new Categoria($columna['categoria_id'], $columna['categoria_nombre']);
 
+                // Crear el objeto dependiendo del tipo
+                if ($tipo === "alimentacion" || ($tipo === null && !is_null($columna['mes_caducidad']))) {
+                    $producto = new Alimentacion(
+                        $columna['mes_caducidad'],
+                        $columna['anio_caducidad'],
+                        $columna['id'],
+                        $columna['precio'],
+                        $columna['nombre'],
+                        $categoria
+                    );
+                } elseif ($tipo === "electronica" || ($tipo === null && !is_null($columna['plazo_garantia']))) {
+                    $producto = new Electronica(
+                        $columna['plazo_garantia'],
+                        $columna['id'],
+                        $columna['precio'],
+                        $columna['nombre'],
+                        $categoria
+                    );
+                } else {
+                    continue; // Si no se puede clasificar, ignorar el producto
+                }
+
+                // Evitar duplicados
+                if (!in_array($producto, $productos)) {
+                    $productos[] = $producto;
                 }
             }
 
@@ -87,5 +82,6 @@ class FuncionBD
             return [];
         }
     }
+
 }
 ?>
