@@ -16,13 +16,13 @@ class Producto
          $this->categoria=$categoria;
     }
 
-    public function __toString()
+    public function toString()
     {
-        return 'Codigo: ' . $this->codigo . '.\n' .
-               'Precio: ' . $this->precio . '.\n' .
-               'Nombre: ' . $this->nombre . '\n' .
-               'Categoria id: ' . $this->categoria->__get('id') . '\n' .
-               'Nombre de la categoria: ' . $this->categoria->__get('nombre');
+        return 'Codigo: ' . $this->codigo . '.<br>' .
+               'Precio: ' . $this->precio . '.<br>' .
+               'Nombre: ' . $this->nombre . '<br>' .
+               'Categoria id: ' . $this->categoria->__get('id') . '<br>' .
+               'Nombre de la categoria: ' . $this->categoria->__get('nombre').'<br>';
     }
 }
 ?>

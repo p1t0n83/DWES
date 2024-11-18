@@ -13,11 +13,11 @@ class Alimentacion extends Producto
         $this->anioCaducidad=$anioCaducidad;
     }
 
-    public function __tostring()
+    public function tostring()
     {
-        return parent::__tostring().
-        'Mes de caducidad: '.$this->mesCaducidad.'\n
-        Año de caducidad: '.$this->anioCaducidad.'\n';
+        return parent::tostring().
+        'Mes de caducidad: '.$this->mesCaducidad.'<br>
+        Año de caducidad: '.$this->anioCaducidad.'<br>';
     }
 }
 ?>

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'igi/hoja3',
+        'name' => 'igi/hoja4',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '572fb02c4d5e8a5c43e41dda5ee153f60946baf1',
+        'reference' => 'f942d5637a495ac7bc80c6e8233f2704f6e82b85',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -19,10 +19,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'igi/hoja3' => array(
+        'igi/hoja4' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '572fb02c4d5e8a5c43e41dda5ee153f60946baf1',
+            'reference' => 'f942d5637a495ac7bc80c6e8233f2704f6e82b85',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

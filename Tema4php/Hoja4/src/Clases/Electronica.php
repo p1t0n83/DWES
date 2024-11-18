@@ -13,10 +13,10 @@ class Electronica extends Producto
        
     }
 
-    public function __tostring()
+    public function tostring()
     {
-        return parent::__tostring().
-        'Plazo de garantia: '.$this->plazoGarantia.'\n';
+        return parent::tostring().
+        'Plazo de garantia: '.$this->plazoGarantia.'<br>';
     }
 }
 ?>

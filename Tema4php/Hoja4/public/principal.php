@@ -11,6 +11,11 @@ use App\ClasesBD\FuncionBD;
 </head>
 <body>
    <?php
+   $productos=FuncionBD::getProductos(null);
+   foreach($productos as $producto){
+       echo $producto->toString();
+   }
    ?>
+   <a href="categorias.php">Filtrar por categorias</a>
 </body>
 </html>
