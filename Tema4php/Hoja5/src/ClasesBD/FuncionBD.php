@@ -101,7 +101,7 @@ class FuncionBD
                         $fila['unidad']
                     );
                 } else {
-                    continue; 
+                    continue;
                 }
 
                 $medicos[] = $medico;
