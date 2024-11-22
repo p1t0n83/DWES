@@ -22,12 +22,18 @@ use App\Clases\FuncionBD;
                 <input id="plaza' . $plaza['numero'] . '" name="plaza[' . $plaza['numero'] . ']" type="number" value="' . $plaza['precio'] . '" step="0.01">€</label><br>';
         }
         ?>
-        <input type="submit" value="Actualizar" id="actualizar">
+        <input type="submit" value="Actualizar" id="actualizar" name="actualizar">
     </form>
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $plazas=$_POST['plaza'];
-        FuncionBD::actualizarPlazas($plazas);
+        $plazasActualizadas = $_POST['plaza'];
+        $plazasActual = [];
+        foreach ($plazas as $plaza) {
+            if ($plaza['precio'] != $plazasActualizadas[$plaza['numero']]) {
+                $plazasActual[$plaza['numero']] = $plazasActualizadas[$plaza['numero']];
+            }
+        }
+        FuncionBD::actualizarPlazas($plazasActual);
     }
     ?>
     <a href="../index.html">Pagina de inicio</a>

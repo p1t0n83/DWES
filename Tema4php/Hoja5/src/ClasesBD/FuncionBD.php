@@ -97,7 +97,7 @@ class FuncionBD
                         $turno,
                         $fila->unidad);
                 } else {
-                    continue; 
+                    continue;
                 }
 
                 $medicos[] = $medico;
