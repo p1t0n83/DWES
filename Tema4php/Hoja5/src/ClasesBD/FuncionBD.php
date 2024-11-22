@@ -21,32 +21,30 @@ class FuncionBD
             LEFT JOIN familia f ON m.codigo = f.medico_codigo
             LEFT JOIN urgencias u ON m.codigo = u.medico_codigo
         ");
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
             $medicos = [];
             foreach ($resultados as $fila) {
                 // Crear objeto Turno
-                $turno = new Turno($fila['turno_id'], $fila['turno_desc']);
+                $turno = new Turno($fila->turno_id, $fila->turno_desc);
 
                 // Determinar tipo de médico según las tablas relacionadas
-                if ($fila['numPacientes'] !== null) { // Médico de familia
+                if ($fila->numPacientes !== null) { 
                     $medico = new Familia(
-                        $fila['codigo'],
-                        $fila['nombre'],
-                        $fila['edad'],
+                        $fila->codigo,
+                        $fila->nombre,
+                        $fila->edad,
                         $turno,
-                        $fila['numPacientes']
-                    );
-                } elseif ($fila['unidad'] !== null) { // Médico de urgencia
+                        $fila->numPacientes);
+                } elseif ($fila->unidad !== null) { 
                     $medico = new Urgencia(
-                        $fila['codigo'],
-                        $fila['nombre'],
-                        $fila['edad'],
+                        $fila->codigo,
+                        $fila->nombre,
+                        $fila->edad,
                         $turno,
-                        $fila['unidad']
-                    );
+                        $fila->unidad);
                 } else {
-                    continue; // No clasificado, ignorar
+                    continue;
                 }
 
                 $medicos[] = $medico;
@@ -76,30 +74,28 @@ class FuncionBD
         ");
             $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);  // Asegúrate de usar el tipo correcto
             $stmt->execute();
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
             $medicos = [];
             foreach ($resultados as $fila) {
                 // Crear objeto Turno
-                $turno = new Turno($fila['turno_id'], $fila['turno_desc']);
+                $turno = new Turno($fila->turno_id, $fila->turno_desc);
 
                 // Determinar tipo de médico según las tablas relacionadas
-                if ($fila['numPacientes'] !== null) { // Médico de familia
+                if ($fila->numPacientes !== null) { // Médico de familia
                     $medico = new Familia(
-                        $fila['codigo'],
-                        $fila['nombre'],
-                        $fila['edad'],
+                        $fila->codigo,
+                        $fila->nombre,
+                        $fila->edad,
                         $turno,
-                        $fila['numPacientes']
-                    );
-                } elseif ($fila['unidad'] !== null) { // Médico de urgencia
+                        $fila->numPacientes);
+                } elseif ($fila->unidad !== null) { // Médico de urgencia
                     $medico = new Urgencia(
-                        $fila['codigo'],
-                        $fila['nombre'],
-                        $fila['edad'],
+                        $fila->codigo,
+                        $fila->nombre,
+                        $fila->edad,
                         $turno,
-                        $fila['unidad']
-                    );
+                        $fila->unidad);
                 } else {
                     continue; 
                 }
@@ -128,22 +124,20 @@ class FuncionBD
         ");
             $stmt->bindParam(':numPacientes', $numPacientes, PDO::PARAM_INT);
             $stmt->execute();
-            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
             $medicos = [];
             foreach ($resultados as $fila) {
                 // Crear objeto Turno
-                $turno = new Turno($fila['turno_id'], $fila['turno_desc']);
+                $turno = new Turno($fila->turno_id, $fila->turno_desc);
 
                 // Crear el objeto de médico de familia
                 $medico = new Familia(
-                    $fila['codigo'],
-                    $fila['nombre'],
-                    $fila['edad'],
+                    $fila->codigo,
+                    $fila->nombre,
+                    $fila->edad,
                     $turno,
-                    $fila['numPacientes']
-                );
-
+                    $fila->numPacientes);
                 $medicos[] = $medico;
             }
 
