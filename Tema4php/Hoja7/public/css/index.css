@@ -1,0 +1,55 @@
+
+  /* Estilo general de la tabla */
+  .tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 columnas */
+    gap: 10px; /* Espacio entre las celdas */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  /* Estilo para las filas de la tabla */
+  .tabla .encabezado, .tabla .fila {
+    display: contents; /* Deja que los elementos dentro de cada fila se alineen correctamente */
+  }
+  
+  /* Encabezado de la tabla */
+  .tabla .encabezado div {
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f4f4f4;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  /* Celdas de los productos */
+  .tabla .fila div {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+  }
+  
+  /* Alineación y estilo para la columna de acciones */
+  .tabla .fila div:last-child {
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilo de las celdas para que se vean más tipo tabla */
+  .tabla div {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  /* Añadir bordes a las filas */
+  .tabla .fila:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla .fila:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  

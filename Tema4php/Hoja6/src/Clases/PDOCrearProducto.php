@@ -1,10 +1,11 @@
 <?php
 namespace App\Clases;
 
-use App\Interfaces\Interfazproducto;
+use App\Interfaces\InterfazProducto;
 use PDOException;
 use App\ClasesBD\FuncionBD;
-class PDOCrearProducto implements Interfazproducto
+use App\ClasesBD\ConexionBD;
+class PDOCrearProducto implements InterfazProducto
 {
 
     private function crearTablaProducto(string $query): bool
@@ -37,7 +38,7 @@ class PDOCrearProducto implements Interfazproducto
     {
         try {
             $con = ConexionBD::getConnection();
-            $query = 'INSERT INTO products(nombre,precio,descripcion,imagen)
+            $query = 'INSERT INTO productos(nombre,precio,descripcion,imagen)
             VALUES(:nombre,:precio,:descripcion,:imagen)';
             $stmt = $con->prepare($query);
             $nombre=$producto->getNombre();
