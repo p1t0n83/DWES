@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Classes;
+namespace App\Clases;
 
 use App\Interfaces\InterfazProducto;
 use App\Clases\Modeloproducto;

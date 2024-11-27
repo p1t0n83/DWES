@@ -42,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product = new Product(new PDOCrearProducto());
 
     $obj_product = new Modeloproducto();
-    $obj_product->setName($_POST['name']);
-    $obj_product->setDescription($_POST['description']);
-    $obj_product->setPrice($_POST['price']);
-    $obj_product->setImage(generateUniqueFileName($image_product['name']));
+    $obj_product->setNombre($_POST['name']);
+    $obj_product->setDescripcion($_POST['description']);
+    $obj_product->setPrecio($_POST['price']);
+    $obj_product->setImagen(generateUniqueFileName($image_product['name']));
 
-    if (!$product->create($obj_product)) {
+    if (!$product->crear($obj_product)) {
         redirect('index.php?error=5');
     } else {
         redirect('index.php?success=1');

@@ -1,7 +1,8 @@
 <?php
-namespace Interfaces\Interfazproducto;
+namespace App\Inerfaces;
+
 use App\Clases\Producto;
-interface InterfazProducto
+interface Interfazproducto
 {
     function crear(Producto $producto): bool;
 }

@@ -1,10 +1,10 @@
 <?php
 namespace App\Clases;
 
-use App\Interfaces\InterfazProducto;
+use App\Interfaces\Interfazproducto;
 use PDOException;
 use App\ClasesBD\FuncionBD;
-class PDOCrearProducto implements InterfazProducto
+class PDOCrearProducto implements Interfazproducto
 {
 
     private function crearTablaProducto(string $query): bool
@@ -40,10 +40,14 @@ class PDOCrearProducto implements InterfazProducto
             $query = 'INSERT INTO products(nombre,precio,descripcion,imagen)
             VALUES(:nombre,:precio,:descripcion,:imagen)';
             $stmt = $con->prepare($query);
-            $stmt->bindParam(':nombre',$producto->getNombre());
-            $stmt->bindParam(':precio',$producto->getPrecio());
-            $stmt->bindParam(':descripcion',$producto->getDescripcion());
-            $stmt->bindParam(':imagen',$producto->getImagen());
+            $nombre=$producto->getNombre();
+            $stmt->bindParam(':nombre',$nombre);
+            $precio=$producto->getPrecio();
+            $stmt->bindParam(':precio',$precio);
+            $descripcion=$producto->getDescripcion();
+            $stmt->bindParam(':descripcion',$descripcion);
+            $imagen=$producto->getImagen();
+            $stmt->bindParam(':imagen',$imagen);
             // si logro ejecutarse que se guarden las columnas afectadas
             if ($stmt->execute()) {
                 $result = $stmt->rowCount() === 1;

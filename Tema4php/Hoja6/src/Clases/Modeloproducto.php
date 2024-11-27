@@ -1,5 +1,5 @@
 <?php
-namespace App\Clases\producto;
+namespace App\Clases;
 
 class Modeloproducto{
    private string $nombre;
