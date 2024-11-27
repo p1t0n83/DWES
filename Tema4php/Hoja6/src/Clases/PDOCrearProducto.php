@@ -21,7 +21,7 @@ class PDOCrearProducto implements Interfazproducto
     public function __construct()
     {
         // nos pide crear la tabla si no existe
-        $query = "CREATE TABLE IF NOT EXISTS products  (
+        $query = "CREATE TABLE IF NOT EXISTS productos  (
                     id int(11) NOT NULL AUTO_INCREMENT COMMENT 'productos con id auto incrementado',
                     nombre varchar(100) NOT NULL  COMMENT 'Nombre de los productos',
                     precio double NOT NULL COMMENT 'Precio de los productos',

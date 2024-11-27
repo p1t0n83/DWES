@@ -2,7 +2,6 @@
 namespace App\Clases;
 
 use App\Interfaces\InterfazProducto;
-use App\Clases\Modeloproducto;
 
 class Product
 {
