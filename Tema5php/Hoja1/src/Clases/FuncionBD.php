@@ -138,7 +138,7 @@ class FuncionBD
             $dwes = ConexionBD::getConnection();
             $stmt = $dwes->prepare('INSERT INTO usuarios(usuario,password) VALUES (:usuario,:password)');
             $stmt->bindParam(':usuario', $nombre);
-            $stmt->bindParam(':nombre', $clave);
+            $stmt->bindParam(':password', $clave);
             $stmt->execute();
             echo ('Se ha añadido con exito');
         } catch (PDOException $e) {
