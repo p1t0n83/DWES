@@ -132,7 +132,7 @@ class FuncionBD
         }
     }
 
-    public static function crearUsuario($nombre, $clave):viod
+    public static function crearUsuario($nombre, $clave):void
     {
         try {
             $dwes = ConexionBD::getConnection();
