@@ -6,7 +6,7 @@ class Modeloproducto{
     private string $descripcion;
     private float $precio;
     private string $imagen;
-
+    
     public function __construct(string $nombre,string $descripcion,float $precio,string $imagen){
      $this->nombre=$nombre;
      $this->descripcion=$descripcion;

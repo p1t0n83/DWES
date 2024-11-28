@@ -18,14 +18,25 @@
         </div>
         <?php
         require_once '../vendor/autoload.php';
+        use App\Clases\Product;
         use App\Clases\PDOCrearProducto;
-        $productos = PDOCrearProducto::obtenerProductos();
+        $product = new Product(new PDOCrearProducto());
+        $productos = $product->obtenerProductos();
         foreach ($productos as $producto) {
             echo '<div class="fila">
                 <div>' . $producto->getNombre() . '</div>
                 <div>' . $producto->getPrecio() . '</div>
-                <div>ACCIONES</div>
-              </div>';
+                <div>
+                    <form method="POST" action="detalle.php">
+                        <input type="hidden" name="nombre" value="'.$producto->getNombre().'" >
+                        <button type="submit">Ver detalles</button>
+                    </form>
+                    <form method="POST" action="borra.php">
+                        <input type="hidden" name="nombre" value="'. $producto->getNombre() .'">  
+                        <button type="submit">Borrar</button>  
+                    </form>
+                </div>
+            </div>';
         }
         ?>
     </div>

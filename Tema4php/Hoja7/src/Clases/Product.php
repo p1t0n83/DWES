@@ -15,4 +15,12 @@ class Product
     {
         return $this->interface->crear($producto);
     }
+
+    public function  obtenerProductos():array{
+        return $this->interface->obtenerProductos();
+    }
+
+    public function borrarProducto($nombre):bool{
+        return $this->interface->borrarProducto($nombre);
+    }
 }

@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $product = new Product(new PDOCrearProducto());
 
-    $obj_product = new Modeloproducto();
+    $obj_product = new Modeloproducto('',null,0,null);
     $obj_product->setNombre($_POST['name']);
     $obj_product->setDescripcion($_POST['description']);
     $obj_product->setPrecio($_POST['price']);
