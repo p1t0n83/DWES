@@ -22,6 +22,7 @@
         use App\Clases\PDOCrearProducto;
         $product = new Product(new PDOCrearProducto());
         $productos = $product->obtenerProductos();
+        if($productos[0]!=null){
         foreach ($productos as $producto) {
             echo '<div class="fila">
                 <div>' . $producto->getNombre() . '</div>
@@ -37,9 +38,12 @@
                     </form>
                 </div>
             </div>';
+        }}else{
+            echo 'No hay productos';
         }
-        ?>
+        ?>   
     </div>
+     <a href="crear.php">Crear producto</a>
 </body>
 
 </html>

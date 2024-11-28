@@ -23,4 +23,8 @@ class Product
     public function borrarProducto($nombre):bool{
         return $this->interface->borrarProducto($nombre);
     }
+
+    function obtenerProducto($nombre):Modeloproducto{
+        return $this->interface->obtenerProducto($nombre);
+    }
 }

@@ -8,5 +8,7 @@ interface InterfazProducto
     function obtenerProductos():array;
 
     function borrarProducto($nombre):bool;
+
+    function obtenerProducto($nombre):Modeloproducto;
 }
 ?>

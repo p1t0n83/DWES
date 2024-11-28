@@ -16,10 +16,11 @@
     $nombreProducto = $_POST['nombre'];
     $producto=new Product(new PDOCrearProducto());   
     if($producto->borrarProducto($nombreProducto)){
-        echo('El producto de nombre'.$nombreProducto.' se ha borrado con exito');
+        echo('El producto de nombre "'.$nombreProducto.'" se ha borrado con exito');
     }
 }
 ?>
+<a href="index.php">Volver listar</a>
 </body>
 
 </html>

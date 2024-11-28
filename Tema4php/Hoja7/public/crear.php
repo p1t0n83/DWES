@@ -65,7 +65,7 @@
                     </label>
 
                     <label>
-                        <input type="text" name="price" placeholder="Precio">
+                        <input type="number" name="price" placeholder="Precio">
                     </label>
 
                     <textarea rows="5" name="description" placeholder="Descripcion"></textarea>

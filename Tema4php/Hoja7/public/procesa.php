@@ -41,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $product = new Product(new PDOCrearProducto());
 
-    $obj_product = new Modeloproducto('',null,0,null);
+    $obj_product = new Modeloproducto('','',0,'');
     $obj_product->setNombre($_POST['name']);
     $obj_product->setDescripcion($_POST['description']);
     $obj_product->setPrecio($_POST['price']);
-    $obj_product->setImagen(generateUniqueFileName($image_product['name']));
+    $obj_product->setImagen($image_product['name']);
 
     if (!$product->crear($obj_product)) {
         redirect('index.php?error=5');

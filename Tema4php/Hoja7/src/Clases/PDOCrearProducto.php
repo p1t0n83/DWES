@@ -82,16 +82,35 @@ class PDOCrearProducto implements InterfazProducto
         }
     }
 
+    public function obtenerProducto($nombre): Modeloproducto
+    {
+        try {
+            $producto = null;
+            $dwes = ConexionBD::getConnection();
+            $resultado = $dwes->prepare('SELECT nombre,precio,descripcion,imagen FROM productos WHERE nombre=:nombre');
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->execute();
+            $columna = $resultado->fetch(PDO::FETCH_OBJ);
+            $producto = new Modeloproducto($columna->nombre, $columna->descripcion, $columna->precio, $columna->imagen);
+            return $producto;
+        } catch (PDOException $e) {
+            throw new PDOEXception('Algo fallo en la obtencion del producto ' . $e->getMessage());
+        }
+
+    }
+
     public function borrarProducto($nombre): bool
     {
         try {
             $con = ConexionBD::getConnection();
-            $stmt = $con->prepare('delete from productos where nombre = :nombre');
+            $stmt = $con->prepare('select * from productos where nombre = :nombre');
             $stmt->bindParam(':nombre', $nombre);
             $stmt->execute();
-            $columnasModificadas = $stmt->rowCount();
-            if ($columnasModificadas > 0) {
-                return true;
+            if ($stmt->rowCount() > 0) {
+                $stmt = $con->prepare('delete from productos where nombre = :nombre ');
+                $stmt->bindParam(':nombre', $nombre);
+                $stmt->execute();
+                return $stmt->rowCount() > 0;
             } else {
                 return false;
             }
