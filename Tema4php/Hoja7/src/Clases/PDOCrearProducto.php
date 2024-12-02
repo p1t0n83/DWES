@@ -39,15 +39,18 @@ class PDOCrearProducto implements InterfazProducto
     {
         try {
             $con = ConexionBD::getConnection();
+            
             $query = 'INSERT INTO productos(nombre,precio,descripcion,imagen)
             VALUES(:nombre,:precio,:descripcion,:imagen)';
             $stmt = $con->prepare($query);
+ 
             $nombre = $producto->getNombre();
             $stmt->bindParam(':nombre', $nombre);
             $precio = $producto->getPrecio();
             $stmt->bindParam(':precio', $precio);
             $descripcion = $producto->getDescripcion();
             $stmt->bindParam(':descripcion', $descripcion);
+            
             $imagen = $producto->getImagen();
             $stmt->bindParam(':imagen', $imagen);
             // si logro ejecutarse que se guarden las columnas afectadas

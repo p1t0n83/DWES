@@ -31,13 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $uploads_dir = 'products';
+    $nombreImagen=generateUniqueFileName($image_product);  
+        move_uploaded_file($image_product['tmp_name'], "{$uploads_dir}/{$nombreImagen}");
 
-    if (!file_exists($uploads_dir)) {
-        mkdir($uploads_dir);
-        move_uploaded_file($image_product['tmp_name'], "{$uploads_dir}/{$image_product['name']}");
-    } else {
-        move_uploaded_file($image_product['tmp_name'], "{$uploads_dir}/{$image_product['name']}");
-    }
 
     $product = new Product(new PDOCrearProducto());
 
@@ -45,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $obj_product->setNombre($_POST['name']);
     $obj_product->setDescripcion($_POST['description']);
     $obj_product->setPrecio($_POST['price']);
-    $obj_product->setImagen($image_product['name']);
+    $obj_product->setImagen($nombreImagen);
 
     if (!$product->crear($obj_product)) {
         redirect('index.php?error=5');
