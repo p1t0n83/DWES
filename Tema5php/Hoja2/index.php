@@ -15,7 +15,7 @@
     }
 
     $ultima_sesion=date("Y-m-d H:i:s");
-    setcookie("last_session", $ultima_sesion,  time()+86400, "/");
+    setcookie("last_session", $ultima_sesion,  time()+40, "/");
      ?>
 </body>
 </html>
