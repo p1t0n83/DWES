@@ -1,0 +1,22 @@
+{
+    "name": "ikergarciaiturri/examen04",
+    "description": "Este es el examen de la unidad 4 de base de datos",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iker garcia iturri"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts":{
+        "start":"php -S localhost:8001 -t public"
+    },
+    "autoload":{
+        "psr-4":{
+            "App\\":"app/"
+        },
+        "files":["app/Ficheros/helper.php"]
+    }
+}
