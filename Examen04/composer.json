@@ -18,5 +18,10 @@
             "App\\":"app/"
         },
         "files":["app/Ficheros/helper.php"]
+    },
+    "repositories":[{
+        "type":"path",
+        "url": "libreria/phpdotenv"
     }
+    ]
 }
