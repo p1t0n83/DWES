@@ -57,7 +57,7 @@ class Funciones implements InterfazObjeto{
      }
 
      //metodo listar por id
-     public  static function listarPorId($id):ModeloProducto{
+     public static function listarPorId($id):ModeloProducto{
            try{
             $con=ConexionBD::getConnection();
             $con->beginTransaction();

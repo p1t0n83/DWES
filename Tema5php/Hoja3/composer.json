@@ -1,0 +1,16 @@
+{
+    "name": "hoja3tema5/igi",
+    "description": "Esta es la hoja 3 del tema5",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "scripts": {
+        "start": "php -S localhost:8001 "
+    }
+}
