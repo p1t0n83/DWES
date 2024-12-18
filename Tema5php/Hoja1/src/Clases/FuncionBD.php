@@ -26,16 +26,19 @@ class FuncionBD
         try {
             $dwes = ConexionBD::getConnection();
             $stmt = $dwes->prepare("SELECT password FROM usuarios WHERE usuario = ?");
-            $stmt->execute($usuario);
+            $stmt->execute([$usuario]);
             $hashedPassword = $stmt->fetchColumn();
             if (password_verify($password, $hashedPassword)) {
                 echo "Contraseña correcta";
+                return true;
             } else {
                 echo "Contraseña incorrecta";
+                return false;
             }
-        
+             
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+            return false;
         }
     }
 

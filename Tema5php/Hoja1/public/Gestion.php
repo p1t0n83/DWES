@@ -16,12 +16,15 @@ use App\Clases\FuncionBD;
     <hr>
     <form method="post">
         <?php
-        if ($_SERVER['PHP_AUTH_USER']!='usuario' || $_SERVER['PHP_AUTH_PW']!='contraseña') {
-            header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+        if (
+            !isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
+            !FuncionBD::verificarUsuario($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+        ) {
+            // Pedir credenciales al usuario
+            header('WWW-Authenticate: Basic realm="Contenido restringido"');
             header('HTTP/1.0 401 Unauthorized');
-            echo "Usuario no reconocido!";
-            FuncionBD::verificarUsuario($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
-           
+            echo "Usuario no reconocido. Debe proporcionar credenciales válidas.";
+            exit; // Detener ejecución si las credenciales son incorrectas
         }
         $plazas = FuncionBD::plazas();
         foreach ($plazas as $plaza) {
