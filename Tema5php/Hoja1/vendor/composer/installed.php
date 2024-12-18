@@ -1,10 +1,10 @@
 <?php return array(
     'root' => array(
-        'name' => 'igi/hoja3',
+        'name' => 'ikergarciaiturri/basedatoshoja1ejer1',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7a1bb44d23cd5c6cc85a9f635506506f952159be',
-        'type' => 'project',
+        'reference' => 'ddc37b1023a97676cdd46bf0d89d0854f51a1839',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
@@ -19,11 +19,11 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'igi/hoja3' => array(
+        'ikergarciaiturri/basedatoshoja1ejer1' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7a1bb44d23cd5c6cc85a9f635506506f952159be',
-            'type' => 'project',
+            'reference' => 'ddc37b1023a97676cdd46bf0d89d0854f51a1839',
+            'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,

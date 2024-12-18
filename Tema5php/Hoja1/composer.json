@@ -1,7 +1,6 @@
 {
-    "name": "igi/hoja3",
-    "description": "Hoja 3 de base de datos",
-    "type": "project",
+    "name": "ikergarciaiturri/basedatoshoja1ejer1",
+    "description": "Ejercicio1 de la Hoja1 de base de datos",
     "authors": [
         {
             "name": "p1t0n83",
@@ -10,17 +9,16 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "vlucas/phpdotenv": "^5.6"
-    },
-    "scripts": {
-        "start": "php -S localhost:8001 -t public"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        },
-        "files": [
-            "src/Ficheros/Funciones.php"
-        ]
+        "vlucas/phpdotenv":"^5.6"
     }
+    ,"scripts": {
+        "start":
+           "php -S localhost:8001 -t public"     
+       }
+       ,
+        "autoload": {
+            "psr-4": {
+                "App\\": "src/"
+            }
+        }
 }

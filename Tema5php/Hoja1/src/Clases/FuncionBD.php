@@ -1,12 +1,43 @@
 <?php
 namespace App\Clases;
-// como conexion esta en la misma carpeta se puede quitar
+
 use App\Clases\ConexionBD;
 use PDO;
-use PDOException;
+use PDOException; // Cambiado de DPOException a PDOException
 
 class FuncionBD
 {
+    public static function insertarUsuario($usuario, $password)
+    {
+        try {
+            $dwes = ConexionBD::getConnection();
+            $resultado = $dwes->prepare('Insert into usuarios(usuario,password) values (:usuario,:password)');
+            $resultado->bindParam(":usuario", $usuario);
+            $resultado->bindParam(":password", $password);
+            $resultado->execute();
+
+        } catch (PDOException $e) {
+            echo "Error al insertar usuario: " . $e->getMessage();
+
+        }
+    }
+
+    public static function verificarUsuario($usuario,$password){
+        try {
+            $dwes = ConexionBD::getConnection();
+            $stmt = $dwes->prepare("SELECT password FROM usuarios WHERE usuario = ?");
+            $stmt->execute($usuario);
+            $hashedPassword = $stmt->fetchColumn();
+            if (password_verify($password, $hashedPassword)) {
+                echo "Contraseña correcta";
+            } else {
+                echo "Contraseña incorrecta";
+            }
+        
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 
     public static function plazasLibres()
     {
@@ -132,18 +163,5 @@ class FuncionBD
         }
     }
 
-    public static function crearUsuario($nombre, $clave):void
-    {
-        try {
-            $dwes = ConexionBD::getConnection();
-            $stmt = $dwes->prepare('INSERT INTO usuarios(usuario,password) VALUES (:usuario,:password)');
-            $stmt->bindParam(':usuario', $nombre);
-            $stmt->bindParam(':password', $clave);
-            $stmt->execute();
-            echo ('Se ha añadido con exito');
-        } catch (PDOException $e) {
-            echo "No se ha podido añadir el usuario " . $e->getMessage();
-        }
-    }
 }
 ?>
