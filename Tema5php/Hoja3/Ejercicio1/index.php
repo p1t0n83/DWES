@@ -7,8 +7,15 @@
 </head>
 <body>
     <?php
-    $fecha= date("Y-m-d H:i:s");
+    $contador=0;
+    session_start();
     
+    $_SESSION['visitas'][] = date("Y-m-d H:i:s");
+    if(count($_SESSION['visitas'])==0){
+        echo"primer acceso";
+    }else{
+        echo "Se ha accedido un total de: ". count($_SESSION['visitas']);
+    }
     ?>
 </body>
 </html>
