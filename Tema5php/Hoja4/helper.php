@@ -1,6 +1,15 @@
 <?php
 function flash(string $clave, string $mensaje = null): null|string
 {
+    if ($_SESSION['flash'][$clave]) {
+        $valor = $_SESSION['flash'][$clave];
+        unset($_SESSION['flash'][$clave]);
+        return $valor;
+    } else {
+        $_SESSION['flash'][$clave] = $mensaje;
+        return $mensaje;
+    }
+}
 
 function iniciar_sesion()
 {
