@@ -12,10 +12,22 @@
                 <a href="{{route('animales.index')}}" class="text-white mb-1 lg:mr-16 lg:mb-8">Listado de Animales</a>
                 <a href="{{route('animales.create')}}" class="text-white">Nuevo Animal</a>
             </div>
-            <div class="flex flex-col text-center lg:flex-row">
-               <a href="{{route('login')}}">Iniciar Sesion</a>
-                <a href="{{route('register')}}">Regístrate</a>
-            </div>
+            @guest
+                    <li><a href="{{ route('login') }}">Iniciar sesión</a></li>
+                    <li><a href="{{ route('register') }}">Registrarse</a></li>
+                @else
+                    <li>Bienvenido, {{ Auth::user()->name }}</li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Cerrar sesión
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endguest
         </div>
     </div>
 </nav>
