@@ -1,4 +1,3 @@
-<!-- filepath: /c:/Users/Usuario/Documents/DWES/Tema6php/laravel_zoologico/resources/views/animales/show.blade.php -->
 @extends('layouts.plantilla')
 
 @section('titulo', 'Mostrar animales')
@@ -14,18 +13,24 @@
                 <li class="mb-2"><strong>Especie:</strong> {{ $animal->especie }}</li>
                 <li class="mb-2"><strong>Peso:</strong> {{ $animal->peso }} kg</li>
                 <li class="mb-2"><strong>Altura:</strong> {{ $animal->altura }} cm</li>
-                <li class="mb-2"><strong>Fecha de Nacimiento:</strong> {{ $animal->fechaNacimiento }}</li>
+                <li class="mb-2"><strong>Edad:</strong> {{ $animal->getEdad() }} años</li>
                 <li class="mb-2"><strong>Alimentación:</strong> {{ $animal->alimentacion }}</li>
                 <li class="mb-2"><strong>Descripción:</strong> {{ $animal->descripcion }}</li>
+                <li class="mb-2"><strong>Revisiones:</strong>
+                    @foreach($animal->revisiones as $revision)
+                        {{ $revision->fecha }} - {{ $revision->descripcion }}<br>
+                    @endforeach
+                </li>
             </ul>
         </div>
     </div>
     <div class="flex space-x-4">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Editar animal
-        </button>
-        <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+    <a href="{{ route('animales.edit',$animal) }}" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Editar Animal
+        </a>
+        <a href="{{ route('animales.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Volver al Listado
-        </button>
+        </a>
     </div>
 @endsection
+

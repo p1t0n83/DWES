@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Revision;
 class Animal extends Model
 {
     protected $table = "animales";
@@ -17,6 +17,10 @@ class Animal extends Model
     public function getEdad()
     {
         $fechaFormateada = Carbon::parse($this->fechaNacimiento);
-        return $fechaFormateada->diffInYears(Carbon::now());
+        return (int) $fechaFormateada->diffInYears(Carbon::now());
+    }
+
+    public function revisiones(){
+        return $this->hasMany(Revision::class);
     }
 }

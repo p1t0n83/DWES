@@ -30,6 +30,7 @@ class AnimalController extends Controller
     public function store(CrearAnimalRequest $request)
 {
     $animal = new Animal();
+    $animal->id=$request->id;
     $animal->especie = $request->especie;
     $animal->peso = $request->peso;
     $animal->altura = $request->altura;

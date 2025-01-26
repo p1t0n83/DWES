@@ -9,11 +9,15 @@
                 <li class="mb-2"><strong>Especie:</strong> {{ $animal->especie }}</li>
                 <li class="mb-2"><strong>Peso:</strong> {{ $animal->peso }} kg</li>
                 <li class="mb-2"><strong>Altura:</strong> {{ $animal->altura }} cm</li>
-                <li class="mb-2"><strong>Fecha de Nacimiento:</strong> {{ $animal->fechaNacimiento }}</li>
+                <li class="mb-2"><strong>Edad:</strong> {{ $animal->getEdad() }} años</li>
                 <li class="mb-2"><strong>Alimentación:</strong> {{ $animal->alimentacion}}</li>
                 <li class="mb-2"><strong>Descripción:</strong> {{ $animal->descripcion }}</li>
+                <li class="mb-2"><strong>Revisiones:</strong> {{ $animal->revisiones->count() }}</li>
                 <li class="mb-2">
                     <img src="{{ asset('assets/imagenes/' . $animal->imagen) }}" alt="imagen de {{ $animal->especie }}" class="w-32 h-32 object-cover">
+                </li>
+                <li class="mb-2">
+                    <a href="{{ route('animales.show', $animal) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver detalles</a>
                 </li>
             </ul>
         </div>
