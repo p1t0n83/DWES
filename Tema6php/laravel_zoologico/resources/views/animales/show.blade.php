@@ -28,6 +28,9 @@
     <a href="{{ route('animales.edit',$animal) }}" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Editar Animal
         </a>
+        <a href="{{ route('animales.revision',$animal) }}" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Crear revision
+        </a>
         <a href="{{ route('animales.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Volver al Listado
         </a>

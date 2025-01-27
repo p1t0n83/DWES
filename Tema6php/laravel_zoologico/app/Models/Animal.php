@@ -9,6 +9,10 @@ class Animal extends Model
 {
     protected $table = "animales";
 
+    protected $fillable = [
+        'especie', 'peso', 'altura', 'fecha_nacimiento', 'alimentacion', 'descripcion'
+    ];
+
     public function getRouteKeyName()
     {
         return 'slug';

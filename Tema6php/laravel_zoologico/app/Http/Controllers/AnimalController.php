@@ -77,6 +77,9 @@ class AnimalController extends Controller
     return redirect()->route('animales.show', $animal);
 }
 
+public function revision(Animal $animal ){
+    return view("animales.revision", compact('animal'));
+}
     /**
      * Remove the specified resource from storage.
      */
