@@ -12,10 +12,22 @@
                 <a href="<?php echo e(route('animales.index')); ?>" class="text-white mb-1 lg:mr-16 lg:mb-8">Listado de Animales</a>
                 <a href="<?php echo e(route('animales.create')); ?>" class="text-white">Nuevo Animal</a>
             </div>
-            <div class="flex flex-col text-center lg:flex-row">
-               <a href="<?php echo e(route('login')); ?>">Iniciar Sesion</a>
-                <a href="<?php echo e(route('register')); ?>">Regístrate</a>
-            </div>
+            <?php if(auth()->guard()->guest()): ?>
+                    <li><a href="<?php echo e(route('login')); ?>">Iniciar sesión</a></li>
+                    <li><a href="<?php echo e(route('register')); ?>">Registrarse</a></li>
+                <?php else: ?>
+                    <li>Bienvenido, <?php echo e(Auth::user()->name); ?></li>
+                    <li>
+                        <a href="<?php echo e(route('logout')); ?>"
+                           onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Cerrar sesión
+                        </a>
+                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
+                        </form>
+                    </li>
+                <?php endif; ?>
         </div>
     </div>
 </nav>

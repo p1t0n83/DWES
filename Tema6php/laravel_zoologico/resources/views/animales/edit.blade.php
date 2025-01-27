@@ -5,8 +5,8 @@
 
 @section('contenido')
     <h1 class="text-3xl font-bold underline mb-4">Página de editar animales</h1>
-    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="{{route('animales.update', $animal)}}" method="POST" enctype="multipart/form-data">
-    @csrf    
+    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="{{route('animales.update', $animal)}}" method="GET" enctype="multipart/form-data">
+    @csrf
     <div class="mb-4">
             <label for="especie" class="block text-gray-700 text-sm font-bold mb-2">Especie:</label>
             <input type="text" id="especie" name="especie" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>

@@ -24,6 +24,7 @@ class AnimalController extends Controller
         return view("animales.create");
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -40,7 +41,7 @@ class AnimalController extends Controller
     }
     $animal->save();
 
-    return redirect()->route('animales.show', $animal);
+       return redirect(route('animales.show', $animal));
 }
 
     /**
@@ -74,7 +75,7 @@ class AnimalController extends Controller
     }
     $animal->save();
 
-    return redirect()->route('animales.show', $animal);
+    return redirect(route('animales.show', $animal));
 }
 
 public function revision(Animal $animal ){
