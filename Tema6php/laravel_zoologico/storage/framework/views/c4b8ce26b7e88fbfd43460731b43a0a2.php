@@ -23,11 +23,11 @@
         </div>
     </div>
     <div class="flex space-x-4">
-    <a href="<?php echo e(route('animales.edit',$animal)); ?>" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+        <a href="<?php echo e(route('animales.edit', $animal)); ?>" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Editar Animal
         </a>
-        <a href="<?php echo e(route('animales.revision',$animal)); ?>" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            Crear revision
+        <a href="<?php echo e(route('animales.revision', $animal)); ?>" class="bg-blue-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Crear revisión
         </a>
         <a href="<?php echo e(route('animales.index')); ?>" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Volver al Listado
