@@ -15,6 +15,6 @@ class InicioController extends Controller
     }
 
     public function inicio(){
-        return view('inicio');
+        return redirect()->action([AnimalController::class,'index']);
     }
 }
