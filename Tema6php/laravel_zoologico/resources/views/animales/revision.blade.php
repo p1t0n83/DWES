@@ -5,7 +5,7 @@
 
 @section('contenido')
     <h1 class="text-3xl font-bold underline mb-4">Página de crear revision</h1>
-    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="{{route('animales.store')}}" method="POST" enctype="multipart/form-data">
+    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="{{route('animales.store')}}" method="post" enctype="multipart/form-data">
     @csrf
         <div class="mb-4">
             <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha:</label>

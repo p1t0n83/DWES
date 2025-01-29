@@ -5,7 +5,7 @@
 
 <?php $__env->startSection('contenido'); ?>
     <h1 class="text-3xl font-bold underline mb-4">Página de crear revision</h1>
-    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="<?php echo e(route('animales.store')); ?>" method="POST" enctype="multipart/form-data">
+    <form class="bg-white shadow-md rounded-lg p-6 mb-4" action="<?php echo e(route('animales.store')); ?>" method="post" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
         <div class="mb-4">
             <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha:</label>

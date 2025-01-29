@@ -10,9 +10,9 @@ class Animal extends Model
     protected $table = "animales";
 
     protected $fillable = [
-        'especie', 'peso', 'altura', 'fecha_nacimiento', 'alimentacion', 'descripcion'
+        'id','especie', 'peso', 'altura', 'fecha_nacimiento', 'alimentacion', 'descripcion','slug','imagen'
     ];
-
+    public $timestamps = false;
     public function getRouteKeyName()
     {
         return 'slug';
