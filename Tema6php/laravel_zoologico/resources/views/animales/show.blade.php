@@ -7,7 +7,7 @@
     <div class="row">
         <!-- Columna de la imagen -->
         <div class="col-md-6">
-            <img src="{{ asset('assets/imagenes/' . $anima->imagen) }}" alt="{{ $animal->especie }}" class="img-fluid">
+            <img src="{{ asset('assets/imagenes/' . $animal->imagen) }}" alt="{{ $animal->especie }}" class="img-fluid">
         </div>
 
         <!-- Columna de los detalles -->
@@ -19,7 +19,7 @@
             <p><strong>Alimentación:</strong> {{ $animal->alimentacion }}</p>
             <p><strong>Descripción:</strong> {{ $animal->descripcion }}</p>
         </div>
-        
+
     </div>
 
     <!-- Botones -->

@@ -24,9 +24,11 @@
                     {{ \Carbon\Carbon::parse($animal->fechaNacimiento)->format('d-m-Y') }}</p>
                 <p><strong>Alimentación:</strong> {{ $animal->alimentacion }}</p>
                 <p><strong>Descripción:</strong> {{ $animal->descripcion }}</p>
-             
+                <form action="{{route("animales.show",$animal)}}" method="get">
+                    <button  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Ver informacion detallada</button>
+                </form>
             </div>
-            
+
         </div>
     @endforeach
 </div>
