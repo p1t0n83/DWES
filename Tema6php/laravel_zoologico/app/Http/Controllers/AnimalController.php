@@ -40,7 +40,6 @@ class AnimalController extends Controller
         $animal->slug = Str::slug($request->input('especie'));
         if ($request->hasFile('imagen')) {
             // Almacenar la imagen en la carpeta 'public/assets/imagenes'
-            // Primero verificamos si la carpeta existe, sino la creamos
             $rutaDestino = public_path('assets/imagenes');
             // Subir la imagen directamente a 'public/assets/imagenes'
             $imagen = $request->file('imagen');
