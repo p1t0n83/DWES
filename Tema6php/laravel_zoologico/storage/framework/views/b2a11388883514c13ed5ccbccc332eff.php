@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('titulo', 'Zoologico'); ?>
 
 <?php $__env->startSection('contenido'); ?>
@@ -24,12 +22,15 @@
                     <?php echo e(\Carbon\Carbon::parse($animal->fechaNacimiento)->format('d-m-Y')); ?></p>
                 <p><strong>Alimentación:</strong> <?php echo e($animal->alimentacion); ?></p>
                 <p><strong>Descripción:</strong> <?php echo e($animal->descripcion); ?></p>
-             
+                <form action="<?php echo e(route("animales.show",$animal)); ?>" method="get">
+                    <button  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Ver informacion detallada</button>
+                </form>
             </div>
-            
+
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.plantilla', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\DWES\Tema6php\laravel_zoologico\resources\views/animales/index.blade.php ENDPATH**/ ?>
