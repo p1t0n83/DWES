@@ -18,6 +18,7 @@
             <p><strong>Edad:</strong> {{ $animal->getEdad()}}</p>
             <p><strong>Alimentación:</strong> {{ $animal->alimentacion }}</p>
             <p><strong>Descripción:</strong> {{ $animal->descripcion }}</p>
+            <p><strong>Revisiones:</strong>{{$animal->revisiones()->count()}}</p>
         </div>
     </div>
 
@@ -31,6 +32,10 @@
         <!-- Botón para editar el animal -->
         <div class="col-md-6">
             <a href="{{ route('animales.edit', $animal) }}" class="btn btn-primary btn-lg btn-block">Editar</a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="{{ route('revisiones.create', $animal) }}" class="btn btn-primary btn-lg btn-block">Crear revision</a>
         </div>
     </div>
 </div>

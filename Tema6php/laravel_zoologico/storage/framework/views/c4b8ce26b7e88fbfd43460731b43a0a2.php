@@ -16,6 +16,7 @@
             <p><strong>Edad:</strong> <?php echo e($animal->getEdad()); ?></p>
             <p><strong>Alimentación:</strong> <?php echo e($animal->alimentacion); ?></p>
             <p><strong>Descripción:</strong> <?php echo e($animal->descripcion); ?></p>
+            <p><strong>Revisiones:</strong><?php echo e($animal->revisiones()->count()); ?></p>
         </div>
     </div>
 
@@ -29,6 +30,10 @@
         <!-- Botón para editar el animal -->
         <div class="col-md-6">
             <a href="<?php echo e(route('animales.edit', $animal)); ?>" class="btn btn-primary btn-lg btn-block">Editar</a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="<?php echo e(route('revisiones.create', $animal)); ?>" class="btn btn-primary btn-lg btn-block">Crear revision</a>
         </div>
     </div>
 </div>

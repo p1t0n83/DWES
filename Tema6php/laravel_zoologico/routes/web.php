@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnimalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\RevisionController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -13,6 +14,8 @@ Route::get('animales/{animal}',[AnimalController::class,'show'])->name('animales
 Route::get('animales/{animal}/editar',[AnimalController::class,'edit'])->name('animales.edit')->middleware("auth");
 Route::post('animales',[AnimalController::class,'store'])->name("animales.store");
 Route::put('animales/{animal}',[AnimalController::class,'update'])->name('animales.update');
+Route::get('revisiones/{animal}/crear',[RevisionController::class,'create'])->name('revisiones.create');
+Route::post('revisiones',[RevisionController::class,'store'])->name("revisiones.store");
 
 Route::middleware([
     'auth:sanctum',
