@@ -14,17 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
         DB::table('users')->delete();
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
+        User::factory(5)->create();
+        $this->call(UserSeeder::class);
 
 
         DB::table('animales')->delete();
         $this->call(AnimalSeeder::class);
 
+        DB::table('animales_revisiones')->delete();
+        $this->call(RevisionesSeeder::class);
     }
 }

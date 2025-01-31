@@ -12,10 +12,23 @@
                 <a href="<?php echo e(route('animales.index')); ?>" class="text-white mb-1 lg:mr-16 lg:mb-8">Listado de Animales</a>
                 <a href="<?php echo e(route('animales.create')); ?>" class="text-white">Nuevo Animal</a>
             </div>
-            <div class="flex flex-col text-center lg:flex-row">
-                <a href="#" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesion</a>
-                <a href="#" class="bverde">Regístrate</a>
-            </div>
+            <?php if(auth()->guard()->guest()): ?>
+    <div class="flex flex-col text-center lg:flex-row">
+        <a href="<?php echo e(route('login')); ?>" class="bblanco mb-1 lg:mr-4 lg:mb-0">Iniciar Sesión</a>
+        <a href="<?php echo e(route('register')); ?>" class="bverde">Regístrate</a>
+    </div>
+<?php else: ?>
+    <!-- Formulario para cerrar sesión con método POST -->
+    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
+        <div class="flex flex-col text-center lg:flex-row">
+            <button type="submit" class="bverde">
+                Cerrar sesión
+            </button>
+        </div>
+    </form>
+<?php endif; ?>
+
         </div>
     </div>
 </nav>
