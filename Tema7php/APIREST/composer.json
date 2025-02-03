@@ -1,0 +1,31 @@
+{
+    "name": "iker/apirest",
+    "description": "nada",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.68"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "pecee/simple-router": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "scripts":{
+        "start":"php -S localhost:8001 -t=public"
+    }
+}

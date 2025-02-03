@@ -44,16 +44,45 @@ class AnimalController extends Controller
             $rutaDestino = public_path('assets/imagenes');
             // Subir la imagen directamente a 'public/assets/imagenes'
             $imagen = $request->file('imagen');
-            $nombreImagen = Str::slug($request->input('especie')) . '.' . $imagen->getClientOriginalExtension();
+            $nombreImagen = $imagen->getClientOriginalName(); '.' . $imagen->getClientOriginalExtension();
             $imagen->move($rutaDestino, $nombreImagen);
             // Guardamos la ruta de la imagen en la base de datos
             $animal->imagen = $nombreImagen;
         }
         $animal->save();
-        return redirect()->route('animales.show', $animal->id)
-                     ->with('success', 'Animal creado correctamente.');
+        return redirect()->route('animales.show', $animal->id);
     }
+    public function update(CrearAnimalRequest $request, Animal $animal)
+    {
+        // Actualizar los demás campos del animal
+        $animal->especie = $request->input('especie');
+        $animal->peso = $request->input('peso');
+        $animal->altura = $request->input('altura');
+        $animal->fechaNacimiento = $request->input('fechaNacimiento');
+        $animal->alimentacion = $request->alimentacion;
+        $animal->descripcion = $request->descripcion;
+        $animal->slug = Str::slug($request->input('especie'));
 
+        // Si el usuario sube una nueva imagen
+        if ($request->hasFile('imagen')) {
+            // Almacenar la imagen en la carpeta 'public/assets/imagenes'
+            // Primero verificamos si la carpeta existe, sino la creamos
+            $rutaDestino = public_path('assets/imagenes');
+            // Subir la imagen directamente a 'public/assets/imagenes'
+            $imagen = $request->file('imagen');
+            $nombreImagen = Str::slug($request->input('especie')) . '.' . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaDestino, $nombreImagen);
+            // Guardamos la ruta de la imagen en la base de datos
+            $animal->imagen = $nombreImagen;
+        }
+
+        // Guardar los cambios en la base de datos
+        $animal->save();
+
+        // Redirigir a la vista de detalle del animal
+        return redirect()->route('animales.show', $animal->id)
+                         ->with('success', 'Animal actualizado correctamente.');
+    }
     /**
      * Display the specified resource.
      */
@@ -61,8 +90,8 @@ class AnimalController extends Controller
 {
     return view('animales.show', compact('animal'));
 }
-    
-   
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -75,37 +104,7 @@ class AnimalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CrearAnimalRequest $request, Animal $animal)
-{
-    // Actualizar los demás campos del animal
-    $animal->especie = $request->input('especie');
-    $animal->peso = $request->input('peso');
-    $animal->altura = $request->input('altura');
-    $animal->fechaNacimiento = $request->input('fechaNacimiento');
-    $animal->alimentacion = $request->alimentacion;
-    $animal->descripcion = $request->descripcion;
-    $animal->slug = Str::slug($request->input('especie'));
 
-    // Si el usuario sube una nueva imagen
-    if ($request->hasFile('imagen')) {
-        // Almacenar la imagen en la carpeta 'public/assets/imagenes'
-        // Primero verificamos si la carpeta existe, sino la creamos
-        $rutaDestino = public_path('assets/imagenes');
-        // Subir la imagen directamente a 'public/assets/imagenes'
-        $imagen = $request->file('imagen');
-        $nombreImagen = Str::slug($request->input('especie')) . '.' . $imagen->getClientOriginalExtension();
-        $imagen->move($rutaDestino, $nombreImagen);
-        // Guardamos la ruta de la imagen en la base de datos
-        $animal->imagen = $nombreImagen;
-    }
-
-    // Guardar los cambios en la base de datos
-    $animal->save();
-
-    // Redirigir a la vista de detalle del animal
-    return redirect()->route('animales.show', $animal->id)
-                     ->with('success', 'Animal actualizado correctamente.');
-}
 
 
     /**
