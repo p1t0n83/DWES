@@ -13,7 +13,8 @@ final class Producto
 
     public function __construct()
     {
-        $this->db = DBConnection::getInstance()->getConexion();
+        $this->db = DBConnection::getInstance();
+        $this->db=DBConnection::getConexion();
         $this-> createTable();
     }
 
@@ -52,6 +53,11 @@ final class Producto
    $stmt=$this->db->prepare(query:$sql);
    $stmt->execute(params: $productoId);
   return [];
+    }
+
+    public function get(){
 
     }
+
+    
 }
