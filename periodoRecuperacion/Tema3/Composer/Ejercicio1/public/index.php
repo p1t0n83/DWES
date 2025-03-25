@@ -20,8 +20,11 @@
      if($_SERVER['REQUEST_METHOD']=='POST'){
         $codigo=$_POST['iban'];
         $comprobador=new Metodos($codigo);
-        echo $comprobador->validarLongitudCaracteres()? "El IBAN esta bien formado <br>":"";
-       $comprobador->digitosControl();
+        if($comprobador->compararIBAN()){
+            echo "Los IBANS coinciden";
+        }else{
+            echo "Los IBANS no coinciden";
+        }
      }
     ?>
 </body>

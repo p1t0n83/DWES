@@ -3,7 +3,7 @@
         'name' => 'iker/ejercicio1',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '752fb3a0667e1f5c8ca36e94d4dbe30b2c4101a7',
+        'reference' => '02c218421a3af73ca073c6c135d5786096557917',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'iker/ejercicio1' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '752fb3a0667e1f5c8ca36e94d4dbe30b2c4101a7',
+            'reference' => '02c218421a3af73ca073c6c135d5786096557917',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
