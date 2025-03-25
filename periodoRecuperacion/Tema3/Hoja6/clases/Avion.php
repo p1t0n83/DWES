@@ -33,7 +33,7 @@
  
 
   function mostrarInformacion(){
-    echo "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor;
+    return "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor."<br>";
 } 
 }
 ?>
