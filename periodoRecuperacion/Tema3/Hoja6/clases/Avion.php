@@ -1,6 +1,6 @@
 <?php
-  namespace Clases;
-  use Clases\ElementoVolador;
+  namespace App\Clases;
+  use App\Clases\ElementoVolador;
 
   class Avion extends ElementoVolador{
     private $companiaAerea;
@@ -30,7 +30,10 @@
             echo "No se puede poner esa altitud";
         }
     }
+ 
 
-
-  }
+  function mostrarInformacion(){
+    echo "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor;
+} 
+}
 ?>

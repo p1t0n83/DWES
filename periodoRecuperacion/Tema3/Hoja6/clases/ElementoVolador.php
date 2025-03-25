@@ -1,6 +1,6 @@
 <?php
 
-namespace Clases;
+namespace App\Clases;
 
 use Interfaces\Volador;
 

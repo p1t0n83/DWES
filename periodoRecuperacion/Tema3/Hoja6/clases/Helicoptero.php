@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Clases;
 use App\Clases\ElementoVolador;
 
 class Helicoptero extends ElementoVolador
@@ -15,6 +15,20 @@ class Helicoptero extends ElementoVolador
     }
 
     public function volar($altitud){
+            if($altitud<=100*$this->nRotor){
+                for($altura=0;$altura<$altitud;$altura+=20){
+                    if($altitud-$altura>=20){
+                     $this->setAltitud($altura);
+                    }else{
+                        $this->setAltitud($altitud);
+                    }
+                }
+          }
 
+            }
+   
+
+     function mostrarInformacion(){
+        echo "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor;
     }
-}
+ }
