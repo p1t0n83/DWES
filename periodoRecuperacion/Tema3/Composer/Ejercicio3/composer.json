@@ -1,0 +1,29 @@
+{
+    "name": "iker/ejercicio3",
+    "description": "Ejercicio 3 de composer",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "hackzilla/password-generator": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "MiAplicacion\\": "app"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8001 -t public"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "libreria"
+        }
+    ]
+}

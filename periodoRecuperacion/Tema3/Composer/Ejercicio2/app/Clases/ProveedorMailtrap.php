@@ -25,14 +25,14 @@ class ProveedorMailtrap implements InterfazProveedorCorreo
         $mail->Username = '24b48eb7c08f2e';                   // Nombre de usuario SMTP
         $mail->Password = 'e14dac8e7acdd8';                   // Contraseña SMTP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Habilita el cifrado TLS; `ssl` también aceptado
-        $mail->Port = 2525;
+        $mail->Port = 587;
 
         try {
             // Configura y envía el mensaje
             $mail->setFrom('rompeolas93@gmail.com', 'Iker Garcia Iturri');
-            $mail->addAddress('recipient@example.com', 'Recipient Name');
-            $mail->Subject = 'Prueba de MailTrap';
-            $mail->Body = 'Querido MailTrap, espero que funciones sin ningun problema';
+            $mail->addAddress($paraQuien,'iker garcia iturri');
+            $mail->Subject = $asunto;
+            $mail->Body = $cuerpoMensaje;
             $mail->send();
             return true;
         } catch (Exception $e) {
