@@ -1,6 +1,7 @@
 <?php
-  namespace App\Clases;
-  use App\Clases\ElementoVolador;
+  namespace Clases;
+
+  use Clases\ElementoVolador;
 
   class Avion extends ElementoVolador{
     private $companiaAerea;
@@ -31,6 +32,9 @@
         }
     }
  
+    public function getCompaniaAerea(){
+        return $this->companiaAerea;
+    }
 
   function mostrarInformacion(){
     return "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor."<br>";

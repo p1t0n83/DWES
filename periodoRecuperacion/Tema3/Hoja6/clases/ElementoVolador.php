@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Clases;
+namespace Clases;
 
 use Interfaces\Volador;
 
 abstract class ElementoVolador implements Volador
 {
-    private $nombre;
-    private $numAlas;
-    private $numMotores;
-    private $altitud;
-    private $velocidad;
+    protected $nombre;
+    protected $numAlas;
+    protected $numMotores;
+    protected $altitud;
+    protected $velocidad;
 
     public function __construct($nombre, $numAlas, $numMotores)
     {
@@ -42,6 +42,10 @@ abstract class ElementoVolador implements Volador
 
     public function getVelocidad(){
         return $this->velocidad;
+    }
+
+    public function getNombre(){
+        return $this->nombre;
     }
     public abstract function volar($altitud);
 }

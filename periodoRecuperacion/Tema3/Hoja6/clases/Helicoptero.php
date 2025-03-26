@@ -1,6 +1,6 @@
 <?php
-namespace App\Clases;
-use App\Clases\ElementoVolador;
+namespace Clases;
+use Clases\ElementoVolador;
 
 class Helicoptero extends ElementoVolador
 {
@@ -26,7 +26,9 @@ class Helicoptero extends ElementoVolador
           }
 
             }
-   
+   public function getNRotor(){
+    return $this->nRotor;
+   }
 
      function mostrarInformacion(){
        return "Nombre:".$this->nombre.". Numero de alas:".$this->numAlas.". Numeo de motores:".$this->numMotores.". Propietario:".$this->propietario.". Numero de rotores".$this->nRotor."<br>";
