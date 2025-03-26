@@ -23,6 +23,7 @@
      $aeropuerto->insertar($helicoptero);
      echo $aeropuerto->buscar("Apaache");
      echo $helicoptero->mostrarInformacion();
+     $aeropuerto->despegar("A-10 Thunderboldt II ",3000,200);
     ?>
 </body>
 </html>

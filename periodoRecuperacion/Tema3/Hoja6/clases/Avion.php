@@ -19,7 +19,8 @@
     public function volar($altitud){
         if($altitud>0 && $altitud<$this->altitudMaxima){
             if($this->getVelocidad()>=150){
-                for($altura=0;$altura<$altitud;$altura+=100){
+                for($altura=0;$altura<=$altitud;$altura+=100){
+                    echo "Altitud actual: ".$altura."<br>";
                     if($altitud-$altura>=100){
                      $this->setAltitud($altura);
                     }else{
