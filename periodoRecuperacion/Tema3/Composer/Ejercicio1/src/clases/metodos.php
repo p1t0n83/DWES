@@ -36,8 +36,6 @@ class metodos
         return true;
     }
 
-
-
    function digitosControl()
     {
         $R = BigInteger::of(substr($this->ibanPasado, 4, 24) . '142800')->remainder(97);
@@ -54,56 +52,31 @@ class metodos
    function validarCCC()
     {
         $CCC = substr($this->ibanPasado, 4, 24);
-        $digitosControlCCC = BigInteger::of($CCC, );
-       
-  
 
-        $pesos = [1, 2, 4, 8, 5, 10, 9, 7, 3, 6];
-
-        $primerDigito=$this->calcularPrimerDigitoCCC($CCC,$pesos);
-
-
-        $segundoDigito=$this->calcularSegundoDigitoCCC($CCC,$pesos);
-          
-        return $primerDigito.$segundoDigito;
-    }
-
-     private function calcularPrimerDigitoCCC($CCC,$pesos){
-
-        $numerosPrimerDigito = substr($CCC, 0, 8) . '00';
-        
-        $primeraSuma = 0;
-        for ($i = 0; $i < strlen($numerosPrimerDigito); $i++) {
-            $primeraSuma += intval($numerosPrimerDigito[$i]) * $pesos[$i];
-        }
-        $primerDigito =BigInteger::of(11)->minus(BigInteger::of($primeraSuma)->mod(11));
-        if ($primerDigito->isEqualTo(11)) {
-            $primerDigito = 0;
-        } else if ($primerDigito->isEqualTo(10)) {
-            $primerDigito = 1;
-        }
-      
-        return substr($CCC, 0, 8).$primerDigito;
-    }
-
-    private function calcularSegundoDigitoCCC($CCC,$pesos){
+        $numerosPrimerDigito = '00'.substr($CCC, 0, 8) ;
+        $primerDigito=$this->calcularDigitoCCC( $numerosPrimerDigito);
 
         $numerosSegundoDigito=substr($CCC,10,10);
-       
-        $segundaSuma=0;
-        for ($i = 0; $i < strlen($numerosSegundoDigito); $i++) {
-            $segundaSuma += intval($numerosSegundoDigito[$i]) * $pesos[$i];
-        }
-        $segundoDigito =BigInteger::of(11)->minus(BigInteger::of($segundaSuma)->mod(11));
-        if ($segundoDigito->isEqualTo(11)) {
-            $segundoDigito = 0;
-        } else if ($segundoDigito->isEqualTo(10)) {
-            $segundoDigito = 1;
-        }
-       
-        return $segundoDigito.$numerosSegundoDigito;
+        $segundoDigito=$this->calcularDigitoCCC($numerosSegundoDigito);
+          
+        return substr($CCC, 0, 8).$primerDigito.$segundoDigito.$numerosSegundoDigito;
     }
 
+    private function calcularDigitoCCC($numerosDigito){
+        $pesos = [1, 2, 4, 8, 5, 10, 9, 7, 3, 6];
+        $Suma=0;
+        for ($i = 0; $i < strlen($numerosDigito); $i++) {
+            $Suma += intval($numerosDigito[$i]) * $pesos[$i];
+        }
+        $Digito =BigInteger::of(11)->minus(BigInteger::of($Suma)->mod(11));
+        if ($Digito->isEqualTo(11)) {
+            $Digito = 0;
+        } else if ($Digito->isEqualTo(10)) {
+            $Digito = 1;
+        }
+       
+        return $Digito;
+    }
 
     public function compararIBAN(): bool
     {

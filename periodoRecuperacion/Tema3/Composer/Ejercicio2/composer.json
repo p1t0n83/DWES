@@ -1,0 +1,23 @@
+{
+    "name": "iker/ejercicio2composer",
+    "description": "Ejercicio 2 de composer",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload":{
+        "psr-4": {
+            "App\\":"app"
+        }
+    },
+    "scripts": {
+        "start":"php -S localhost:8001 -t public"
+    }
+}
