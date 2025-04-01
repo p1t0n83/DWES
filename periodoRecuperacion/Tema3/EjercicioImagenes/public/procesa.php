@@ -3,7 +3,7 @@
 /**
  * Guardo los datos
  */
-$imagen = $_FILES['imagen'];
+$fichero = $_FILES['imagen'];
 $nombreNuevo = $_POST['nombre'];
 
 $tipos_permitidos = [
