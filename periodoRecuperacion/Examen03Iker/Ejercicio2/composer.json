@@ -1,0 +1,26 @@
+{
+    "name": "iker/ejercicio2",
+    "description": "Este es el ejercicio 2 del examen del tema 3",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iker"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "intervention/image": "^3.11"
+    },
+    "autoload":{
+        "psr-4":{
+            "Ejercicio2\\":"app/"
+        }
+    },
+    "repositories":[{
+        "type":"path",
+        "url":"libreria"
+    }],
+    "scripts":{
+        "start":"php -S localhost:8001 -t public"
+    }
+}

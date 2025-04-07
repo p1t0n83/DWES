@@ -1,0 +1,20 @@
+{
+    "name": "ikergarcia/ejercicio1",
+    "description": "Ejercicio 1 del examen tema 3",
+    "type": "project",
+    "authors": [
+        {
+            "name": "iker"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "Ejercicio1\\":"fuentes/"
+        }
+    },
+    "scripts":{
+        "start":"php -S localhost:8001 -t public "
+    }
+}
