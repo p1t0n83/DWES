@@ -1,0 +1,17 @@
+{
+    "name": "iker/hoja1recuperacionbasededatos",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Iker\\Hoja1recuperacionbasededatos\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
