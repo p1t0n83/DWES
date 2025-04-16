@@ -11,18 +11,20 @@
     <h1>Equipos</h1>
     <hr>
     <form method="post">
-        <label for="equipo">Selecciona un equipo:</label><br>
+        <label for="equipo">Selecciona un equipo:<br>
         <select name="equipo">
             <?php
             require_once '../vendor/autoload.php';
+
             use App\Clases\FuncionesBD;
+
             $conexion = new FuncionesBD();
             $equipos = $conexion->getEquipos();
             foreach ($equipos as $equipo) {
                 echo '<option value="' . $equipo->nombre . '">' . $equipo->nombre . '</option>';
             }
             ?>
-        </select><br><br>
+        </select></label><br><br>
         <button>Enviar</button>
     </form>
     <hr>
@@ -58,7 +60,7 @@
     <h1>Traspaso de jugadores</h1>
     <hr>
     <form method="post">
-        <label for="equipo2">Selecciona un equipo para el traspaso:</label><br>
+        <label for="equipo2">Selecciona un equipo para el traspaso:<br>
         <select name="equipo2">
             <?php
             $equipos = $conexion->getEquipos();
@@ -66,48 +68,50 @@
                 echo '<option value="' . $equipo->nombre . '">' . $equipo->nombre . '</option>';
             }
             ?>
-        </select><br><br>
+        </select></label><br><br>
         <button>Enviar</button>
     </form>
     <hr>
-
-    <?php  
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['equipo2'])) {
-        echo '<h1>Baja y Alta de jugadores:</h1><hr>';
-        echo '<label for="baja">Selecciona un jugador para dar de baja:</label><br>';
-        echo '<select name="baja">';
-        $jugadores = $conexion->getJugadores($_POST['equipo2']);
-        foreach ($jugadores as $jugador) {
-            echo '<option value="' . $jugador->codigo . '">' . $jugador->nombre . '</option>';
-        }
-        echo '</select><br><br>';
-    }
-    ?>
     <form method="post">
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['equipo2'])) {
+            echo '<h1>Baja y Alta de jugadores:</h1><hr>';
+            echo '<label for="baja">Selecciona un jugador para dar de baja:<br>';
+            echo '<select name="baja">';
+            $jugadores = $conexion->getJugadores($_POST['equipo2']);
+            foreach ($jugadores as $jugador) {
+                echo '<option value="' . $jugador->codigo . '">' . $jugador->nombre . '</option>';
+            }
+            echo '</select></label><br><br>';
+      
+        ?>
+
         <h2>Datos del nuevo jugador:</h2>
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" name="nombre" required><br><br>
-
-        <label for="procedencia">Procedencia:</label><br>
-        <input type="text" name="procedencia"><br><br>
-
-        <label for="altura">Altura:</label><br>
-        <input type="number" step="0.01" name="altura"><br><br>
-
-        <label for="peso">Peso:</label><br>
-        <input type="number" step="0.01" name="peso"><br><br>
-
-        <label for="posicion">Posición:</label><br>
+        <label for="nombre">Nombre:<br>
+            <input type="text" name="nombre" required><br><br>
+        </label>
+        <label for="procedencia">Procedencia:<br>
+            <input type="text" name="procedencia"><br><br>
+        </label>
+        <label for="altura">Altura:<br>
+            <input type="number" step="0.01" name="altura"><br><br>
+        </label>
+        <label for="peso">Peso:<br>
+            <input type="number" step="0.01" name="peso"><br><br>
+        </label>
+        <label for="posicion">Posición:<br>
         <select name="posicion">
             <?php
             $posiciones = $conexion->getPosiciones();
             foreach ($posiciones as $posicion) {
-                echo '<option value="' . $posicion . '">' . $posicion . '</option>';
+                echo '<option value="' . $posiciones[$posicion] . '">' . $posiciones[$posicion] . '</option>';
             }
             ?>
-        </select><br>
+        </select></label>
+        <hr>
         <button>Realizar traspaso</button>
     </form>
+    <?php }?>
 </body>
 
 </html>
