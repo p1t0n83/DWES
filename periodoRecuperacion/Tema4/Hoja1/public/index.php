@@ -34,9 +34,10 @@
         $equipo = $_POST['equipo'];
         $conexion = new FuncionesBD();
         $jugadores = $conexion->getJugadores($equipo);
-
+         
         // Mostrar los jugadores en una tabla
         echo '<h2>Jugadores del equipo: ' . $equipo . '</h2>';
+        echo '<form method="post">';
         echo '<table border="1" cellpadding="5" cellspacing="0">';
         echo '<thead>';
         echo '<tr>';
@@ -48,11 +49,18 @@
         foreach ($jugadores as $jugador) {
             echo '<tr>';
             echo '<td>' . $jugador->nombre . '</td>';
-            echo '<td>' . $jugador->peso . ' kg</td>';
+            echo '<td><input type="number" step="0.01" name="pesos[' . $jugador->codigo . ']" value="' . $jugador->peso . '"></td>';
             echo '</tr>';
         }
         echo '</tbody>';
         echo '</table>';
+        echo '<input type="hidden" name="equipo" value="' . $equipo . '">';
+        echo '<button> actualizar</button>';
+        echo '</form>';
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pesos'])) {
+        $conexion->actualizarPesos($_POST['pesos'], $_POST['equipo']);
     }
     ?>
     <hr>
@@ -83,7 +91,6 @@
                 echo '<option value="' . $jugador->codigo . '">' . $jugador->nombre . '</option>';
             }
             echo '</select></label><br><br>';
-      
         ?>
 
         <h2>Datos del nuevo jugador:</h2>
@@ -104,14 +111,24 @@
             <?php
             $posiciones = $conexion->getPosiciones();
             foreach ($posiciones as $posicion) {
-                echo '<option value="' . $posiciones[$posicion] . '">' . $posiciones[$posicion] . '</option>';
+                echo '<option value="' . $posicion['posicion'] . '">' . $posicion['posicion'] . '</option>';
             }
             ?>
         </select></label>
         <hr>
         <button>Realizar traspaso</button>
     </form>
-    <?php }?>
+    <?php }
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['baja'])) {
+        $id = $_POST['baja']; 
+        $nombre = $_POST['nombre']; 
+        $procedencia = $_POST['procedencia']; 
+        $altura = $_POST['altura'];
+        $peso = $_POST['peso']; 
+        $posicion = $_POST['posicion']; 
+         $conexion->traspaso($id,$nombre,$procedencia,$peso,$altura,$posicion);
+    }?>
 </body>
 
 </html>
