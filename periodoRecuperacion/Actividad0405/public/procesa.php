@@ -6,7 +6,7 @@ use Ejercicio0405\Clases\Producto;
 use Ejercicio0405\Clases\Produ;
 use Ejercicio0405\ClasesBD\PDOProducto;
 use Ejercicio0405\ClasesBD\FuncionesBD;
-
+use Ejercicio0405\ClasesBD\ConexionBD;
 $repositorio = new PDOProducto(); // Instancia de PDOProducto
 $produ = new Produ($repositorio); // Instancia de Produ que utiliza PDOProducto
 $funciones = new FuncionesBD();   // Instancia de FuncionesBD para familias e imágenes
