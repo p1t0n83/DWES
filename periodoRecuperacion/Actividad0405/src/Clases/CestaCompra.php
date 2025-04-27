@@ -22,5 +22,17 @@ class CestaCompra{
     function estaVacia(){
         return false;
     }
+
+    function guardarCesta(){
+
+    }
+
+    function carga_cesta(){
+
+    }
+
+    function muestra(){
+        
+    }
 }
 ?>

@@ -2,21 +2,20 @@
 
 namespace Ejercicio0405\Clases;
 use Ejercicio0405\Interfaces\Metodos;
-class Producto implements Metodos
+class Producto
 {
     private $id;
-    private $titulo;
+    private $nombre;
     private $precio;
     private $familia;
     private $descripcion;
-    private $imagenId;
+    
 
-    function __construct($titulo,$precio,$familia,$descripcion,$imagenId,$id=0) {
-        $this->titulo=$titulo;
+    function __construct($nombre,$precio,$familia,$descripcion,$id=0) {
+        $this->nombre=$nombre;
         $this->precio=$precio;
         $this->familia=$familia;
         $this->descripcion=$descripcion;
-        $this->imagenId=$imagenId;
         $this->id=$id;
     }
 
@@ -24,19 +23,5 @@ class Producto implements Metodos
           return $this->$tipo;
     }
 
-    function crear(Producto $producto):bool{
-        return false;
-    }
-
-    function listar():array{
-        return [];
-    }
-
-    function listarPorId($id):bool{
-        return false;
-    }
-
-    function borrar($id):bool{
-        return false;
-    }
+    
 }
