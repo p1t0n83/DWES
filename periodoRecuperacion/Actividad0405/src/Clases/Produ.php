@@ -2,7 +2,7 @@
 namespace Ejercicio0405\Clases;
 
 use Ejercicio0405\Interfaces\IntRepoProducto;
-
+//clase puente para el patron repositorio
 class Produ
 {
     private $repositorio;
@@ -29,6 +29,7 @@ class Produ
 
     public function borrarProducto(int $id): bool
     {
+        var_dump($id); // Verifica el valor de $id
         return $this->repositorio->borrar($id);
     }
 }

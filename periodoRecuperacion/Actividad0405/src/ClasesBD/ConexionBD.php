@@ -2,7 +2,7 @@
 namespace Ejercicio0405\ClasesBD;
 use PDO;
 use PDOException;
-
+//clase conexion
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__,2));
 $dotenv->load();
 final class ConexionBD

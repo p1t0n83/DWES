@@ -7,11 +7,11 @@ use Ejercicio0405\Clases\Produ;
 use Ejercicio0405\ClasesBD\PDOProducto;
 use Ejercicio0405\ClasesBD\FuncionesBD;
 use Ejercicio0405\ClasesBD\ConexionBD;
-$repositorio = new PDOProducto(); // Instancia de PDOProducto
-$produ = new Produ($repositorio); // Instancia de Produ que utiliza PDOProducto
-$funciones = new FuncionesBD();   // Instancia de FuncionesBD para familias e imágenes
+$repositorio = new PDOProducto(); 
+$produ = new Produ($repositorio); 
+$funciones = new FuncionesBD(); 
 
-// Verificar que los campos se hayan pasado
+// Verificar que los campos se hayan pasado todo con las funciones del helper mientras se pueda
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (
         !validar_requerido($_POST['nombre']) || !validar_requerido($_POST['familia']) ||
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Crear el producto
     $producto = new Producto($nombre, $precio, $familia, $descripcion);
 
-    if ($produ->crearProducto($producto)) { // Usar el método crearProducto de Produ
+    if ($produ->crearProducto($producto)) {
         // Obtener el último ID insertado
         $stmt = ConexionBD::getConnection();
         $idProducto = $stmt->lastInsertId();
@@ -65,5 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         redireccionar('altaProductos.php?error=5');
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+   
+    $produ->borrarProducto($_GET['id']);
+    redireccionar('index.php');
 }
 ?>

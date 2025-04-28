@@ -1,6 +1,6 @@
 <?php
 
-
+//aqui sin mas, las funciones auxiliares que van a utilizar las otras clases y archivos
 function validar_requerido(string $campo): bool {
     return !empty($campo);
 }

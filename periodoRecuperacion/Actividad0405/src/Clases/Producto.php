@@ -11,11 +11,14 @@ class Producto
     private $descripcion;
     
 
-    function __construct($nombre,$precio,$familia,$descripcion,$id=0) {
+    private $imagen;
+
+    function __construct($nombre,$precio,$familia,$descripcion,$imagen="",$id=0) {
         $this->nombre=$nombre;
         $this->precio=$precio;
         $this->familia=$familia;
         $this->descripcion=$descripcion;
+        $this->imagen=$imagen;
         $this->id=$id;
     }
 

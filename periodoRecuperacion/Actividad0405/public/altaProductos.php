@@ -18,9 +18,10 @@
         <label for="familia">Familia del producto:
             <select id="familia" name="familia">
                 <?php
+                //las movidas de namespace
                 require_once "../vendor/autoload.php";
                 use Ejercicio0405\ClasesBD\FuncionesBD;
-
+                //sacamos las familias para el select
                 $funciones = new FuncionesBD();
                 $familias = $funciones->getFamilias();
 
@@ -48,6 +49,7 @@
     </form>
 
     <?php
+    //no tiene perdida, depende de lo que nos devuelva el procesa decimos una cosa u otra
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['success'])) {
             echo "Se dio de alta el producto sin problemas";
