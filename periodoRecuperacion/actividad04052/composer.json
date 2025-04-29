@@ -1,0 +1,26 @@
+{
+    "name": "ikergarcia/actividad0405",
+    "description": "Este es el ejercicio evaluable de las unidades 4 y 5",
+    "type": "project",
+    "authors": [
+        {
+            "name": "p1t0n83",
+            "email": "rompeolas93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts":{
+        "start":"php -S localhost:8001 -t public"
+    },
+    "autoload": {
+        "psr-4":{
+            "Ejercicio0405\\":"src/"
+        },
+        "files": [
+      "src/Funciones/helper.php"
+    ]
+    }
+}
