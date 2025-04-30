@@ -20,7 +20,7 @@
             "Ejercicio0405\\":"src/"
         },
         "files": [
-      "src/Funciones/helper.php"
+      "helper.php"
     ]
     }
 }

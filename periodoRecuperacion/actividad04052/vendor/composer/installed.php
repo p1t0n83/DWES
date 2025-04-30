@@ -3,7 +3,7 @@
         'name' => 'ikergarcia/actividad0405',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd1d4f04929485c63caad54d01e9c62e0110dfb74',
+        'reference' => '0e7ecd5018926595887efefb471d86ab59eaf285',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'ikergarcia/actividad0405' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd1d4f04929485c63caad54d01e9c62e0110dfb74',
+            'reference' => '0e7ecd5018926595887efefb471d86ab59eaf285',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
