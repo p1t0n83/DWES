@@ -1,7 +1,5 @@
 <?php
 namespace Ejercicio0405\ClasesBD;
-use Ejercicio0405\Interfaces\Metodos;
-use Ejercicio0405\Clases\Producto;
 use Ejercicio0405\ClasesBD\ConexionBD;
 use PDO;
 use PDOException;
@@ -14,7 +12,6 @@ class FuncionesBD
     {
         try {
             $stmt = ConexionBD::getConnection();
-
             $resultado = $stmt->query('SELECT idfamilias,nombre FROM familias');
             $familias = $resultado->fetchAll(PDO::FETCH_OBJ);
             var_dump($familias);
