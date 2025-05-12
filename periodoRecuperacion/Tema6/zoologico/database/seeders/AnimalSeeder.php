@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Database\Seeders;
 
-use Illuminate\Http\Request;
-
-class AnimalController extends Controller
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\Animal;
+class AnimalSeeder extends Seeder
 {
-   private $animales = array(
+
+    private $animales = array(
 		array(
 			'especie' => 'Bisonte',
 			'peso' => 1000,
@@ -85,65 +89,27 @@ Son diurnos y viven preferentemente en el suelo. Forman grupos numerosos que se 
 			'fechaNacimiento' => '2018-03-10',
 			'imagen' => 'tigre.jpg',
 			'alimentacion' => 'carnívoro',
-			'descripcion' =>'Se encuentra en el continente asiático; es un predador carnívoro y es la especie de félido más grande del mundo junto con el león pudiendo alcanzar ambos un tamaño comparable al de los fósiles de félidos de mayor tamaño'
+			'descripcion' => 'Se encuentra en el continente asiático; es un predador carnívoro y es la especie de félido más grande del mundo junto con el león pudiendo alcanzar ambos un tamaño comparable al de los fósiles de félidos de mayor tamaño'
 		)
-    );
-
+	);
     /**
-     * Display a listing of the resource.
+     * Run the database seeds.
      */
-    public function index()
+    public function run(): void
     {
-    return view('index',['animales'=>$this->animales]);
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($especie)
-    {
-        $animal = collect($this->animales)->firstWhere('especie', $especie);
-        return view('show', ['animal'=>$animal]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($animal)
-    {
-        return view('edit', ['animal'=>$animal]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        foreach ($this->animales as $animal)
+{
+$a = new Animal();
+$a->especie = $animal['especie'];
+$a->slug = Str::slug($animal['especie']);
+$a->peso = $animal['peso'];
+$a->altura = $animal['altura'];
+$a->fechaNacimiento = $animal['fechaNacimiento'];
+$a->imagen = $animal['imagen'];
+$a->alimentacion = $animal['alimentacion'];
+$a->descripcion = $animal['descripcion'];
+$a->save();
+}
+$this->command->info('Tabla animales inicializada con datos');
     }
 }
