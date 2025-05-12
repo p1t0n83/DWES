@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Animal;
-use Carbon\Carbon;
+use App\Requests\CrearAnimalRequest;
 class AnimalController extends Controller
 {
-	
+
 
 	/**
 	 * Display a listing of the resource.
@@ -32,8 +31,24 @@ class AnimalController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
-	}
+
+        $datos = $request->only([
+            'especie',
+            'peso',
+            'altura',
+            'fechaNacimiento',
+            'alimentacion',
+            'descripcion',
+        ]);
+        $nombreArchivo = $request->file('imagen');
+        $datos['imagen']=$nombreArchivo;
+        $animal = new Animal($datos);
+
+        $animal->save();
+
+        return redirect()->route('animales.index')->with('success', 'Animal añadido correctamente.');
+
+    }
 
 	/**
 	 * Display the specified resource.
@@ -71,5 +86,5 @@ class AnimalController extends Controller
 		//
 	}
 
-	
+
 }
