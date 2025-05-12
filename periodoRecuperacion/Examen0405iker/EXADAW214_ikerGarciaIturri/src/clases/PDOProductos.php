@@ -55,12 +55,12 @@ class PDOProductos implements IntRepoProducto{
             $consulta=$conexion->prepare("SELECTid,nombre,descripcion,precio,familia,imagenId FROM productos WHERE id=:id");
             $consulta->bindParam(":id",$id);
             $consulta->execute();
-            $resultado=$consulta->fetch(PDO::FETCH_OBJ);
+            $result=$consulta->fetch(PDO::FETCH_OBJ);
             $producto=new Producto($result->nombre,$result->precio,$result->familia,$result->imagenId,$result->descripcion,$result->id);
             return $producto;
          }catch(PDOException $error){
              echo ("Error al sacar el producto". $error->getMessage());
-             return null;
+             return new Producto(null,null,null,null);
          }
     }
 
