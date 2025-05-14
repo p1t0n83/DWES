@@ -2,7 +2,11 @@
 @section('titulo','Listado de animales')
 @section('contenido')
 <h1 class="text-3x1 font-bold underline">Página principal de los animales</h1>
-
+@if(session('success'))
+    <div style="color: green; border: 1px solid green; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach($animales as $animal)
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">

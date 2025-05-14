@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Animal;
-use App\Requests\CrearAnimalRequest;
+use App\Http\Requests\CrearAnimalRequest;
 class AnimalController extends Controller
 {
 
@@ -29,7 +29,7 @@ class AnimalController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(Request $request)
+	public function store(CrearAnimalRequest $request)
 	{
 
         $datos = $request->only([
@@ -40,12 +40,18 @@ class AnimalController extends Controller
             'alimentacion',
             'descripcion',
         ]);
-        $nombreArchivo = $request->file('imagen');
-        $datos['imagen']=$nombreArchivo;
+        //obtengo imagen
+        $imagen=$request->file('imagen');
+        //obtengo el nombre de la imagen
+        $nombreArchivo = $request->file('imagen')->getClientOriginalName();
+        //le cambio el nombre
+        $nuevoNombre=uniqid()."_".$nombreArchivo;
+        //inserto el nombre de la imagen en el animal
+        $datos['imagen']=$nuevoNombre;
         $animal = new Animal($datos);
-
+        //muevo la imagen
+        move_uploaded_file($imagen,"assets/imagenes/".$nuevoNombre);
         $animal->save();
-
         return redirect()->route('animales.index')->with('success', 'Animal añadido correctamente.');
 
     }
