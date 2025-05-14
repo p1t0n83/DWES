@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Database\Seeders\AnimalSeeder;
+use Database\Seeders\UserSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('animals')->delete(); 
-        $this->call(AnimalSeeder::class); 
+        DB::table('animals')->delete();
+        $this->call(AnimalSeeder::class);
 
-        
-        // User::factory(10)->create();
+         DB::table('users')->delete();
+        $this->call(UserSeeder::class);
+
+
+        User::factory(5)->create();
 
         User::factory()->create([
             'name' => 'Test User',

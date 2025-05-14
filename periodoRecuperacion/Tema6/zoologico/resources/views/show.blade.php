@@ -1,6 +1,11 @@
 @extends('layouts.plantilla')
 @section('titulo','Mostrar animal')
 @section('contenido')
+@if(session('success'))
+    <div style="color: green; border: 1px solid green; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="max-w-5xl mx-auto px-4 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-xl shadow-lg p-6">
         <!-- Imagen del animal -->
@@ -18,7 +23,7 @@
             <p class="mb-4 text-gray-600">{{ $animal->descripcion }}</p>
 
             <div class="flex gap-4">
-                <a href="{{ route('animales.edit', 0) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Editar animal</a>
+                <a href="{{ route('animales.edit', $animal->especie) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Editar animal</a>
                 <a href="{{ route('animales.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Volver al listado</a>
             </div>
         </div>
