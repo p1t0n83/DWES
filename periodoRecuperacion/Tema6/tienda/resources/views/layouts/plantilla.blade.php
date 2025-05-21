@@ -7,9 +7,9 @@
     <title>@yield('titulo')</title>
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-gray-950">
     @include('layouts.partials.nav')
-    <div class="container">
+    <div class="container ml-8">
         @yield('contenido')
     </div>
     @include('layouts.partials.footer')
