@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Image;
 use App\Http\Requests\ProductosRequest;
 use Illuminate\Support\Str;
-use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -23,7 +24,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        return view('create');
     }
 
     /**
@@ -31,15 +32,47 @@ class ProductoController extends Controller
      */
     public function store(ProductosRequest $request)
     {
-      
+         $datos=$request->all();
+         $producto = Product::create([
+        'nombre' => $datos['nombre'],
+        'slug' => Str::slug($datos['nombre']),
+        'precio' => $datos['precio'],
+        'stock' => $datos['stock'],
+        'descripcion' => $datos['descripcion'],
+        'familia' => $datos['familia']
+    ]);
+
+        /**
+         * $request->imagen->isValid();
+         * !empty($request->imagen);
+         * $request->imagen->store('',);
+         */
+
+         if($request->imagen->isValid() &&  !empty($request->imagen)){
+
+         $url=$request->imagen->store('','imagenes');
+        // Crear registro de imagen
+        Image::create([
+            'titulo'=>$producto->nombre,
+            'url' => $url,
+            'producto' => $producto->id
+        ]);
+    }
+
+
+    return redirect()
+        ->route('productos.index')
+        ->with('success', 'Producto creado correctamente.');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $producto)
+    public function show($slug)
     {
-        return view('productos.show', compact('producto'));
+     $producto=Product::where('slug',$slug)->firstOrFail();
+     return view('show',compact('producto'));
     }
 
     /**

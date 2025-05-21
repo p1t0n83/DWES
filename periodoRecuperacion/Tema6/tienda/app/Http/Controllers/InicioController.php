@@ -11,6 +11,6 @@ class InicioController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return redirect()->route('index');
+        return redirect()->route('productos.index');
     }
 }

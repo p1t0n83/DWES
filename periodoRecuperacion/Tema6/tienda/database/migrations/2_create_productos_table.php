@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('descripcion');
             $table->unsignedBigInteger('familia');
-            $table->foreign('familia')->references('id')->on('familys');
+            $table->foreign('familia')->references('id')->on('families');
 
             $table->timestamps();
         });

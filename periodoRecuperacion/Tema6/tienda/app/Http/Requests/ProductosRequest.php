@@ -11,7 +11,7 @@ class ProductosRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; 
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductosRequest extends FormRequest
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'descripcion' => 'required|string|max:1000',
-            'familia' => 'required|exists:familys,id',
+            'familia' => 'required|exists:families,id',
         ];
     }
 

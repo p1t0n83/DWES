@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         $this->call(UsersSeeder::class);
 
-        DB::table('familys')->delete();
-        $this->call(FamilysSeeder::class);
+        DB::table('families')->delete();
+        $this->call(FamiliesSeeder::class);
 
         DB::table('products')->delete();
         $this->call(ProductsSeeder::class);
