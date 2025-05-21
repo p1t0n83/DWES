@@ -9,7 +9,7 @@
             $imagen = $producto->imagenes()->first();
         @endphp
         <div class="mb-6 flex justify-center">  
-                <img src="{{ asset('assets/imagenes/default.jpg') }}" alt="Sin imagen" class="w-full max-w-md h-96 object-cover rounded-lg border border-gray-700 shadow-md">      
+                <img src="{{ asset('imagenes/'.$imagen->url) }}" alt="Sin imagen" class="w-full max-w-md h-96 object-cover rounded-lg border border-gray-700 shadow-md">      
         </div>
         <p class="mb-4"><span class="font-semibold">Descripción:</span> {{ $producto->descripcion }}</p>
         <p class="mb-2"><span class="font-semibold">Precio:</span> <span class="text-blue-400 font-bold">{{ $producto->precio }} €</span></p>

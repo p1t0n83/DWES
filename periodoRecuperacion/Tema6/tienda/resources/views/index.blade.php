@@ -13,9 +13,9 @@
                         $imagen = $producto->imagenes()->first();
                     @endphp
                     @if($imagen)
-                        <img src="{{ asset('assets/imagenes/' . $imagen->url) }}" alt="Imagen de {{ $producto->nombre }}" class="mb-5 w-full h-120 object-cover rounded-lg border border-gray-700 shadow-md">
+                        <img src="{{ asset('imagenes/' . $imagen->url) }}" alt="Imagen de {{ $producto->nombre }}" class="mb-5 w-full h-120 object-cover rounded-lg border border-gray-700 shadow-md">
                     @else
-                        <img src="{{ asset('assets/imagenes/default.jpg') }}" alt="Sin imagen" class="mb-5 w-full h-96 object-cover rounded-lg border border-gray-700 shadow-md">
+                        <img src="{{ asset('imagenes/default.jpg') }}" alt="Sin imagen" class="mb-5 w-full h-96 object-cover rounded-lg border border-gray-700 shadow-md">
                     @endif
                     <h2 class="text-xl font-bold mb-2 text-white">{{ $producto->nombre }}</h2>
                     <p class="text-gray-300 mb-2">{{ $producto->descripcion }}</p>

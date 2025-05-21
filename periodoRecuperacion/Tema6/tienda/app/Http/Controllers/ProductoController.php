@@ -49,10 +49,9 @@ class ProductoController extends Controller
          */
 
          if($request->imagen->isValid() &&  !empty($request->imagen)){
-
          $url=$request->imagen->store('','imagenes');
-        // Crear registro de imagen
-        Image::create([
+            // Crear registro de imagen
+            Image::create([
             'titulo'=>$producto->nombre,
             'url' => $url,
             'producto' => $producto->id
