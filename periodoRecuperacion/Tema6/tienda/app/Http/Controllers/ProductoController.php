@@ -7,7 +7,8 @@ use App\Models\Image;
 use App\Http\Requests\ProductosRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
+use Symfony\Component\VarDumper\VarDumper;
+use Illuminate\Support\Facades\File;
 class ProductoController extends Controller
 {
     /**
@@ -32,15 +33,15 @@ class ProductoController extends Controller
      */
     public function store(ProductosRequest $request)
     {
-         $datos=$request->all();
-         $producto = Product::create([
-        'nombre' => $datos['nombre'],
-        'slug' => Str::slug($datos['nombre']),
-        'precio' => $datos['precio'],
-        'stock' => $datos['stock'],
-        'descripcion' => $datos['descripcion'],
-        'familia' => $datos['familia']
-    ]);
+        $datos = $request->all();
+        $producto = Product::create([
+            'nombre' => $datos['nombre'],
+            'slug' => Str::slug($datos['nombre']),
+            'precio' => $datos['precio'],
+            'stock' => $datos['stock'],
+            'descripcion' => $datos['descripcion'],
+            'familia' => $datos['familia']
+        ]);
 
         /**
          * $request->imagen->isValid();
@@ -48,20 +49,20 @@ class ProductoController extends Controller
          * $request->imagen->store('',);
          */
 
-         if($request->imagen->isValid() &&  !empty($request->imagen)){
-         $url=$request->imagen->store('','imagenes');
+        if ($request->imagen->isValid() && !empty($request->imagen)) {
+            $url = $request->imagen->store('', 'imagenes');
             // Crear registro de imagen
             Image::create([
-            'titulo'=>$producto->nombre,
-            'url' => $url,
-            'producto' => $producto->id
-        ]);
-    }
+                'titulo' => $producto->nombre,
+                'url' => $url,
+                'producto' => $producto->id
+            ]);
+        }
 
 
-    return redirect()
-        ->route('productos.index')
-        ->with('success', 'Producto creado correctamente.');
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Producto creado correctamente.');
 
     }
 
@@ -70,26 +71,57 @@ class ProductoController extends Controller
      */
     public function show($slug)
     {
-     $producto=Product::where('slug',$slug)->firstOrFail();
-     return view('show',compact('producto'));
+        $producto = Product::where('slug', $slug)->firstOrFail();
+        return view('show', compact('producto'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $producto)
+    public function edit($slug)
     {
-        return view('productos.edit', compact('producto'));
+        $producto = Product::where('slug', $slug)->firstOrFail();
+        return view('edit', compact('producto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductosRequest $request, Product $producto)
+    public function update(ProductosRequest $request, $slug)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($data['nombre']);
-        $producto->update($data);
+        $datos = $request->all();
+        $producto = Product::where('slug', $slug)->firstOrFail();
+        $producto->update([
+            'nombre' => $request->nombre,
+            'slug' => Str::slug($request->nombre),
+            'precio' => $request->precio,
+            'stock' => $request->stock,
+            'descripcion' => $request->descripcion,
+            'familia' => $request->familia
+        ]);
+
+         // Si se sube una nueva imagen, reemplaza la primera imagen asociada
+    if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+         $url = $request->imagen->store('', 'imagenes');
+        // Busca la primera imagen asociada al producto
+        $imagen = Image::where('producto', $producto->id)->first();
+        //borro la imagen
+        $ruta = public_path('imagenes/' . $imagen->url);
+        File::delete($ruta);
+        if ($imagen) {
+            $imagen->update([
+                'titulo' => $producto->nombre,
+                'url' => $url,
+            ]);
+        } else {
+            Image::create([
+                'titulo' => $producto->nombre,
+                'url' => $url,
+                'producto' => $producto->id
+            ]);
+        }
+    }
+
         return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente');
     }
 
