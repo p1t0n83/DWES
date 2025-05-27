@@ -13,16 +13,20 @@
                         $imagen = $producto->imagenes()->first();
                     @endphp
                     @if($imagen)
-                        <img src="{{ asset('assets/imagenes/' . $imagen->url) }}" alt="Imagen de {{ $producto->nombre }}" class="mb-5 w-full h-120 object-cover rounded-lg border border-gray-700 shadow-md">
+                        <img src="{{ asset('imagenes/' . $imagen->url) }}" alt="Imagen de {{ $producto->nombre }}" class="mb-5 w-full h-120 object-cover rounded-lg border border-gray-700 shadow-md">
                     @else
-                        <img src="{{ asset('assets/imagenes/default.jpg') }}" alt="Sin imagen" class="mb-5 w-full h-96 object-cover rounded-lg border border-gray-700 shadow-md">
+                        <img src="{{ asset('imagenes/default.jpg') }}" alt="Sin imagen" class="mb-5 w-full h-96 object-cover rounded-lg border border-gray-700 shadow-md">
                     @endif
                     <h2 class="text-xl font-bold mb-2 text-white">{{ $producto->nombre }}</h2>
                     <p class="text-gray-300 mb-2">{{ $producto->descripcion }}</p>
                     <p class="text-blue-400 font-bold mb-2">Precio: {{ $producto->precio }} €</p>
                     <p class="text-gray-400 mb-4">Stock: {{ $producto->stock }}</p>
                     <a href="{{route('productos.show', $producto->slug) }}" class="bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded text-sm text-center font-semibold transition">Ver detalle</a>
-                    </div>
+                    <form action="{{ route('cesta.agregar', $producto->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-green-600 hover:bg-green-800 text-white px-3 py-1 rounded">Añadir a la cesta</button>
+                    </form>
+                </div>
             @endforeach
         </div>
     @else

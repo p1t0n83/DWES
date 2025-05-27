@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-
+  // Crea los roles solo si no existen
+        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'cliente', 'guard_name' => 'web']);
+        
         DB::table('users')->delete();
         $this->call(UsersSeeder::class);
 
@@ -27,5 +31,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('images')->delete();
         $this->call(ImagesSeeder::class);
+
+      
     }
 }
