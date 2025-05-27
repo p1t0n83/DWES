@@ -17,4 +17,13 @@ class Producto extends Model
     public function getRouteKeyName(){
         return 'slug';
     }
+    public function imagen()
+    {
+        return $this->belongsTo(Imagene::class, 'imagen_id');
+    }
+
+    public function familia()
+    {
+        return $this->belongsTo(Familia::class, 'familia_id');
+    }
 }

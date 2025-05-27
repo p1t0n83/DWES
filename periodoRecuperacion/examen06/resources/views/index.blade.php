@@ -14,22 +14,22 @@
     <h1>Pagina principal</h1>
     <a href="{{route('productos.create')}}">Crear Producto</a>
 
-    @foreach ($productos as $producto){
+    @foreach ($productos as $producto)
         <h1>{{$producto->titulo}}</h1>
-        {{$imagen=Imagene::where('id',$producto->imagen_id)}}
-        <img src="{{$imagen->url}}">
-        {{$familia=Familia::where('id',$producto->familia_id)}}
-        <p>Familia: {{$familia->descripcion}}</p>
+        @if($producto->imagen)
+            <img src="{{$producto->imagen->url}}" alt="{{$producto->titulo}}">
+        @endif
+        @if($producto->familia)
+            <p>Familia: {{$producto->familia->descripcion}}</p>
+        @endif
         <p>Precio: {{$producto->precio}}</p>
-        <p>Descripcion: {{$producto->descipcion}}</p>
-        <a href="{{route('produtos.editar',$producto->slug)}}">Editar</a>
-        <form action="{{route('productos.destroy')}}" method="post">
-         @csrf
-         @method('DELETE')
-         <button type="submit">Borrar</button>
+        <p>Descripcion: {{$producto->descripcion}}</p>
+        <a href="{{route('productos.edit', $producto->slug)}}">Editar</a>
+        <form action="{{route('productos.destroy', $producto->slug)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Borrar</button>
         </form>
-    }
-
     @endforeach
 </body>
 </html>

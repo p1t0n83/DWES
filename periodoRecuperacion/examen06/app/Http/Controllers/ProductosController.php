@@ -16,9 +16,8 @@ class ProductosController extends Controller
      */
     public function index()
     {
-    $productos=Producto::all()->get();
-
-    return view('index',compact('productos'));
+        $productos = Producto::with(['imagen', 'familia'])->get();
+        return view('index', compact('productos'));
     }
 
     /**
@@ -45,13 +44,13 @@ class ProductosController extends Controller
                "url"=>"/imagenes/".$nombre
             ]);
 
-            $imagen=Imagene::where("nombre",$nombre);
+            $imagen=Imagene::where("nombre",$nombre)->first();
             if(!$imagen){
                 $familias=Familia::all();
                 return view('create',compact('familias'));
             }
             $codigoFamilia=$request->familia;
-            $familia=Familia::where('codigo',$codigoFamilia);
+            $familia=Familia::where('codigo',$codigoFamilia)->first();
             if(!$familia){
                 $familias=Familia::all();
                 return view('create',compact('familias'));
@@ -78,7 +77,7 @@ class ProductosController extends Controller
      */
     public function show(string $slug)
     {
-        $producto=Producto::where('slug',$slug);
+        $producto=Producto::where('slug',$slug)->first();
         $imagen=Imagene::where('id',$producto->imagen_id);
         $familia=Familia::where('id',$producto->familia_ids);
         return view('show',compact('producto','imagen','familia'));
@@ -87,65 +86,86 @@ class ProductosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug)
-    {
-        return view('edit',compact('slug'));
+
+public function edit(string $slug)
+{
+    try {
+        $producto = Producto::where('slug', $slug)->firstOrFail();
+        $familias = Familia::all();
+
+        return view('edit', compact('producto', 'familias'));
+    } catch (\Exception $e) {
+        return redirect()
+            ->route('productos.index')
+            ->with('error', 'Producto no encontrado');
     }
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slug)
-    {
+    public function update(Request $request, $slug)
+{
+    try {
+        // Obtener el producto
+        $producto = Producto::where('slug', $slug)->firstOrFail();
 
-            $producto=Producto::where('slug',$slug);
+        // Validar campos obligatorios
+        if (!$request->filled(['titulo', 'precio', 'descripcion', 'familia'])) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Todos los campos son obligatorios');
+        }
 
-            $familias=Familia::all();
-            return view('create',compact('familias'));
+        // Buscar familia
+        $familia = Familia::where('codigo', $request->familia)->first();
+        if (!$familia) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Familia no encontrada');
+        }
 
-            $nombre=$request->imagen->store('','imagenesProducto');
-            Imagene::create([
-               "nombre"=>$nombre,
-               "url"=>"/imagenes/".$nombre
+        // Si hay nueva imagen
+        if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
+            $nombre = $request->imagen->store('', 'imagenesProducto');
+
+            // Crear nueva imagen
+            $nuevaImagen = Imagene::create([
+                "nombre" => $nombre,
+                "url" => "/imagenes/" . $nombre
             ]);
 
-            $imagen=Imagene::where("nombre",$nombre);
-            if(!$imagen){
-                $familias=Familia::all();
-                return view('create',compact('familias'));
-            }
-            $codigoFamilia=$request->familia;
-            $familia=Familia::where('codigo',$codigoFamilia);
-            if(!$familia){
-                $familias=Familia::all();
-                return view('create',compact('familias'));
-            }
-
-            if(!$request['titulo'] || !$request['precio'] || !$request['descripcion']  ){
-                $familias=Familia::all();
-                return view('create',compact('familias'));
-            }
-            $familiaId=$familia->id;
-            if(!$request->imagen || empty($request->imagen)){
-            $producto::update([
-                "titulo"=>$request['titulo'],
-                "slug"=>Str::slug($request['titulo']),
-                "precio"=>$request['precio'],
-                "familia_id"=>$familiaId,
-                "imagen_id"=>$imagen->id,
-                "descripcion"=>$request['descripcion']
+            // Actualizar producto con nueva imagen
+            $producto->update([
+                "titulo" => $request->titulo,
+                "slug" => Str::slug($request->titulo),
+                "precio" => $request->precio,
+                "familia_id" => $familia->id,
+                "imagen_id" => $nuevaImagen->id,
+                "descripcion" => $request->descripcion
             ]);
-            return redirect()->route('productos.index')->with('success','Se edito el producto');
-    }else{
-        $producto::update([
-            "titulo"=>$request['titulo'],
-            "slug"=>Str::slug($request['titulo']),
-            "precio"=>$request['precio'],
-            "familia_id"=>$familiaId,
-            "descripcion"=>$request['descripcion']
-        ]);
-        return redirect()->route('productos.index')->with('success','Se edito el producto');
+        } else {
+            // Actualizar producto sin cambiar la imagen
+            $producto->update([
+                "titulo" => $request->titulo,
+                "slug" => Str::slug($request->titulo),
+                "precio" => $request->precio,
+                "familia_id" => $familia->id,
+                "descripcion" => $request->descripcion
+            ]);
+        }
 
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Producto actualizado correctamente');
+
+    } catch (\Exception $e) {
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'Error al actualizar el producto: ' . $e->getMessage());
     }
 }
 
@@ -154,9 +174,10 @@ class ProductosController extends Controller
      */
     public function destroy(string $slug)
     {
-        $producto=Producto::where('slug',$slug);
-        $imagen=Imagene::where('id',$producto->id);
+        $producto=Producto::where('slug',$slug)->first();
+        $imagen=Imagene::where('id',$producto->imagen_id);
         $producto->delete();
         $imagen->delete();
+        return redirect()->route('productos.index');
     }
 }

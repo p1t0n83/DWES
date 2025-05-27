@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Imagene extends Model
 {
-    public $fillable=[
+     public $fillable=[
         "nombre",
         "url"
     ];
