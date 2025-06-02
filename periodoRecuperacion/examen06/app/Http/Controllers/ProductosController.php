@@ -16,7 +16,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::with(['imagen', 'familia'])->get();
+        $productos = Producto::all();
         return view('index', compact('productos'));
     }
 
@@ -78,9 +78,8 @@ class ProductosController extends Controller
     public function show(string $slug)
     {
         $producto=Producto::where('slug',$slug)->first();
-        $imagen=Imagene::where('id',$producto->imagen_id);
-        $familia=Familia::where('id',$producto->familia_ids);
-        return view('show',compact('producto','imagen','familia'));
+
+        return view('show',compact('producto'));
     }
 
     /**

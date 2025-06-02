@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/',[ProductosController::class,'index'])->name('productos.index');
 
 Route::get('productos',[ProductosController::class,'index'])->name('productos.index');
 Route::get('productos/create',[ProductosController::class,'create'])->name('productos.create');
