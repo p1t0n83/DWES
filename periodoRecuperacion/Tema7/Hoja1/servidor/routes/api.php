@@ -7,7 +7,7 @@ use App\Controllers\Api\Producto\ListProductoController;
 use App\Controllers\Api\Producto\GetProductoController;
 use App\Controllers\Api\Producto\UpdateProductoController;
 use App\Controllers\Api\Producto\DeleteProductoController;
-//añadimos un nuevo grupo con el prefijo productos e indicamos el espacio de nombres
+
 
 Router::group(
     ['prefix' => 'api'],

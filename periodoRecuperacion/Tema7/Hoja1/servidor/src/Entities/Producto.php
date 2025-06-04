@@ -74,10 +74,7 @@ final class Producto
     public function update(array $data):bool{
          try{
         $stmt=$this->db->prepare('UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE id = :id');
-        $stmt->bindParam(":id",$data['id']);
-        $stmt->bindParam(":nombre",$data['nombre']);
-        $stmt->bindParam(":descripcion",$data['descripcion']);
-        $stmt->bindParam(":precio",$data['precio']);
+        $stmt->execute(params: $data);
         return $stmt->execute();
         
         }catch(PDOException $error){
