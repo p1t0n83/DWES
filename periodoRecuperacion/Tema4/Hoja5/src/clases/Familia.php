@@ -19,8 +19,6 @@ class Familia extends Medico {
     }
 
     // Sobrescribir el método __toString
-    public function __toString() {
-        return parent::__toString() . ", Número de Pacientes: {$this->numPacientes}";
-    }
+  
 }
 ?>

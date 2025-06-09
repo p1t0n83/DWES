@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controllers\Api\Producto;
 
@@ -13,15 +13,21 @@ final class CreateProductoController
     {
         $producto = new Producto();
         $request = new ProductoRequest();
+        $datosValidados = $request->validated();
 
-        $productoId = $producto->create(
-         
-           data:$request->validated(),
-        );
+        // Agregar el nombre de imagen a los datos validados
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            $nombreImagen = $_FILES['imagen']['name']; 
+            $datosValidados['imagen'] = $nombreImagen;
 
+            // Mover la imagen al servidor
+            move_uploaded_file($_FILES['imagen']['tmp_name'], dirname(__DIR__, 4) . '/public/img/' . $nombreImagen);
+        }
+
+        $productoId = $producto->create(data: $datosValidados);
 
         JsonResponse::response(
-            data:$producto->find(id:(int) $productoId)
+            data: $producto->find(id: (int) $productoId)
         );
     }
 }

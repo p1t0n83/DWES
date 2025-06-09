@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace APP\Entities;
 
@@ -15,7 +15,7 @@ final class Producto
     public function __construct()
     {
         $this->db = DBConnection::getConexion();
-        $this-> createTable();
+        $this->createTable();
     }
 
     private function createTable(): void
@@ -25,6 +25,7 @@ final class Producto
             nombre VARCHAR(50) NOT NULL,
             descripcion VARCHAR(255) NOT NULL,
             precio DECIMAL(10, 2) NOT NULL,
+            imagen VARCHAR(50) ,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )';
 
@@ -38,9 +39,9 @@ final class Producto
     public function create(array $data): false|string
     {
         $sql = '
-            INSERT INTO productos (nombre, descripcion, precio)
-            VALUES (:nombre, :descripcion, :precio)
-        ';
+        INSERT INTO productos (nombre, descripcion, precio, imagen)
+        VALUES (:nombre, :descripcion, :precio, :imagen)
+    ';
 
         $stmt = $this->db->prepare(query: $sql);
         $stmt->execute(params: $data);
@@ -48,46 +49,47 @@ final class Producto
         return $this->db->lastInsertId();
     }
 
-    public function find(int $id):array|null{
-        try{
-        $stmt=$this->db->prepare('SELECT id,nombre,descripcion,precio,created_at FROM productos WHERE id=:id');
-        $stmt->bindParam(":id",$id);
-        $stmt->execute();
-        $resultado=$stmt->fetchAll(PDO::FETCH_OBJ);
-        return $resultado;
-        }catch(PDOException $error){
+    public function find(int $id): array|null
+    {
+        try {
+            $stmt = $this->db->prepare('SELECT id, nombre, descripcion, precio, imagen, created_at FROM productos WHERE id = :id');
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultado ?: null;
+        } catch (PDOException $error) {
             return null;
         }
     }
 
-    public function get():array|null{
-        try{
-        $stmt=$this->db->query('SELECT id,nombre,descripcion,precio,created_at FROM productos');
-        $stmt->execute();
-        $resultado=$stmt->fetchAll(PDO::FETCH_OBJ);
-        return $resultado;
-        }catch(PDOException $error){
+    public function get(): array|null
+    {
+        try {
+            $stmt = $this->db->query('SELECT id, nombre, descripcion, precio, imagen, created_at FROM productos');
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultado;
+        } catch (PDOException $error) {
             return null;
         }
     }
 
-    public function update(array $data):bool{
-         try{
-        $stmt=$this->db->prepare('UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE id = :id');
-        $stmt->execute(params: $data);
-        return $stmt->execute();
-        
-        }catch(PDOException $error){
+    public function update(array $data): bool
+    {
+        try {
+            $stmt = $this->db->prepare('UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, imagen = :imagen WHERE id = :id');
+            return $stmt->execute(params: $data);
+        } catch (PDOException $error) {
             return false;
         }
     }
 
-     public function delete(int $id):bool{
-        try{
-        $stmt=$this->db->prepare('DELETE  FROM productos WHERE id=:id');
-        $stmt->bindParam(":id",$id);
-        return  $stmt->execute();
-        }catch(PDOException $error){
+    public function delete(int $id): bool
+    {
+        try {
+            $stmt = $this->db->prepare('DELETE  FROM productos WHERE id=:id');
+            $stmt->bindParam(":id", $id);
+            return $stmt->execute();
+        } catch (PDOException $error) {
             return false;
         }
     }

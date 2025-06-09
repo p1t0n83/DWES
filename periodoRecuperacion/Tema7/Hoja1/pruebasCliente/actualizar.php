@@ -56,7 +56,7 @@
             echo "HTTP code: $http_code<br>";
             echo "Respuesta: $respuesta_curl";
         } else {
-            header('Location: obtener.php');
+            header('Location: obtener.php?success=1');
             exit;
         }
     }
