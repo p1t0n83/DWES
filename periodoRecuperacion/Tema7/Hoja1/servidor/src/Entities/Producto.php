@@ -11,7 +11,10 @@ use PDOException;
 final class Producto
 {
     private PDO $db;
-
+    public ?string $nombre = null;
+    public ?string $descripcion = null;
+    public ?float $precio = null;
+    public ?string $imagen = null;
     public function __construct()
     {
         $this->db = DBConnection::getConexion();
