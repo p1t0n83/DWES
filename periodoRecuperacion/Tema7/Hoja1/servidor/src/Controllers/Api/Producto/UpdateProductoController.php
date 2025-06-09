@@ -12,8 +12,8 @@ final class UpdateProductoController
         $response = response();
         $producto = new Producto();
         $request = new ProductoRequest($id);
-        $validated['id'] = $id;
-        $validated = $request->validated();  
+        $validated = $request->validated();
+        $validated['id'] = $id;  
         $productoActualizado = $producto->update($validated);
         if ($productoActualizado !== false) {
             // Respuesta exitosa en JSON

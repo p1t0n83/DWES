@@ -18,10 +18,6 @@ final class ProductoRequest extends AbstractRequest
     protected function rules(): array
     {
         return [
-            'id' => [
-            new RequiredRule(message: 'El id es requerido'),
-            new NumericRule(message: 'El id debe ser numérico'),
-            ],
             'nombre' => [
                 new RequiredRule(message: 'El nombre es requerido'),
                 new MinRule(length: 2, message: 'El nombre debe tener como mínimo 2 caracteres'),
