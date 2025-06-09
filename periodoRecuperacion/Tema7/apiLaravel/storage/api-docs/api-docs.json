@@ -1,0 +1,241 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Productos",
+        "description": "API de productos",
+        "contact": {
+            "email": "email@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/productos": {
+            "get": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Obtener productos",
+                "description": "Obtener todos los productos",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Productos encontrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Productos no encontrados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Crear un producto",
+                "description": "Crear un producto segun los datos pasados",
+                "operationId": "create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Producto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no creado"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}": {
+            "get": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Obtener un producto",
+                "description": "Obtener un producto por su id",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Editar un producto",
+                "description": "Editar un producto segun los datos pasados y su id",
+                "operationId": "edit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Producto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto editado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no editado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "productos"
+                ],
+                "summary": "Eliminar un producto",
+                "description": "Eliminar un producto por su id",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto eliminado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Producto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Producto no eliminado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Categoria": {
+                "title": "Categoria",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Categoria 1"
+                    }
+                },
+                "type": "object"
+            },
+            "Producto": {
+                "title": "Producto",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Producto 1"
+                    },
+                    "descripcion": {
+                        "type": "string",
+                        "example": "descripcion del primer producto"
+                    },
+                    "precio": {
+                        "type": "decimal",
+                        "example": "10.56"
+                    },
+                    "stock": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "categoria": {
+                        "$ref": "#/components/schemas/Categoria"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "productos",
+            "description": "productos"
+        }
+    ]
+}
