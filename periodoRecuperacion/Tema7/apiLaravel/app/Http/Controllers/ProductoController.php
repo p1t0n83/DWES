@@ -39,9 +39,8 @@ class ProductoController extends Controller
     {
         $productos=Producto::with('categoria')->get();
         return ProductoResource::collection($productos);
+
     }
-
-
 
 
     /**
@@ -145,7 +144,10 @@ class ProductoController extends Controller
      */
     public function update(UpdateProductoRequest $request, string $id)
     {
-        //
+        $validado = $request->validated();
+        $producto = Producto::findOrFail($id);
+        $producto->update($validado);
+        return new ProductoResource($producto);
     }
 
     /**

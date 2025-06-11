@@ -26,20 +26,22 @@
 
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['precio'])) {
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
-        $precio = $_POST['precio'];
-        /**tengo que pasar asi los datos porque es lo que espera CURLOPT_POSTFIELDS */
-        $producto = [
-            "nombre" => $nombre,
-            "descripcion" => $descripcion,
-            "precio" => $precio
-        ];
+   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['precio'])) {
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $precio = $_POST['precio'];
+    
+    $producto = [
+        "nombre" => $nombre,
+        "descripcion" => $descripcion,
+        "precio" => $precio,
+    ];
 
+    // Solo agregar imagen si hay archivo válido
+    if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['tmp_name']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $nombreImagen = uniqid() . "_" . $_FILES['imagen']['name'];
-
         $producto['imagen'] = new CURLFILE($_FILES['imagen']['tmp_name'], $_FILES['imagen']['type'], $nombreImagen);
+    }
 
         $url_servicio = 'http://localhost:8001/api/productos';
 

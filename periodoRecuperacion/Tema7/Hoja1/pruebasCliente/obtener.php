@@ -21,12 +21,17 @@ curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"GET");
 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
 $respuesta_curl=curl_exec($curl);
 $productos=json_decode( $respuesta_curl);
-foreach($productos->data as $producto){
-   echo'<tr> 
-            <td>'.$producto->nombre.'</td>
-            <td>'.$producto->descripcion.'</td>
-            <td>'.$producto->precio.'</td>
-        </tr>';
+if (!isset($productos->data)) {
+    echo "<p>Error: No se pudo obtener la lista de productos.</p>";
+    echo "<pre>Respuesta de la API:\n" . htmlentities($respuesta_curl) . "</pre>";
+} else {
+    foreach ($productos->data as $producto) {
+        echo '<tr> 
+                <td>' . $producto->nombre . '</td>
+                <td>' . $producto->descripcion . '</td>
+                <td>' . $producto->precio . '</td>
+              </tr>';
+    }
 }
 curl_close($curl);
 ?>

@@ -22,6 +22,8 @@ final class CreateProductoController
             
             // Mover archivo
             move_uploaded_file($_FILES['imagen']['tmp_name'], dirname(__DIR__, 4) . '/public/img/' . $nombreImagen);
+        }else{
+            $datosValidados['imagen']=null;
         }
 
         $productoId = $producto->create(data: $datosValidados);

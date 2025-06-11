@@ -68,7 +68,7 @@ final class Producto
     public function get(): array|null
     {
         try {
-            $stmt = $this->db->query('SELECT id, nombre, descripcion, precio, imagen, created_at FROM productos');
+            $stmt = $this->db->query('SELECT id, nombre, descripcion, precio, imagen FROM productos');
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
         } catch (PDOException $error) {

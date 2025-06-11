@@ -12,7 +12,7 @@ final class ListProductoController
         $producto = new Producto();
         $productos = $producto->get();
         $response = response();
-        if ($productos !== false && !empty($productos)) {
+        if (!is_null($productos) && !empty($productos)) {
             // Respuesta exitosa en JSON
             $response->httpCode(200)
                 ->json([

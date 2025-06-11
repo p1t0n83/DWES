@@ -19,7 +19,7 @@ Router::group(
             function (): void {
                 Router::get('/listado', [ListProductoController::class, '__invoke']);
                 Router::get('/{id}', [GetProductoController::class, '__invoke']);
-                Router::put('/{id}', [UpdateProductoController::class, '__invoke']);
+                Router::post('/{id}', [UpdateProductoController::class, '__invoke']);
                 Router::delete('/{id}',[DeleteProductoController::class,'__invoke']);
                 Router::post('/', [CreateProductoController::class, '__invoke']);
 
