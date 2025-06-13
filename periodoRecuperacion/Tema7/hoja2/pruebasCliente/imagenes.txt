@@ -1,0 +1,26 @@
+/**PARA IMAGENES
+$producto=array();
+
+la ruta de la imagen en mi sistema local
+$ruta_imagen=''; 
+
+adjuntar la imagen usando curlfile
+$producto['imagen']=new CURLFILE($ruta_imagen);
+
+url_servicio="http://localhost:8001/api";
+$curl=curl_init($url_servicio);
+
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"POST");
+curl_setopt($curl,CURLOPT_POSTFIELDS,$productos);
+curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+
+guardamos el resultado
+$respuesta_curl=curl_exec($curl);
+
+if(curl_errno($curl)){
+echo 'Error al realizar la solicitud';
+}
+
+ curl_stop($curl);
+ 
+  */
