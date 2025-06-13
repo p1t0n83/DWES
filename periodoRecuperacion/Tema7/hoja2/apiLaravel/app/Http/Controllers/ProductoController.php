@@ -7,11 +7,11 @@ use App\Http\Resources\ProductoResource;
 use App\Models\Producto;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
- /**
-     * @OA\Info(title="API Productos", version="1.0",description="API de productos",
-     * @OA\Server(url="http://localhost:8000"),
-     * @OA\Contact(email="email@gmail.com"))
-     */
+/**
+ * @OA\Info(title="API Productos", version="1.0",description="API de productos",
+ * @OA\Server(url="http://localhost:8000"),
+ * @OA\Contact(email="email@gmail.com"))
+ */
 class ProductoController extends Controller
 {
     /**
@@ -37,8 +37,19 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos=Producto::with('categoria')->get();
-        return ProductoResource::collection($productos);
+        $productos = Producto::with('categoria')->get();
+        if ($productos->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontraron productos',
+                'data' => [],
+            ], 200);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Productos encontrados',
+            'data' => ProductoResource::collection($productos),
+        ], 200);
 
     }
 
@@ -46,7 +57,7 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-     /**
+    /**
      * @OA\POST(
      *  path="/api/productos",
      *  summary="Crear un producto",
@@ -70,7 +81,7 @@ class ProductoController extends Controller
      */
     public function store(StoreProductoRequest $request)
     {
-        $validado=$request->validated();
+        $validado = $request->validated();
         $producto = Producto::create($validado);
         return new ProductoResource($producto);
     }
@@ -105,9 +116,20 @@ class ProductoController extends Controller
      */
     public function show(string $id)
     {
-        $producto=Producto::where('id',$id)->firstOrFail();
-        return new ProductoResource($producto->load('categoria'));
+        $producto = Producto::with('categoria')->findOrFail($id);
+        if ($producto==null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontro el producto',
+                'data' => [],
+            ], 200);
         }
+        return response()->json([
+            'success' => true,
+            'message' => 'Producto encontrado',
+            'data' => $producto,
+        ], 200);
+    }
 
 
     /**
@@ -153,7 +175,7 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-     /**
+    /**
      * @OA\DELETE(
      *  path="/api/productos/{id}",
      *  summary="Eliminar un producto",
@@ -179,11 +201,17 @@ class ProductoController extends Controller
      * )
      */
     public function destroy(string $id)
-    {
-        if(Producto::destroy($id)==1){
-                 return "Producto borrado con exito";
-        }else{
-            return "No se pudo borrar wey";
-        }
+{
+    if (Producto::destroy($id) == 1) {
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Producto borrado con éxito'
+        ], 200);
+    } else {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'No se pudo borrar el producto'
+        ], 404);
     }
+}
 }

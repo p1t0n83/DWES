@@ -10,7 +10,7 @@
 <body>
     <form method="post">
         <label for="id">Id del producto a borrar:</label>
-        <input type="number" name="id" nombre="id" required>
+        <input type="number" name="id" id="id" required>
         <button type="submit">Eliminar</button>
     </form>
     <?php

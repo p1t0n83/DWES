@@ -9,7 +9,7 @@
 
 <body>
     <h1>Formulario de edicion</h1>
-    <form method="post"  enctype="multipart/form-data">
+    <form method="post">
         <label for="id">Id: <br>
             <input type="text" name="id" id="id"><br>
         </label>
@@ -22,41 +22,41 @@
         <label for="precio">Precio: <br>
             <input type="number" name="precio" id="precio"><br>
         </label>
-        <label for="imagen">Imagen: </label>
-        <input type="file" name="imagen"><br>
-        <button>Editar Producto</button>
+        <lable for="stock">Stock: <br>
+            <input type="number" name="stock" id="stock"><br>
+            </label>
+            <button>Actualizar Producto</button>
     </form>
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['precio'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['precio']) && isset($_POST['stock'])) {
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
-         /**tengo que pasar asi los datos porque es lo que espera CURLOPT_POSTFIELDS */
+        $stock = $_POST['stock'];
+        /**tengo que pasar asi los datos porque es lo que espera CURLOPT_POSTFIELDS */
         $producto = [
             "nombre" => $nombre,
             "descripcion" => $descripcion,
             "precio" => $precio,
+            "stock" => $stock,
             "id" => $id,
         ];
-        if(isset($_FILES['imagen'])){
-             $nombreImagen = uniqid() . "_" . $_FILES['imagen']['name'];
 
-        $producto['imagen'] = new CURLFILE($_FILES['imagen']['tmp_name'], $_FILES['imagen']['type'], $nombreImagen);
-        }else{
-            $producto['imagen']=null;
-        }
-       
-        $url_servicio = 'http://localhost:8001/api/productos/' . $id;
+        $url_servicio = 'http://localhost:8000/api/productos/' . $id;
         $curl = curl_init($url_servicio);
 
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $producto);
-       
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($producto));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ]);
 
-       
+
+
         $respuesta_curl = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $resultado = json_decode($respuesta_curl);

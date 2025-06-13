@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-     <h1>Productos</h1>
-     <table border=1>
-        <tr> 
+    <h1>Productos</h1>
+    <table border=1>
+        <tr>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Precio</th>
         </tr>
-    <?php
-$url_servicio="http://localhost:8001/api/productos/listado";
+        <?php
+$url_servicio="http://localhost:8000/api/productos";
 $curl=curl_init($url_servicio);
 
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"GET");
 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($curl,CURLOPT_HTTPHEADER,['Accept: application/json']);
 $respuesta_curl=curl_exec($curl);
 $productos=json_decode( $respuesta_curl);
 if (!isset($productos->data)) {
@@ -35,5 +38,8 @@ if (!isset($productos->data)) {
 }
 curl_close($curl);
 ?>
+
+    </table>
 </body>
+
 </html>

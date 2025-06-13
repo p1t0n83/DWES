@@ -20,7 +20,7 @@ $curl=curl_init($url_servicio);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST,"GET");
 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
 $respuesta_curl=curl_exec($curl);
-$productos=json_decode( $respuesta_curl);
+
 if (!isset($productos->data)) {
     echo "<p>Error: No se pudo obtener la lista de productos.</p>";
     echo "<pre>Respuesta de la API:\n" . htmlentities($respuesta_curl) . "</pre>";
