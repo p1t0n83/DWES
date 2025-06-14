@@ -16,8 +16,10 @@ return new class extends Migration
              $table->text('descripcion')->nullable();
              $table->decimal('precio',8,2);
              $table->integer('stock');
-             $table->unsignedBigInteger('categoria_id')->nullable();
+             $table->unsignedBigInteger('categoria_id')->onDelete('cascade');;
              $table->foreign('categoria_id')->references('id')->on('categorias');
+             $table->unsignedBigInteger('imagen_id')->nullable()->onDelete('set null');
+             $table->foreign('imagen_id')->references('id')->on('imagenes');
              $table->timestamps();
         });
     }

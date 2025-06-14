@@ -59,6 +59,12 @@ return [
             'throw' => false,
             'report' => false,
         ],
+         'imagenes' => [
+            'driver' => 'local',
+            'root' => public_path('imagenes'),
+            'url' => env('APP_URL') . '/imagenes',
+            'visibility' => 'public',
+        ],
 
     ],
 

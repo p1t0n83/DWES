@@ -19,16 +19,22 @@ use App\Models\Categoria;
  */
 class Producto extends Model
 {
-protected $table='productos';
-protected $fillable = [
-    'nombre',
-    'descripcion',
-    'precio',
-    'stock',
-    'categoria_id',
-];
-public function categoria()
-{
-    return $this->belongsTo(Categoria::class);
-}
+    protected $table = 'productos';
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'precio',
+        'stock',
+        'categoria_id',
+        'imagen_id'
+    ];
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function imagen()
+    {
+        return $this->belongsTo(Imagen::class);
+    }
 }

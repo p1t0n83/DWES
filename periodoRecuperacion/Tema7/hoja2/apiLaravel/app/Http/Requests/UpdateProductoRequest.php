@@ -21,30 +21,40 @@ class UpdateProductoRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Obtenemos el id del producto a actualizar para excluirlo de la validación unique
+        $productoId = $this->route('producto') ?? $this->input('id');
+
         return [
-            'id'=>'required|numeric',
-            'nombre' => 'required|max:100|unique:productos',
+            'id' => 'required|numeric',
+            'nombre' => 'required|max:100|unique:productos,nombre,' . $productoId,
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'categoria_id' => 'nullable|integer|exists:categorias,id'
+            'categoria_id' => 'required|integer|exists:categorias,id',
         ];
     }
 
-    public function message():array{
+    public function messages(): array
+    {
         return [
-            'id.required'=>'El id es obligatorio',
-            'id.numeric'=>'El id tiene que ser un numero',
-            'nombre.max'=>'El nombre no puede tener más de 100 caracteres',
-            'nombre.required'=>'El nombre es obligatorio',
-            'nombre.unique'=>'El nombre ya existe',
-            'precio.required'=>'El precio es obligatorio',
-            'precio.numeric'=>'El precio debe ser un número',
-            'precio.min'=>'El precio no puede ser negativo',
-            'stock.required'=>'El stock es obligatorio',
-            'stock.min'=>'El stock no puede ser negativo',
-            'stock.integer'=>'El stock debe ser un número entero',
-            'categoria_id.exists'=>'La categoría no existe'
+            'id.required' => 'El id es obligatorio',
+            'id.numeric' => 'El id tiene que ser un número',
+
+            'nombre.required' => 'El nombre es obligatorio',
+            'nombre.max' => 'El nombre no puede tener más de 100 caracteres',
+            'nombre.unique' => 'El nombre ya existe',
+
+            'precio.required' => 'El precio es obligatorio',
+            'precio.numeric' => 'El precio debe ser un número',
+            'precio.min' => 'El precio no puede ser negativo',
+
+            'stock.required' => 'El stock es obligatorio',
+            'stock.integer' => 'El stock debe ser un número entero',
+            'stock.min' => 'El stock no puede ser negativo',
+
+            'categoria_id.required'=>'La categoria es obligatoria',
+            'categoria_id.integer' => 'La categoría debe ser un número válido',
+            'categoria_id.exists' => 'La categoría no existe',
         ];
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProductoResource;
 use App\Models\Producto;
+use App\Models\Imagen;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
 /**
@@ -47,7 +48,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::with('categoria')->get();
+        $productos = Producto::with(['categoria', 'imagen'])->get();
         if ($productos->isEmpty()) {
             return response()->json([
                 'success' => false,
@@ -60,8 +61,8 @@ class ProductoController extends Controller
             'message' => 'Productos encontrados',
             'data' => ProductoResource::collection($productos),
         ], 200);
-
     }
+
 
 
     /**
@@ -96,10 +97,32 @@ class ProductoController extends Controller
      */
     public function store(StoreProductoRequest $request)
     {
-        $validado = $request->validated();
-        $producto = Producto::create($validado);
-        return new ProductoResource($producto);
+        $datos = $request->validated();
+
+        if ($request->hasFile('imagen') && $request->imagen->isValid()) {
+            // Guardar la imagen en disco 'imagenes'
+            $nombreImagen = $request->imagen->store('', 'imagenes');
+
+            // Crear registro en la tabla imágenes
+            $imagen = Imagen::create(['nombre' => $nombreImagen]);
+
+            // Guardar el id de la imagen en los datos del producto
+            $datos['imagen_id'] = $imagen->id;
+        }
+
+        // Crear producto con los datos (incluyendo imagen_id)
+        $producto = Producto::create($datos);
+
+        // Cargar relaciones
+        $producto->load(['categoria', 'imagen']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Producto creado con éxito',
+            'data' => new ProductoResource($producto),
+        ], 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -128,27 +151,30 @@ class ProductoController extends Controller
      *  description="Producto no encontrado"
      *  ),
      * @OA\Response(
-    * response=401,
-    * description="No autorizado"
-    * )
+     * response=401,
+     * description="No autorizado"
+     * )
      * )
      */
     public function show(string $id)
     {
-        $producto = Producto::with('categoria')->findOrFail($id);
-        if ($producto == null) {
+        $producto = Producto::with(['categoria', 'imagen'])->find($id);
+
+        if (!$producto) {
             return response()->json([
                 'success' => false,
-                'message' => 'No se encontro el producto',
+                'message' => 'No se encontró el producto',
                 'data' => [],
-            ], 200);
+            ], 404);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Producto encontrado',
-            'data' => $producto,
+            'data' => new ProductoResource($producto),
         ], 200);
     }
+
 
 
     /**
@@ -183,18 +209,42 @@ class ProductoController extends Controller
      *  description="Producto no editado"
      *  ),
      * @OA\Response(
-    * response=401,
-    * description="No autorizado"
-    * )
+     * response=401,
+     * description="No autorizado"
+     * )
      * )
      */
     public function update(UpdateProductoRequest $request, string $id)
     {
-        $validado = $request->validated();
         $producto = Producto::findOrFail($id);
-        $producto->update($validado);
-        return new ProductoResource($producto);
+        $datos = $request->validated();
+
+        // Si viene imagen válida nueva, borrar la anterior y subir la nueva
+        if ($request->hasFile('imagen') && $request->imagen->isValid()) {
+            if ($producto->nombre_imagen && Storage::disk('imagenes')->exists($producto->nombre_imagen)) {
+                Storage::disk('imagenes')->delete($producto->nombre_imagen);
+            }
+
+            $nombreImagen = $request->imagen->store('', 'imagenes');
+
+            // Crear registro en la tabla imágenes
+            $imagen = Imagen::create(['nombre' => $nombreImagen]);
+
+            // Guardar el id de la imagen en los datos del producto
+            $datos['imagen_id'] = $imagen->id;
+        }
+
+        $producto->update($datos);
+        $producto->load(['categoria', 'imagen']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Producto actualizado con éxito',
+            'data' => new ProductoResource($producto),
+        ], 200);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -224,23 +274,34 @@ class ProductoController extends Controller
      *  description="Producto no eliminado"
      *  ),
      * @OA\Response(
-    * response=401,
-    * description="No autorizado"
-    * )
-    * )
+     * response=401,
+     * description="No autorizado"
+     * )
+     * )
      */
     public function destroy(string $id)
     {
-        if (Producto::destroy($id) == 1) {
+        $producto = Producto::find($id);
+
+        if (!$producto) {
             return response()->json([
-                'status' => 'success',
-                'message' => 'Producto borrado con éxito'
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No se pudo borrar el producto'
+                'success' => false,
+                'message' => 'Producto no encontrado',
             ], 404);
         }
+
+        // Borrar imagen asociada si existe en el disco
+        if ($producto->nombre_imagen && Storage::disk('imagenes')->exists($producto->nombre_imagen)) {
+            Storage::disk('imagenes')->delete($producto->nombre_imagen);
+        }
+
+        $producto->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Producto borrado con éxito'
+        ], 200);
     }
+
+
 }
