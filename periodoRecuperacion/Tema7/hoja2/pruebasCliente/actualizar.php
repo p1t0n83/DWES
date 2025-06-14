@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8" />
@@ -14,24 +14,24 @@ session_start();
 <body>
     <h1>Formulario de edición</h1>
     <form method="post" enctype="multipart/form-data">
-        <label for="id">Id: <br />
-            <input type="text" name="id" id="id" required value="<?= $_POST['id'] ?? '' ?>" /><br />
+        <label for="id">ID del Producto:<br>
+            <input type="text" name="id" id="id" required value="<?= $_POST['id'] ?? '' ?>"><br>
         </label>
-        <label for="nombre">Nombre: <br />
-            <input type="text" name="nombre" id="nombre" required value="<?= $_POST['nombre'] ?? '' ?>" /><br />
+        <label for="nombre">Nombre:<br>
+            <input type="text" name="nombre" id="nombre" required value="<?= $_POST['nombre'] ?? '' ?>"><br>
         </label>
-        <label for="descripcion">Descripción: <br />
-            <input type="text" name="descripcion" id="descripcion" required value="<?= $_POST['descripcion'] ?? '' ?>" /><br />
+        <label for="descripcion">Descripción:<br>
+            <input type="text" name="descripcion" id="descripcion" required value="<?= $_POST['descripcion'] ?? '' ?>"><br>
         </label>
-        <label for="precio">Precio: <br />
-            <input type="number" name="precio" id="precio" required step="0.01" value="<?= $_POST['precio'] ?? '' ?>" /><br />
+        <label for="precio">Precio:<br>
+            <input type="number" step="0.01" name="precio" id="precio" required value="<?= $_POST['precio'] ?? '' ?>"><br>
         </label>
-        <label for="stock">Stock: <br />
-            <input type="number" name="stock" id="stock" required value="<?= $_POST['stock'] ?? '' ?>" /><br />
+        <label for="stock">Stock:<br>
+            <input type="number" name="stock" id="stock" required value="<?= $_POST['stock'] ?? '' ?>"><br>
         </label>
-        <label for="categoria">Categoría: <br />
+        <label for="categoria">Categoría:<br>
             <select name="categoria" id="categoria" required>
-                <option value="" disabled <?= !isset($_POST['categoria']) ? 'selected' : '' ?>>-- Selecciona categoría --</option>
+                <option value="">--Selecciona categoría--</option>
                 <option value="1" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 1) ? 'selected' : '' ?>>Electrodomésticos</option>
                 <option value="2" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 2) ? 'selected' : '' ?>>Informática</option>
                 <option value="3" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 3) ? 'selected' : '' ?>>Telefonía</option>
@@ -42,80 +42,78 @@ session_start();
                 <option value="8" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 8) ? 'selected' : '' ?>>Bricolaje</option>
                 <option value="9" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 9) ? 'selected' : '' ?>>Mascotas</option>
                 <option value="10" <?= (isset($_POST['categoria']) && $_POST['categoria'] == 10) ? 'selected' : '' ?>>Juguetes</option>
-            </select><br />
+            </select><br>
         </label>
-        <label for="imagen">Imagen (opcional): <br />
-            <input type="file" name="imagen" id="imagen" accept="image/*" /><br />
+        <label for="imagen">Imagen (opcional para edición):<br>
+            <input type="file" name="imagen" id="imagen" accept="image/*"><br>
         </label>
-        <button>Actualizar Producto</button>
+        <button type="submit">Actualizar Producto</button>
     </form>
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
-        isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['categoria'])) {
-        
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'
+        && isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['categoria'])
+    ) {
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
         $stock = $_POST['stock'];
-        $categoria = $_POST['categoria'];
+        $categoria_id = $_POST['categoria'];
 
+        // Preparar datos del producto
         $producto = [
+            "id" => $id,  // Agregar el ID en el cuerpo de la petición
             "nombre" => $nombre,
             "descripcion" => $descripcion,
             "precio" => $precio,
             "stock" => $stock,
-            "categoria" => $categoria
+            "categoria_id" => $categoria_id,
         ];
 
-        $url_servicio = "http://localhost:8000/api/productos/$id";
-
-        $curl = curl_init($url_servicio);
-        $token = $_SESSION['token'];
-
+        // Procesar imagen solo si se subió una nueva
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-            $rutaTemporal = $_FILES['imagen']['tmp_name'];
-            $nombreArchivo = $_FILES['imagen']['name'];
+            $tmp_name = $_FILES['imagen']['tmp_name'];
+            $name = $_FILES['imagen']['name'];
 
-            $cfile = curl_file_create($rutaTemporal, mime_content_type($rutaTemporal), $nombreArchivo);
-
-            $postFields = $producto;
-            $postFields['imagen'] = $cfile;
-
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postFields);
-        } else {
-            // Solo datos sin imagen
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($producto));
-            curl_setopt($curl, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/x-www-form-urlencoded',
-                'Authorization: Bearer ' . $token
-            ]);
+            // Crear CURLFile para enviar la imagen
+            $cfile = new CURLFile($tmp_name, mime_content_type($tmp_name), $name);
+            $producto["imagen"] = $cfile;
         }
 
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+        // URL para actualizar (usando POST como mencionaste que PUT va por POST)
+        $url_servicio = 'http://localhost:8000/api/productos/' . $id;
+        $curl = curl_init($url_servicio);
+
+        $token = $_SESSION['token'] ?? '';
+
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $producto); // Enviar como formulario multipart/form-data
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' . $token
+            'Authorization: Bearer ' . $token,
+            'Accept: application/json',
+            // No poner Content-Type, que cURL lo pone automáticamente para multipart/form-data con boundary
         ]);
 
         $respuesta_curl = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        $resultado = json_decode($respuesta_curl, true);
-
+        $error_curl = curl_error($curl);
         curl_close($curl);
+
+        $resultado = json_decode($respuesta_curl, true);
 
         if ($error_curl) {
             echo "<p>Error cURL: $error_curl</p>";
-        } elseif ($http_code !== 201) {
-            echo "<h3>Error al editar el producto</h3>";
+        } elseif ($http_code !== 200 && $http_code !== 204) {
+            echo "<h3>Error al actualizar el producto</h3>";
             echo "<p>Código HTTP: $http_code</p>";
             echo "<pre>";
             print_r($resultado ?: $respuesta_curl);
             echo "</pre>";
         } else {
             // Redirigir al listado o página deseada tras éxito
-            header('Location: obtener.php?success=2');
+            header('Location: obtener.php?success=1');
             exit;
         }
     }

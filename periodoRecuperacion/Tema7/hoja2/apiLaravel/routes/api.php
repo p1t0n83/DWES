@@ -12,9 +12,9 @@ Route::apiResource('productos', ProductoController::class)->only(['index', 'show
 
 // Rutas protegidas por auth:sanctum para crear, actualizar y eliminar
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('productos', [ProductoController::class, 'store']);
-    Route::put('productos/{producto}', [ProductoController::class, 'update']);
-    Route::patch('productos/{producto}', [ProductoController::class, 'update']);
-    Route::delete('productos/{producto}', [ProductoController::class, 'destroy']);
+    Route::post('productos', [ProductoController::class, 'store']); // crear
+    Route::post('productos/{id}', [ProductoController::class, 'update']); // actualizar con POST
+    Route::delete('productos/{id}', [ProductoController::class, 'destroy']);
 });
+
 Route::post('/login', LoginController::class);
