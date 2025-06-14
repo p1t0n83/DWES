@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,13 +45,16 @@
 
         $url_servicio = 'http://localhost:8000/api/productos';
         $curl = curl_init($url_servicio);
+        $token = $_SESSION['token'];
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($producto));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Accept: application/json'
+            'Accept: application/json',
+            'Authorization: Bearer ' . $token
         ]);
+        ;
 
         $respuesta_curl = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE); // importante

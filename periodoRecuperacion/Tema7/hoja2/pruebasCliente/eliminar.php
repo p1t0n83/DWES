@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,13 +22,14 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'];
         $url_servicio = 'http://localhost:8000/api/productos/' . $id;
-
         $curl = curl_init($url_servicio);
+        $token=$_SESSION['token'];
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Accept: application/json',
             'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Bearer ' . $token
         ]);
         $respuesta_curl = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);

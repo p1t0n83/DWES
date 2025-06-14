@@ -11,7 +11,17 @@ use App\Http\Requests\UpdateProductoRequest;
  * @OA\Info(title="API Productos", version="1.0",description="API de productos",
  * @OA\Server(url="http://localhost:8000"),
  * @OA\Contact(email="email@gmail.com"))
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Use a token to authenticate",
+ *     name="Authorization",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="bearerAuth",
+ * )
  */
+
 class ProductoController extends Controller
 {
     /**
@@ -69,6 +79,7 @@ class ProductoController extends Controller
      *  description="Producto creado",
      *  @OA\JsonContent(ref="#/components/schemas/Producto")
      * ),
+     * security=bearerAuth},
      * @OA\RequestBody(
      * required=true,
      * @OA\JsonContent(ref="#/components/schemas/Producto")
@@ -76,7 +87,11 @@ class ProductoController extends Controller
      *  @OA\Response(
      *  response=404,
      *  description="Producto no creado"
-     *  )
+     *  ),
+     * @OA\Response(
+     * response=401,
+     * description="No autorizado"
+     * )
      * )
      */
     public function store(StoreProductoRequest $request)
@@ -111,13 +126,17 @@ class ProductoController extends Controller
      *  @OA\Response(
      *  response=404,
      *  description="Producto no encontrado"
-     *  )
+     *  ),
+     * @OA\Response(
+    * response=401,
+    * description="No autorizado"
+    * )
      * )
      */
     public function show(string $id)
     {
         $producto = Producto::with('categoria')->findOrFail($id);
-        if ($producto==null) {
+        if ($producto == null) {
             return response()->json([
                 'success' => false,
                 'message' => 'No se encontro el producto',
@@ -154,6 +173,7 @@ class ProductoController extends Controller
      *  description="Producto editado",
      *  @OA\JsonContent(ref="#/components/schemas/Producto")
      * ),
+     * security=bearerAuth},
      *  @OA\RequestBody(
      * required=true,
      * @OA\JsonContent(ref="#/components/schemas/Producto")
@@ -161,7 +181,11 @@ class ProductoController extends Controller
      *  @OA\Response(
      *  response=404,
      *  description="Producto no editado"
-     *  )
+     *  ),
+     * @OA\Response(
+    * response=401,
+    * description="No autorizado"
+    * )
      * )
      */
     public function update(UpdateProductoRequest $request, string $id)
@@ -189,6 +213,7 @@ class ProductoController extends Controller
      *   required=true,
      *   @OA\Schema(type="integer",example="1")
      *  ),
+     * security=bearerAuth},
      *  @OA\Response(
      *  response=200,
      *  description="Producto eliminado",
@@ -197,21 +222,25 @@ class ProductoController extends Controller
      *  @OA\Response(
      *  response=404,
      *  description="Producto no eliminado"
-     *  )
-     * )
+     *  ),
+     * @OA\Response(
+    * response=401,
+    * description="No autorizado"
+    * )
+    * )
      */
     public function destroy(string $id)
-{
-    if (Producto::destroy($id) == 1) {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Producto borrado con éxito'
-        ], 200);
-    } else {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'No se pudo borrar el producto'
-        ], 404);
+    {
+        if (Producto::destroy($id) == 1) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Producto borrado con éxito'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No se pudo borrar el producto'
+            ], 404);
+        }
     }
-}
 }

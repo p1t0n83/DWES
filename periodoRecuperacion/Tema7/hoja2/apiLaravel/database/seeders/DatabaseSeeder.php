@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('categorias')->delete();
         $this->call(CategoriaSeeder::class);
+        DB::table('users')->delete();
+        $this->call(UserSeeder::class);
     }
 }
